@@ -18,15 +18,31 @@ const Registration = function (registration) {
 // POST 
 
 Registration.create = (registration, result) => {
-    sql.query("INSERT INTO student SET ?", registration, (err, res) => {
+    const { vEmail } = registration;
+
+    sql.query(`SELECT * FROM student WHERE vEmail = '${vEmail}'`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
 
-        console.log("created registration: ", { Id: res.insertbId, ...registration });
-        result(null, { Id: res.insertbId, ...registration });
+        if (res.length > 0) {
+            console.log("Email is already in use");
+            result("Email is already in use", null);
+        } 
+        else {
+            sql.query("INSERT INTO student SET ?", registration, (err, res) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                    return;
+                }
+
+                console.log("created registration: ", { Id: res.insertId, ...registration });
+                result(null, { Id: res.insertId, ...registration });
+            });
+        }
     });
 };
 
@@ -46,7 +62,7 @@ Registration.findId = (Id, result) => {
             result(null, res);
             return;
         }
-        result({ kind: "not_found" }, null);
+        // result({ kind: "not_found" }, null);
     });
 };
 
