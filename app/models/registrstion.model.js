@@ -64,7 +64,7 @@ Registration.create = (registration, result) => {
             console.log(error)
           }
           else{
-            console.log("Email sent scessfully:"+info.response)
+            console.log("Email sent scessfully:"+ info.response)
           }
         })
 
