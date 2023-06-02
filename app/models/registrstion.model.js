@@ -43,6 +43,9 @@ Registration.create = (registration, result) => {
         console.log("created registration: ", { Id: res.insertId, ...registration });
         result(null, { Id: res.insertId, ...registration });
 
+
+        // send mail
+        
         const transporter = nodemailer.createTransport({
           service:'gmail',
           auth:{
