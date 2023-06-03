@@ -12,7 +12,6 @@ const Registration = function (registration) {
   this.iNumberOfMembers = registration.iNumberOfMembers;
   this.vProblemStatement = registration.vProblemStatement;
   this.Document = registration.Document;
-  // this.keyStatus = registration.keyStatus;
 };
 Registration.create = (registration, result) => {
   const { vEmail } = registration;

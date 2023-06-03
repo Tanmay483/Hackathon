@@ -22,7 +22,6 @@ exports.create = (req, res) => {
      iNumberOfMembers : req.body.iNumberOfMembers,
      vProblemStatement : req.body.vProblemStatement,
      Document : req.file.path,
-     keyStatus: req.body.keyStatus
     });
     // POST
     
