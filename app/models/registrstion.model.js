@@ -47,11 +47,12 @@ Registration.create = (registration, result) => {
         // send mail
 
         var transport = nodemailer.createTransport({
-          host: "sandbox.smtp.mailtrap.io",
-          port: 2525,
+          mailer:'smtp',
+          host: "server116.web-hosting.com",
+          port: 465,
           auth: {
-            user: "7e6e28e7d09848",
-            pass: "f98d9162171609"
+            user: "info@infinitysoftech.co",
+            pass: "?VlXMbhSU}r#"
           }
         });
         const Template =
