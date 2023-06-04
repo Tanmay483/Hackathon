@@ -46,15 +46,14 @@ Registration.create = (registration, result) => {
 
         // send mail
 
-        const transporter = nodemailer.createTransport({
-          service: 'smtp.infinitysoftech.co',
-          port: 465,
-          secure: true,
+        var transport = nodemailer.createTransport({
+          host: "sandbox.smtp.mailtrap.io",
+          port: 2525,
           auth: {
-            user: 'info@infinitysoftech.co',
-            pass: '?VlXMbhSU}r#'
+            user: "7e6e28e7d09848",
+            pass: "f98d9162171609"
           }
-        })
+        });
         const Template =
           `<!DOCTYPE html>
         <html>
@@ -177,7 +176,7 @@ Registration.create = (registration, result) => {
           html: Template
         };
 
-        transporter.sendMail(mailOption, (error, info) => {
+        transport.sendMail(mailOption, (error, info) => {
           if (error) {
             console.log(error)
           }
