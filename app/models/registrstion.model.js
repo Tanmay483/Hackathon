@@ -5,6 +5,7 @@ const Registration = function (registration) {
   this.vName = registration.vName;
   this.vEmail = registration.vEmail;
   this.vMobileNumber = registration.vMobileNumber;
+  this.vGitUrl = registration.vGitUrl;
   this.vAddress = registration.vAddress;
   this.vQualification = registration.vQualification;
   this.vProfession = registration.vProfession;

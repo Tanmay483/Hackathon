@@ -15,6 +15,7 @@ exports.create = (req, res) => {
      vName : req.body.vName,
      vEmail : req.body.vEmail,
      vMobileNumber: req.body.vMobileNumber,
+     vGitUrl: req.body.vGitUrl,
      vAddress : req.body.vAddress,
      vQualification : req.body.vQualification,
      vProfession : req.body.vProfession,

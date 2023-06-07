@@ -15,6 +15,7 @@ module.exports = (app) => {
     let Id = req.params.Id
         const vName = req.body.vName
         const vMobileNumber  = req.body.vMobileNumber;
+        const vGitUrl  = req.body.vGitUrl;
         const vAddress = req.body.vAddress;
         const vQualification = req.body.vQualification;
         const vProfession = req.body.vProfession;
@@ -23,7 +24,7 @@ module.exports = (app) => {
         const vProblemStatement = req.body.tUpdatedDate;
         const Document = req.file.filename;
         
-        var sql = "UPDATE `student` SET `vName`='" + vName + "',`vMobileNumber`= '" + vMobileNumber + "',`vAddress`='" + vAddress + "',`vQualification`='"+vQualification+"',`vProfession`='"+vProfession+"',`vTeamType`='" + vTeamType + "',`iNumberOfMembers` = '"+iNumberOfMembers+"',`vProblemStatement` = '"+vProblemStatement+"',`Document` = '"+Document+"'WHERE  Id = '" + Id + "' "
+        var sql = "UPDATE `student` SET `vName`='" + vName + "',`vMobileNumber`= '" + vMobileNumber + "',`vGitUrl`='"+vGitUrl+"',`vAddress`='" + vAddress + "',`vQualification`='"+vQualification+"',`vProfession`='"+vProfession+"',`vTeamType`='" + vTeamType + "',`iNumberOfMembers` = '"+iNumberOfMembers+"',`vProblemStatement` = '"+vProblemStatement+"',`Document` = '"+Document+"'WHERE  Id = '" + Id + "' "
         conn.query(sql, (err, data) => {
             if (err) throw err;
             console.log("registration change sucessfully")
