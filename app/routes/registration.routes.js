@@ -1,24 +1,24 @@
-const multer = require('../documentController/document.control')
-const conn = require('../config/db')
-module.exports = app => {
-    const registration = require('../controller/registration.controller');
-  
-    var router = require("express").Router();
-  
-    // Create a new blog
-    router.post("/",multer,registration.create);
+const multer = require('../documentController/document.control');
+const verifyToken = require('../controller/jwt');
+const conn = require('../config/db');
 
-  
-    // Update a registration with id
-    router.put("/:Id", multer, (req, res) => {
+module.exports = (app) => {
+  const registration = require('../controller/registration.controller');
 
-        let Id = req.params.Id
+  var router = require('express').Router();
+
+  // Create a new blog
+  router.post('/', multer,verifyToken, registration.create);
+
+  // Update a registration with id
+  router.put('/:Id', multer, verifyToken,(req, res) => {
+    let Id = req.params.Id
         const vName = req.body.vName
-        const vMobileNumber	 = req.body.vMobileNumber;
+        const vMobileNumber  = req.body.vMobileNumber;
         const vAddress = req.body.vAddress;
         const vQualification = req.body.vQualification;
         const vProfession = req.body.vProfession;
-        const vTeamType	 = req.body.tCreatedDate; 
+        const vTeamType  = req.body.tCreatedDate; 
         const iNumberOfMembers = req.body.tUpdatedDate;
         const vProblemStatement = req.body.tUpdatedDate;
         const Document = req.file.filename;
@@ -30,11 +30,11 @@ module.exports = app => {
             console.log(req.body)
         });
         res.send("registration change sucessfully")
-    }) 
-    // Update a status with id
-    router.put("/active/:Id", (req, res) => {
+  });
 
-        let Id = req.params.Id;
+  // Update a status with id
+  router.put('/active/:Id',verifyToken, (req, res) => {
+    let Id = req.params.Id;
         const keyStatus = req.body.keyStatus
      
         
@@ -45,13 +45,13 @@ module.exports = app => {
             console.log(req.body)
         });
         res.send("status change sucessfully")
-    })
+  });
 
-     // Retrieve all registration
-     router.get("/", registration.findAll);
+  // Retrieve all registration
+  router.get('/',verifyToken, registration.findAll);
 
-     //Retrive registration by id
-     router.get("/Id/:Id",registration.findId)
+  // Retrieve registration by id
+  router.get('/Id/:Id',verifyToken, registration.findId);
 
-    app.use('/app/registration', router);
+  app.use('/app/registration', router);
 };

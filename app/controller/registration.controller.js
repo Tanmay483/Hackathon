@@ -1,5 +1,5 @@
 const Registration = require('../models/registrstion.model');
-
+const jwt = require('jsonwebtoken')
 
 // Create and Save
 exports.create = (req, res) => {
@@ -68,5 +68,4 @@ exports.findId = (req, res) => {
       } else res.send(data);
     });
   };
-
-
+  
