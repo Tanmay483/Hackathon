@@ -26,8 +26,8 @@ Details.create = (newdetails, result) => {
             return;
         }
 
-        console.log("created tutorial: ", { abId: res.insertabId, ...newdetails });
-        result(null, { abId: res.insertabId, ...newdetails });
+        console.log("created tutorial: ", { abId: res.inserthId, ...newdetails });
+        result(null, { abId: res.inserthId, ...newdetails });
     });
 };
 

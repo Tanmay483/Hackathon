@@ -1,6 +1,7 @@
 const upload = require('../documentController/image.controller')
 const conn = require('../config/db');
-const secretKey = require('../controller/jwt')
+const verifyToken = require('../controller/jwt')
+
 
 module.exports = app => {
     const Description = require('../controller/details.controller');
@@ -8,16 +9,16 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new Description
-    router.post("/", upload,secretKey, Description.create);
+    router.post("/", upload,verifyToken, Description.create);
 
     // Retrieve all Description
-    router.get("/",secretKey, Description.findAll);
+    router.get("/",verifyToken,Description.findAll);
 
     // Retrieve a single Description with id
-    router.get("/:hId",secretKey, Description.findOne);
+    router.get("/:hId", verifyToken,Description.findOne);
 
 
-    router.put('/:hId', upload,secretKey, (req, res) => {
+    router.put('/:hId', upload,verifyToken, (req, res) => {
         let hId = req.params.hId
         const vTitle = req.body.vTitle;
         const vImage = "http://localhost:8085/" + req.file.path.replace(/\\/g, '/');
@@ -43,7 +44,8 @@ module.exports = app => {
     
 
     // Delete a Description with id
-    router.delete("/:hId",secretKey, Description.delete);
+    router.delete("/:hId", Description.delete);
 
     app.use('/app/hackathon', router);
 };
+

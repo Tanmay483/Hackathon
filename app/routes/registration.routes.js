@@ -1,6 +1,6 @@
 const multer = require('../documentController/document.control');
-const verifyToken = require('../controller/jwt');
 const conn = require('../config/db');
+const verifyToken = require('../controller/jwt')
 
 module.exports = (app) => {
   const registration = require('../controller/registration.controller');
@@ -11,7 +11,7 @@ module.exports = (app) => {
   router.post('/', multer,verifyToken, registration.create);
 
   // Update a registration with id
-  router.put('/:Id', multer, verifyToken,(req, res) => {
+  router.put('/:Id', multer,verifyToken, (req, res) => {
     let Id = req.params.Id
         const vName = req.body.vName
         const vMobileNumber  = req.body.vMobileNumber;
