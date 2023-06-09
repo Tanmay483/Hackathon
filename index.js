@@ -41,6 +41,7 @@ app.use('/app/Images', express.static(path.join(__dirname, 'app/Images')));
 require('./app/routes/registration.routes')(app)
 require('./app/routes/login.routes')(app)
 require('./app/routes/details.routes')(app)
+require('./app/routes/contact.routes')(app)
 
 
 

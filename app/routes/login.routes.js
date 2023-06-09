@@ -1,4 +1,3 @@
-const conn = require('../config/db')
 const verifyToken = require('../controller/jwt')
 
 module.exports = app => {
