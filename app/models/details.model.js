@@ -41,12 +41,34 @@ Details.findById = (hId, result) => {
             result(err, null);
             return;
         }
-        if (res.length) {
-            console.log("found details: ", res);
-            result(null, res);
+        if (res.length === 0) {
+            console.log('data not found');
+            result('error', null);
             return;
         }
-        result({ kind: "not_found" }, null);
+        const hackathon = res[0]
+
+        sql.query(
+            `SELECT comId , Id , vcomment FROM comment WHERE hId = ${hId}`,
+            (err, res) => {
+                if (err) {
+                    console.log('Error:', err);
+                    result(err, null);
+                    return;
+                }
+
+                const comment = res.length > 0 ? res : [];
+
+                const resultData = {
+                    hackathon: hackathon,
+                    comment: comment
+                };
+
+                console.log('found hackathon:', resultData);
+                result(null, resultData);
+            }
+        );
+
     });
 };
 

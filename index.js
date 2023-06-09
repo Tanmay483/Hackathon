@@ -42,6 +42,7 @@ require('./app/routes/registration.routes')(app)
 require('./app/routes/login.routes')(app)
 require('./app/routes/details.routes')(app)
 require('./app/routes/contact.routes')(app)
+require('./app/routes/comment.routes')(app)
 
 
 
