@@ -135,11 +135,11 @@ Details.ById = (hId, result) => {
                     return;
                 }
 
-                const comment = res.length > 0 ? res : [];
+                const brif = res.length > 0 ? res : [];
 
                 const resultData = {
                     hackathon: hackathon,
-                    tab: comment
+                    tab: brif
                 };
 
                 console.log('found hackathon:', resultData);
