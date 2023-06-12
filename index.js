@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 app.post('/token', (req, resp) => {
   const user = {};
 
-  jwt.sign({ user }, secretKey, { expiresIn: '300s' }, (err, token) => {
+  jwt.sign({ user }, secretKey, {  }, (err, token) => {
     if (err) {
       resp.status(500).json({ error: 'Failed to generate token' });
     } else {
