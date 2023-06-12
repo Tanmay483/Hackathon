@@ -17,6 +17,9 @@ module.exports = app => {
     // Retrieve a single Description with id
     router.get("/:hId", verifyToken,Description.findOne);
 
+    // Retrieve a single Description with id
+    router.get("/brif/:hId", verifyToken,Description.brif);
+
 
     router.put('/:hId', upload,verifyToken, (req, res) => {
         let hId = req.params.hId

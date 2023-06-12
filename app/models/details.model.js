@@ -109,4 +109,47 @@ Details.remove = (hId, result) => {
     });
 };
 
+
+// i don't know what the fuck am i doing 
+
+Details.ById = (hId, result) => {
+    sql.query(`SELECT * FROM hackathon WHERE hId = ${hId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length === 0) {
+            console.log('data not found');
+            result('error', null);
+            return;
+        }
+        const hackathon = res[0]
+
+        sql.query(
+            `SELECT vBrif,vDetails FROM hackathon WHERE hId = ${hId}`,
+            (err, res) => {
+                if (err) {
+                    console.log('Error:', err);
+                    result(err, null);
+                    return;
+                }
+
+                const comment = res.length > 0 ? res : [];
+
+                const resultData = {
+                    hackathon: hackathon,
+                    tab: comment
+                };
+
+                console.log('found hackathon:', resultData);
+                result(null, resultData);
+            }
+        );
+
+    });
+};
+
+
+
 module.exports = Details;

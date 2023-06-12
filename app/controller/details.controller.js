@@ -86,3 +86,19 @@ exports.delete = (req, res) => {
     } else res.send({ message: `Description was deleted successfully!` });
   });
 };
+
+exports.brif = (req, res) => {
+  Details.ById(req.params.hId, (err, data) => {
+  if (err) {
+    if (err.kind === "not_found") {
+      res.status(404).send({
+        message: `Not found Details with id ${req.params.hId}.`
+      });
+    } else {
+      res.status(500).send({
+        message: "Error retrieving Details with id " + req.params.hId
+      });
+    }
+  } else res.send(data);
+});
+};
