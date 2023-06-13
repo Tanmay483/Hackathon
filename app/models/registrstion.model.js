@@ -228,13 +228,12 @@ Registration.findId = (Id, result) => {
       return;
     }
     if (res.length) {
-      console.log("student details: ", res);
-      result(null, res);
+      console.log("student details: ", res[0]); 
+      result(null, res[0]); 
       return;
     }
     result({ kind: "not_found" }, null);
   });
 };
-
 
 module.exports = Registration
