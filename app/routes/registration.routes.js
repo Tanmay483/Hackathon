@@ -19,9 +19,9 @@ module.exports = (app) => {
         const vAddress = req.body.vAddress;
         const vQualification = req.body.vQualification;
         const vProfession = req.body.vProfession;
-        const vTeamType  = req.body.tCreatedDate; 
-        const iNumberOfMembers = req.body.tUpdatedDate;
-        const vProblemStatement = req.body.tUpdatedDate;
+        const vTeamType  = req.body.vTeamType; 
+        const iNumberOfMembers = req.body.iNumberOfMembers;
+        const vProblemStatement = '';
         const Document = req.file.filename;
         
         var sql = "UPDATE `student` SET `vName`='" + vName + "',`vMobileNumber`= '" + vMobileNumber + "',`vGitUrl`='"+vGitUrl+"',`vAddress`='" + vAddress + "',`vQualification`='"+vQualification+"',`vProfession`='"+vProfession+"',`vTeamType`='" + vTeamType + "',`iNumberOfMembers` = '"+iNumberOfMembers+"',`vProblemStatement` = '"+vProblemStatement+"',`Document` = '"+Document+"'WHERE  Id = '" + Id + "' "

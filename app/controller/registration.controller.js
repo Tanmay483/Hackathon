@@ -21,7 +21,7 @@ exports.create = (req, res) => {
      vProfession : req.body.vProfession,
      vTeamType : req.body.vTeamType,
      iNumberOfMembers : req.body.iNumberOfMembers,
-     vProblemStatement : req.body.vProblemStatement,
+     vProblemStatement : '',
      Document : req.file.path,
     });
     // POST

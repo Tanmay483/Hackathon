@@ -11,7 +11,7 @@ const Registration = function (registration) {
   this.vProfession = registration.vProfession;
   this.vTeamType = registration.vTeamType;
   this.iNumberOfMembers = registration.iNumberOfMembers;
-  this.vProblemStatement = registration.vProblemStatement;
+  this.vProblemStatement = '';
   this.Document = registration.Document;
 };
 Registration.create = (registration, result) => {
