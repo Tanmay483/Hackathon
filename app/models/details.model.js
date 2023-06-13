@@ -110,7 +110,7 @@ Details.remove = (hId, result) => {
 };
 
 
-// i don't know what the fuck am i doing 
+// tab
 
 Details.ById = (hId, result) => {
     sql.query(`SELECT * FROM hackathon WHERE hId = ${hId}`, (err, res) => {
