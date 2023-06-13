@@ -33,7 +33,6 @@ Details.create = (newdetails, result) => {
 
 
 // GET by ID
-
 Details.findById = (hId, result) => {
     sql.query(`SELECT * FROM hackathon WHERE hId = ${hId}`, (err, res) => {
         if (err) {
@@ -46,10 +45,10 @@ Details.findById = (hId, result) => {
             result('error', null);
             return;
         }
-        const hackathon = res[0]
+        const hackathon = res[0];
 
         sql.query(
-            `SELECT comId , Id , vcomment FROM comment WHERE hId = ${hId}`,
+            `SELECT comId, Id, vcomment FROM comment WHERE hId = ${hId}`,
             (err, res) => {
                 if (err) {
                     console.log('Error:', err);
@@ -61,14 +60,17 @@ Details.findById = (hId, result) => {
 
                 const resultData = {
                     hackathon: hackathon,
-                    comment: comment
+                    comment: comment,
+                    tab: {
+                        vBrif: hackathon.vBrif,
+                        vDetails: hackathon.vDetails
+                    }
                 };
 
                 console.log('found hackathon:', resultData);
                 result(null, resultData);
             }
         );
-
     });
 };
 
