@@ -29,4 +29,18 @@ exports.findId = (req, res) => {
       } else res.send(data);
     });
   };
+
+
+// iParentId = 0 
+
+  exports.findType = (req, res) => {
+    Registration.findType((err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving details."
+        });
+      else res.send(data);
+    });
+  };
   

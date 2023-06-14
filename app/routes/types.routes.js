@@ -8,7 +8,10 @@ module.exports = app => {
     router.get("/",verifyToken, type.findAll);
 
 
-    router.get("/:iParentId",verifyToken, type.findId);
+    router.get("/Id/:iParentId",verifyToken, type.findId);
+
+
+    router.get("/domain",verifyToken, type.findType);
 
   
     app.use('/app/type', router);
