@@ -3,12 +3,20 @@ const Registration = require('../models/type.model');
 // get all
 exports.findAll = (req, res) => {
   Registration.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving details."
+    if (err) {
+      res.status(400).json({ 
+        success: false,
+        message: "can not find types"
       });
-    else res.send(data);
+    } else {
+      console.log("Types:");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "types"
+      });
+    }
   });
 };
 
@@ -16,17 +24,20 @@ exports.findAll = (req, res) => {
 
 exports.findId = (req, res) => {
   Registration.findData(req.params.iParentId, (err, data) => {
-      if (err) {
-        if (err.kind === "not_found") {
-          res.status(404).send({
-            message: `Not found type with id ${req.params.iParentId}.`
-          });
-        } else {
-          res.status(500).send({
-            message: "Error retrieving type with Id " + req.params.iParentId
-          });
-        }
-      } else res.send(data);
+    if (err) {
+      res.status(404).json({ 
+        success: false,
+        message: "error can not find type with id "+ req.params.iParentId +" Id not found "
+      });
+    } else {
+      console.log("types");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "type with id:"+req.params.iParentId
+      });
+    }
     });
   };
 
@@ -35,12 +46,20 @@ exports.findId = (req, res) => {
 
   exports.findType = (req, res) => {
     Registration.findType((err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving details."
+      if (err) {
+        res.status(404).json({ 
+          success: false,
+          message: "cannot find domains "
         });
-      else res.send(data);
+      } else {
+        console.log("domain:");
+        console.log(req.body);
+        res.status(200).json({
+          success: true,
+          data: data,
+          message: "domains"
+        });
+      }
     });
   };
   

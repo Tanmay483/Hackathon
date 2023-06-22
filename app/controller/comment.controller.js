@@ -20,12 +20,20 @@ exports.create = (req, res) => {
     //   POST
 
     Comment.create(comment, (err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while adding the Comment."
+        if (err) {
+            res.status(400).json({
+              success: false,
+              message: "comment failed"
             });
-        else res.send(data);
+          } else {
+            console.log("comment submited successfully");
+            console.log(req.body);
+            res.status(200).json({
+              success: true,
+              data: req.body,
+              message: "Thankyou for let us know your thoughts "
+            });
+          }
     });
 };
 
@@ -35,12 +43,20 @@ exports.findAll = (req, res) => {
     const title = req.query.title;
 
     Comment.getAll(title, (err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving description."
+        if (err) {
+            res.status(400).json({ 
+              success: false,
+              message: "can not get comment"
             });
-        else res.send(data);
+          } else {
+            console.log("comments");
+            console.log(req.body);
+            res.status(200).json({
+              success: true,
+              data: data,
+              message: "comments"
+            });
+          }
     });
 };
 

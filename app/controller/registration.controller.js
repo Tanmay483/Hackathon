@@ -27,12 +27,20 @@ exports.create = (req, res) => {
     // POST
     
     Registration.create(registration, (err, data) => {
-    if (err)
-    res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the student detail."
-      });
-    else res.send(data);
+      if (err) {
+        res.status(400).json({ 
+          success: false,
+          message: "Registration failed"
+        });
+      } else {
+        console.log("Registration add successfully");
+        console.log(req.body);
+        res.status(200).json({
+          success: true,
+          data: req.body,
+          message: "congratulation your entry has been register successfully"
+        });
+      }
   });
 };
 
@@ -42,12 +50,20 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   Registration.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving details."
-      });
-    else res.send(data);
+      if (err) {
+        res.status(400).json({ 
+          success: false,
+          message: "can not get data"
+        });
+      } else {
+        console.log("user detail");
+        console.log(req.body);
+        res.status(200).json({
+          success: true,
+          data: data,
+          message: "data"
+        });
+      }
   });
 };
 
@@ -56,17 +72,20 @@ exports.findAll = (req, res) => {
 
 exports.findId = (req, res) => {
   Registration.findId(req.params.Id, (err, data) => {
-      if (err) {
-        if (err.kind === "not_found") {
-          res.status(404).send({
-            message: `Not found student with id ${req.params.Id}.`
-          });
-        } else {
-          res.status(500).send({
-            message: "Error retrieving srudent with Id " + req.params.Id
-          });
-        }
-      } else res.send(data);
+    if (err) {
+      res.status(404).json({ 
+        success: false,
+        message: "error retriving data with id "+ req.params.Id +" Id not found "
+      });
+    } else {
+      console.log("Registration changed successfully");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "User with id:"+req.params.Id
+      });
+    }
     });
   };
   

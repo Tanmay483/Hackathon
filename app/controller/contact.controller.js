@@ -21,12 +21,20 @@ exports.create = (req, res) => {
 //   POST
 
 Contact.create(contact, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while adding the Contact."
-      });
-    else res.send(data);
+  if (err) {
+    res.status(400).json({
+      success: false,
+      message: "contact failed"
+    });
+  } else {
+    console.log("contact submited successfully");
+    console.log(req.body);
+    res.status(200).json({
+      success: true,
+      data: req.body,
+      message: "Thankyou for contact us"
+    });
+  }
   });
 };
 
@@ -36,12 +44,20 @@ exports.findAll = (req, res) => {
     const title = req.query.title;
   
     Contact.getAll(title, (err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving description."
+      if (err) {
+        res.status(400).json({ 
+          success: false,
+          message: "can not get contact list"
         });
-      else res.send(data);
+      } else {
+        console.log("contact");
+        console.log(req.body);
+        res.status(200).json({
+          success: true,
+          data: data,
+          message: "contacts"
+        });
+      }
     });
   };
 

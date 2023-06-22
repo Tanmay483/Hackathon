@@ -38,10 +38,22 @@ module.exports = app => {
         var sql = "UPDATE `hackathon` SET `vTitle`='" + vTitle + "',`vImage`='" + vImage + "', `vUniversity`='" + vUniversity + "',`vAddress`='"+vAddress+"',`vBrif`='"+vBrif+"',`vDetails`='"+vDetails+"',`vDeadline`='"+vDeadline	+"',`iTeamSize`='"+iTeamSize+"',`vEligibility`='"+vEligibility+"',`tCreatedDate`='" + tCreatedDate + "',`tUpdatedDate`='" + tUpdatedDate + "' WHERE `hId` = '" + hId + "' ";
         
         conn.query(sql, (err, data) => {
-            if (err) throw err;
-            console.log('details cahnge scessfully')
+            if (err) {
+                res.json({
+                  success: false,
+                  data: req.body,
+                  message: "Database update failed"
+                });
+              } else {
+                console.log("details changed successfully");
+                console.log(req.body);
+                res.json({
+                  success: true,
+                  data: req.body,
+                  message: "Database updated successfully"
+                });
+              }
         })
-        res.send("details cahnge scessfully")
     })
 
     
