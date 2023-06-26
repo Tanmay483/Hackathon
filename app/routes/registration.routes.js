@@ -78,6 +78,61 @@ module.exports = (app) => {
     });
   });
 
+  // update rankings
+
+  router.put('/giturl/:Id', verifyToken, (req, res) => {
+    let Id = req.params.Id;
+    const vGitUrl = req.body.vGitUrl
+
+
+    var sql = "UPDATE `student` SET `vGitUrl`='" + vGitUrl + "' WHERE  Id = '" + Id + "' "
+    conn.query(sql, (err, data) => {
+      if (err) {
+        res.json({
+          success: false,
+          data: req.body,
+          message: "can't enter url"
+        });
+      } else {
+        console.log("URL Update scessfull");
+        console.log(req.body);
+        res.json({
+          success: true,
+          data: req.body,
+          message: "URL Update scessfull"
+        });
+      }
+
+    });
+  });
+
+
+  router.put('/ranking/:Id', verifyToken, (req, res) => {
+    let Id = req.params.Id;
+    const iRanking = req.body.iRanking
+
+    // update git url
+
+    var sql = "UPDATE `student` SET `iRanking`='" + iRanking + "' WHERE  Id = '" + Id + "' "
+    conn.query(sql, (err, data) => {
+      if (err) {
+        res.json({
+          success: false,
+          data: req.body,
+          message: "Ranking fail"
+        });
+      } else {
+        console.log("Rank Update scessfull");
+        console.log(req.body);
+        res.json({
+          success: true,
+          data: req.body,
+          message: "Rank Update scessfull"
+        });
+      }
+
+    });
+  });
   // Retrieve all registration
   router.get('/', verifyToken, registration.findAll);
 
