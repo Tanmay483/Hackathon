@@ -193,7 +193,7 @@ Registration.create = (registration, result) => {
 }
 function getPassword() {
   var length = 8,
-    charset = "@#$%&*0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    charset = "!@#$%&*?0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
     password = "";
   for (var i = 0, n = charset.length; i < length; ++i) {
     password += charset.charAt(Math.floor(Math.random() * n));

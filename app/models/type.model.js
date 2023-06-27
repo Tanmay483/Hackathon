@@ -24,7 +24,7 @@ Type.getAll = (result) => {
 };
 
 
-//GET blog by id 
+//GET type by id 
 
 Type.findData = (iParentId, result) => {
     sql.query(`SELECT * FROM type WHERE iParentId = ${iParentId}`, (err, res) => {
