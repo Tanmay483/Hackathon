@@ -43,7 +43,8 @@ require('./app/routes/contact.routes')(app)
 require('./app/routes/comment.routes')(app)
 require('./app/routes/types.routes')(app)
 require('./app/routes/problemStatement.routes')(app)
-
+require('./app/routes/theme.routes')(app)
+require('./app/routes/tab.routes')(app)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;

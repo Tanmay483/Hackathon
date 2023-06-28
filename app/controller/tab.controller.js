@@ -1,4 +1,4 @@
-const Problem = require('../models/problemStatement.models');
+const Tab = require('../models/tab.model');
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -8,27 +8,29 @@ exports.create = (req, res) => {
     }
 
     // Create a Description
-    const contact = new Problem({
+    const tab = new Tab({
         hId: req.body.hId,
-        theId: req.body.theId,
-        vProblemStatement: req.body.vProblemStatement
+        vTitle: req.body.vTitle,
+        vDiscription: req.body.vDiscription,
+        tCreatedDate: req.body.tCreatedDate,
+        tUpdatedDate: req.body.tUpdatedDate
     });
 
     //   POST
 
-    Problem.create(contact, (err, data) => {
+    Tab.create(tab, (err, data) => {
         if (err) {
             res.status(400).json({
                 success: false,
-                message: "Problem satement failed to add"
+                message: "failed to generate tab"
             });
         } else {
-            console.log("problem statement submited successfully");
+            console.log("tab submited successfully");
             console.log(req.body);
             res.status(200).json({
                 success: true,
                 data: req.body,
-                message: "problem statement submited successfully"
+                message: "tab submited successfully"
             });
         }
     });
@@ -37,19 +39,19 @@ exports.create = (req, res) => {
 // GET all  
 
 exports.findAll = (req, res) => {
-    Problem.getAll((err, data) => {
+    Tab.getAll((err, data) => {
         if (err) {
             res.status(400).json({
                 success: false,
-                message: "can not get problem statement list"
+                message: "can not get tab list"
             });
         } else {
-            console.log("contact");
+            console.log("tab");
             console.log(req.body);
             res.status(200).json({
                 success: true,
                 data: data,
-                message: "Problem statement"
+                message: "Tab statement"
             });
         }
     });
@@ -58,11 +60,11 @@ exports.findAll = (req, res) => {
 // get by id
 
 exports.findId = (req, res) => {
-    Problem.findData(req.params.pId, (err, data) => {
+    Tab.findData(req.params.tabId, (err, data) => {
         if (err) {
             res.status(404).json({
                 success: false,
-                message: "error can not find problemStatement with id " + req.params.pId + " Id not found "
+                message: "error can not find tab with id " + req.params.tabId + " Id not found "
             });
         } else {
             console.log("types");
@@ -70,7 +72,7 @@ exports.findId = (req, res) => {
             res.status(200).json({
                 success: true,
                 data: data,
-                message: "problemStatement with id:" + req.params.pId
+                message: "tab with id:" + req.params.tabId
             });
         }
     });
@@ -79,18 +81,18 @@ exports.findId = (req, res) => {
 // delete problemstatement
 
 exports.delete = (req, res) => {
-    Problem.remove(req.params.pId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found problemstatement with id ${req.params.pId}.`
-        });
-      } else {
-        res.status(500).send({
-          message: "Could not delete problemstatement with id " + req.params.pId
-        });
-      }
-    } else res.send({ message: `problemstatement was deleted successfully!` });
-  });
+    Tab.remove(req.params.tabId, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found tab with id ${req.params.tabId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete tab with id " + req.params.tabId
+                });
+            }
+        } else res.send({ message: `tab was deleted successfully!` });
+    });
 };
 
