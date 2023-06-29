@@ -56,8 +56,6 @@ module.exports = app => {
     })
   })
 
-
-
   // Delete a Description with id
   router.delete("/:hId", Description.delete);
 

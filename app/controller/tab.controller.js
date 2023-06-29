@@ -78,7 +78,7 @@ exports.findId = (req, res) => {
     });
 };
 
-// delete problemstatement
+// delete tab
 
 exports.delete = (req, res) => {
     Tab.remove(req.params.tabId, (err, data) => {

@@ -1,4 +1,5 @@
 const Problem = require('../models/problemStatement.models');
+
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -80,17 +81,17 @@ exports.findId = (req, res) => {
 
 exports.delete = (req, res) => {
     Problem.remove(req.params.pId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found problemstatement with id ${req.params.pId}.`
-        });
-      } else {
-        res.status(500).send({
-          message: "Could not delete problemstatement with id " + req.params.pId
-        });
-      }
-    } else res.send({ message: `problemstatement was deleted successfully!` });
-  });
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found problemstatement with id ${req.params.pId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete problemstatement with id " + req.params.pId
+                });
+            }
+        } else res.send({ message: `problemstatement was deleted successfully!` });
+    });
 };
 

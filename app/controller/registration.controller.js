@@ -1,5 +1,4 @@
 const Registration = require('../models/registrstion.model');
-const jwt = require('jsonwebtoken')
 
 // Create and Save
 exports.create = (req, res) => {
@@ -44,9 +43,7 @@ exports.create = (req, res) => {
   });
 };
 
-
 // get all
-
 
 exports.findAll = (req, res) => {
   Registration.getAll((err, data) => {
@@ -68,7 +65,6 @@ exports.findAll = (req, res) => {
 };
 
 // get by id
-
 
 exports.findId = (req, res) => {
   Registration.findId(req.params.Id, (err, data) => {

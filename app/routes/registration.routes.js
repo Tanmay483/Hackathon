@@ -78,7 +78,7 @@ module.exports = (app) => {
     });
   });
 
-  // update rankings
+  // update git url
 
   router.put('/giturl/:Id', verifyToken, (req, res) => {
     let Id = req.params.Id;
@@ -106,7 +106,7 @@ module.exports = (app) => {
     });
   });
 
-
+  // update ranking
   router.put('/ranking/:Id', verifyToken, (req, res) => {
     let Id = req.params.Id;
     const iRanking = req.body.iRanking
@@ -133,6 +133,7 @@ module.exports = (app) => {
 
     });
   });
+
   // Retrieve all registration
   router.get('/', verifyToken, registration.findAll);
 
