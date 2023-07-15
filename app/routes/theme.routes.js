@@ -1,4 +1,4 @@
-const verifyToken = require('../controller/jwt')
+// const verifyToken = require('../controller/jwt')
 const conn = require('../config/db');
 module.exports = app => {
     const Theme = require('../controller/theme.controller');
@@ -6,16 +6,16 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new Theme
-    router.post("/addTheme", verifyToken, Theme.create);
+    router.post("/addTheme", Theme.create);
 
     // Retrieve all Theme
-    router.get("/", verifyToken, Theme.findAll);
+    router.get("/", Theme.findAll);
 
     //retrieve problemstatement by id
-    router.get("/:theId", verifyToken, Theme.findId)
+    router.get("/:theId", Theme.findId)
 
     //update problem statement
-    router.put('/update/:theId', verifyToken, (req, res) => {
+    router.put('/update/:theId', (req, res) => {
         let theId = req.params.theId
         const vTheme = req.body.vTheme;
         const keyStatus = req.body.keyStatus;
@@ -41,5 +41,5 @@ module.exports = app => {
         })
     })
 
-    app.use('/app/theme', router);
+    app.use('/api/theme', router);
 };

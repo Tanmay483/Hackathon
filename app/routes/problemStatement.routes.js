@@ -1,4 +1,4 @@
-const verifyToken = require('../controller/jwt')
+// const verifyToken = require('../controller/jwt')
 const conn = require('../config/db');
 module.exports = app => {
     const problemStatement = require('../controller/problemStatement.controller');
@@ -6,16 +6,16 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new problemStatement
-    router.post("/", verifyToken, problemStatement.create);
+    router.post("/", problemStatement.create);
 
     // Retrieve all problemStatement
-    router.get("/", verifyToken, problemStatement.findAll);
+    router.get("/", problemStatement.findAll);
 
     //retrieve problemstatement by id
-    router.get("/:pId", verifyToken, problemStatement.findId)
+    router.get("/:pId", problemStatement.findId)
 
     //update problem statement
-    router.put('/update/:pId', verifyToken, (req, res) => {
+    router.put('/update/:pId', (req, res) => {
         let pId = req.params.pId
         const hId = req.body.hId;
         const theId = req.body.theId;
@@ -42,7 +42,7 @@ module.exports = app => {
         })
     })
 
-    router.delete('/delete/:pId', verifyToken , problemStatement.delete)
+    router.delete('/delete/:pId' , problemStatement.delete)
 
-    app.use('/app/problemStatement', router);
+    app.use('/api/problemStatement', router);
 };

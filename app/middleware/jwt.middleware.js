@@ -13,13 +13,15 @@ const secretKey = "secretKey"
         next();
       } catch (error) {
         resp.status(401).json({
-          error: "Invalid token"
-        });
+          status: 0,
+          message: "Invalid token"
+      });
       }
     } else {
       resp.status(401).json({
-        error: "Token is missing"
-      });
+        status: 0,
+        message: "Token is missing"
+    });
     }
   }
   

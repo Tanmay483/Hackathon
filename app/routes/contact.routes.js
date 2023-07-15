@@ -1,4 +1,4 @@
-const verifyToken = require('../controller/jwt')
+// const verifyToken = require('../controller/jwt')
 
 module.exports = app => {
     const contact = require('../controller/contact.controller');
@@ -6,10 +6,10 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new contact
-    router.post("/",verifyToken, contact.create);
+    router.post("/", contact.create);
 
     // Retrieve all contact
-    router.get("/",verifyToken, contact.findAll);
+    router.get("/", contact.findAll);
 
-    app.use('/app/contact', router);
+    app.use('/api/contact', router);
 };

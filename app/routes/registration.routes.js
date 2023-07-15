@@ -1,6 +1,6 @@
 const multer = require('../documentController/document.control');
 const conn = require('../config/db');
-const verifyToken = require('../controller/jwt')
+// const verifyToken = require('../controller/jwt')
 
 module.exports = (app) => {
   const registration = require('../controller/registration.controller');
@@ -8,10 +8,10 @@ module.exports = (app) => {
   var router = require('express').Router();
 
   // Create a new blog
-  router.post('/', multer, verifyToken, registration.create);
+  router.post('/', multer, registration.create);
 
   // Update a registration with id
-  router.put('/:Id', multer, verifyToken, (req, res) => {
+  router.put('/:Id', multer, (req, res) => {
     let Id = req.params.Id;
     const vName = req.body.vName;
     const vMobileNumber = req.body.vMobileNumber;
@@ -52,35 +52,11 @@ module.exports = (app) => {
   });
   
   // Update a status with id
-  router.put('/active/:Id', verifyToken, (req, res) => {
-    let Id = req.params.Id;
-    const keyStatus = req.body.keyStatus
-
-
-    var sql = "UPDATE `student` SET `keyStatus`='" + keyStatus + "' WHERE  Id = '" + Id + "' "
-    conn.query(sql, (err, data) => {
-      if (err) {
-        res.json({
-          success: false,
-          data: req.body,
-          message: "Database update failed"
-        });
-      } else {
-        console.log("status change sucessfully");
-        console.log(req.body);
-        res.json({
-          success: true,
-          data: req.body,
-          message: "status change sucessfully"
-        });
-      }
-
-    });
-  });
+  router.put('/active/:Id',registration.status)
 
   // update git url
 
-  router.put('/giturl/:Id', verifyToken, (req, res) => {
+  router.put('/giturl/:Id', (req, res) => {
     let Id = req.params.Id;
     const vGitUrl = req.body.vGitUrl
 
@@ -107,7 +83,7 @@ module.exports = (app) => {
   });
 
   // update ranking
-  router.put('/ranking/:Id', verifyToken, (req, res) => {
+  router.put('/ranking/:Id', (req, res) => {
     let Id = req.params.Id;
     const iRanking = req.body.iRanking
 
@@ -135,10 +111,10 @@ module.exports = (app) => {
   });
 
   // Retrieve all registration
-  router.get('/', verifyToken, registration.findAll);
+  router.get('/', registration.findAll);
 
   // Retrieve registration by id
-  router.get('/Id/:Id', verifyToken, registration.findId);
+  router.get('/Id/:Id', registration.findId);
 
-  app.use('/app/registration', router);
+  app.use('/api/registration', router);
 };

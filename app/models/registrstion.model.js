@@ -13,6 +13,7 @@ const Registration = function (registration) {
   this.iNumberOfMembers = registration.iNumberOfMembers;
   this.vProblemStatement = '';
   this.Document = registration.Document;
+  this.keyStatus = registration.keyStatus
 };
 Registration.create = (registration, result) => {
   const { vEmail } = registration;
@@ -235,5 +236,33 @@ Registration.findId = (Id, result) => {
     result({ kind: "not_found" }, null);
   });
 };
+
+//update status 
+
+Registration.status = (Id,status,result)=>{
+  let query = `UPDATE student SET keyStatus =? WHERE Id = ?`
+
+  sql.query(query,[status.keyStatus,Id] ,(err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        // data: req.body,
+        message: "Database update failed"
+      });
+    } else {
+      console.log("status change successfully");
+      result(null,"Status change successfully")
+      // console.log(req.body);
+      // res.json({
+      //   success: true,
+      //   // data: req.body,
+      //   message: "status change sucessfully"
+      // });
+    }
+
+  });
+
+
+}
 
 module.exports = Registration

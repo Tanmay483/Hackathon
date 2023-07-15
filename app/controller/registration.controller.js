@@ -20,8 +20,9 @@ exports.create = (req, res) => {
     vProfession: req.body.vProfession,
     vTeamType: req.body.vTeamType,
     iNumberOfMembers: req.body.iNumberOfMembers,
-    vProblemStatement: '',
+    vProblemStatement: req.body.vProblemStatement,
     Document: req.file.path,
+    keyStatus: req.body.keyStatus
   });
   // POST
 
@@ -84,3 +85,25 @@ exports.findId = (req, res) => {
     }
   });
 };
+
+// status change
+exports.status = (req, res) => {
+  if (!req.body) {
+    res.status(400).send({ message: "please insert data" })
+  }
+  const registration = new Registration({
+    keyStatus: req.body.keyStatus
+  });
+  Registration.status(req.params.Id, registration,(err,data)=>{
+    if(err){
+      throw err
+    }
+    else{
+       res.json({
+        success: true,
+        // data: data,
+        message: "status change sucessfully"
+      });
+    }
+  })
+}
