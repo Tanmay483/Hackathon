@@ -1,15 +1,14 @@
 const Registration = require('../models/registrstion.model');
+const upload = require('../documentController/document.control')
 
 // Create and Save
 exports.create = (req, res) => {
-  // Validate request
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
   }
 
-  // Create a Tutorial
   const registration = new Registration({
     vName: req.body.vName,
     vEmail: req.body.vEmail,
@@ -21,8 +20,11 @@ exports.create = (req, res) => {
     vTeamType: req.body.vTeamType,
     iNumberOfMembers: req.body.iNumberOfMembers,
     vProblemStatement: req.body.vProblemStatement,
-    Document: req.file.path,
-    keyStatus: req.body.keyStatus
+    Document: req.file.path.replace(/\\/g, '/'),
+    keyStatus: req.body.keyStatus,
+    iRanking: req.body.iRanking,
+    vUniversity: req.body.vUniversity,
+    gender: req.body.gender
   });
   // POST
 
@@ -35,9 +37,11 @@ exports.create = (req, res) => {
     } else {
       console.log("Registration add successfully");
       console.log(req.body);
+      const responseData = {Id: data.Id,...req.body };
       res.status(200).json({
         success: true,
-        data: req.body,
+        // Id: data.Id, 
+        data: responseData,
         message: "congratulation your entry has been register successfully"
       });
     }
@@ -94,16 +98,111 @@ exports.status = (req, res) => {
   const registration = new Registration({
     keyStatus: req.body.keyStatus
   });
-  Registration.status(req.params.Id, registration,(err,data)=>{
-    if(err){
-      throw err
+  Registration.status(req.params.Id, registration, (err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: "Error while change status"
+      });
     }
-    else{
-       res.json({
+    else {
+      res.json({
         success: true,
-        // data: data,
         message: "status change sucessfully"
       });
     }
   })
 }
+
+// ranking update
+exports.ranking = (req, res) => {
+  if (!req.body) {
+    res.status(400).send({ message: "please insert data" })
+  }
+  const registration = new Registration({
+    iRanking: req.body.iRanking
+  });
+  Registration.ranking(req.params.Id, registration, (err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: "Error while update database"
+      });
+    }
+    else {
+      res.json({
+        success: true,
+        message: "Ranking update successfully"
+      });
+    }
+  })
+}
+
+// giturl update
+exports.giturl = (req, res) => {
+  if (!req.body) {
+    res.status(400).send({ message: "please insert data" })
+  }
+  const registration = new Registration({
+    vGitUrl: req.body.vGitUrl
+  });
+  Registration.giturl(req.params.Id, registration, (err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: "Error while update database"
+      });
+    }
+    else {
+      res.json({
+        success: true,
+        message: "GitUrl update successfully"
+      });
+    }
+  })
+}
+
+// update all data
+exports.update = (req, res) => {
+  upload(req, res, function (err) {
+    if (err) {
+      console.error("Error uploading Document:", err);
+      res.status(500).send({ message: "Failed to upload Document." });
+      return;
+    }
+
+    if (!req.body) {
+      res.status(400).send({ message: "Content can not be empty!" });
+      return;
+    }
+
+    const updatedData = {
+      vName: req.body.vName || '',
+      vMobileNumber: req.body.vMobileNumber || '',
+      vGitUrl: req.body.vGitUrl || '',
+      vAddress: req.body.vAddress || '',
+      vQualification: req.body.vQualification || '',
+      vProfession: req.body.vProfession || '',
+      vTeamType: req.body.vTeamType || '',
+      iNumberOfMembers: req.body.iNumberOfMembers || '',
+      vProblemStatement: req.body.vProblemStatement || '',
+      Document: req.file? req.file.path.replace(/\\/g, '/') : '',
+      keyStatus: req.body.keyStatus || '',
+      vUniversity:req.body.vUniversity || '',
+    };
+
+    Registration.update(req.params.Id, updatedData, (err, data) => {
+      if (err) {
+        console.error("Error updating data:", err);
+        res.status(500).send({ message: "Failed to update data." });
+        return;
+      } else {
+        res.status(200).json({
+          status: 1,
+          message: "Token verify sucessfully",
+          data: data
+        });
+      }
+    });
+  });
+};

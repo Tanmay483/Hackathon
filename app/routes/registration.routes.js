@@ -1,6 +1,4 @@
 const multer = require('../documentController/document.control');
-const conn = require('../config/db');
-// const verifyToken = require('../controller/jwt')
 
 module.exports = (app) => {
   const registration = require('../controller/registration.controller');
@@ -11,104 +9,16 @@ module.exports = (app) => {
   router.post('/', multer, registration.create);
 
   // Update a registration with id
-  router.put('/:Id', multer, (req, res) => {
-    let Id = req.params.Id;
-    const vName = req.body.vName;
-    const vMobileNumber = req.body.vMobileNumber;
-    const vGitUrl = req.body.vGitUrl;
-    const vAddress = req.body.vAddress;
-    const vQualification = req.body.vQualification;
-    const vProfession = req.body.vProfession;
-    const vTeamType = req.body.vTeamType;
-    const iNumberOfMembers = req.body.iNumberOfMembers;
-    const vProblemStatement = '';
-    const Document = req.file ? req.file.path.replace(/\\/g, '/') : null; // Check if file is provided
-  
-    let sql = "UPDATE `student` SET `vName`='" + vName + "', `vMobileNumber`= '" + vMobileNumber + "', `vGitUrl`='" + vGitUrl + "', `vAddress`='" + vAddress + "', `vQualification`='" + vQualification + "', `vProfession`='" + vProfession + "', `vTeamType`='" + vTeamType + "', `iNumberOfMembers`='" + iNumberOfMembers + "', `vProblemStatement`='" + vProblemStatement + "'";
-  
-    if (Document) {
-      sql += ", `Document`='" + Document + "'";
-    }
-  
-    sql += " WHERE Id = '" + Id + "'";
-  
-    conn.query(sql, (err, data) => {
-      if (err) {
-        res.json({
-          success: false,
-          data: req.body,
-          message: "Database update failed"
-        });
-      } else {
-        console.log("Registration changed successfully");
-        console.log(req.body);
-        res.json({
-          success: true,
-          data: req.body,
-          message: "Database updated successfully"
-        });
-      }
-    });
-  });
-  
+  router.put('/:Id',registration.update)
+
   // Update a status with id
   router.put('/active/:Id',registration.status)
 
   // update git url
-
-  router.put('/giturl/:Id', (req, res) => {
-    let Id = req.params.Id;
-    const vGitUrl = req.body.vGitUrl
-
-
-    var sql = "UPDATE `student` SET `vGitUrl`='" + vGitUrl + "' WHERE  Id = '" + Id + "' "
-    conn.query(sql, (err, data) => {
-      if (err) {
-        res.json({
-          success: false,
-          data: req.body,
-          message: "can't enter url"
-        });
-      } else {
-        console.log("URL Update scessfull");
-        console.log(req.body);
-        res.json({
-          success: true,
-          data: req.body,
-          message: "URL Update scessfull"
-        });
-      }
-
-    });
-  });
+  router.put('/giturl/:Id',registration.giturl)
 
   // update ranking
-  router.put('/ranking/:Id', (req, res) => {
-    let Id = req.params.Id;
-    const iRanking = req.body.iRanking
-
-    // update git url
-
-    var sql = "UPDATE `student` SET `iRanking`='" + iRanking + "' WHERE  Id = '" + Id + "' "
-    conn.query(sql, (err, data) => {
-      if (err) {
-        res.json({
-          success: false,
-          data: req.body,
-          message: "Ranking fail"
-        });
-      } else {
-        console.log("Rank Update scessfull");
-        console.log(req.body);
-        res.json({
-          success: true,
-          data: req.body,
-          message: "Rank Update scessfull"
-        });
-      }
-
-    });
-  });
+  router.put('/ranking/:Id', registration.ranking)
 
   // Retrieve all registration
   router.get('/', registration.findAll);

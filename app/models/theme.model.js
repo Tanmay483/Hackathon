@@ -56,4 +56,21 @@ Theme.findData = (theId, result) => {
     });
 };
 
+Theme.Update = (theId, theme, result) => {
+    let query = `UPDATE hackathontheme SET vTheme =?,keyStatus=? WHERE theId = ?`
+
+    sql.query(query, [theme.vTheme, theme.keyStatus,theId], (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Database update failed"
+            });
+        } else {
+            console.log("Theme change successfully");
+            result(null, "Theme change successfully")
+        }
+
+    });
+}
+
 module.exports = Theme;

@@ -1,36 +1,33 @@
-const Tab = require('../models/tab.model');
+const Portfolio = require('../models/portfolio.model');
+
+// insert
 exports.create = (req, res) => {
-    // Validate request
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
     }
-
-    // Create a Description
-    const tab = new Tab({
-        hId: req.body.hId,
-        vTitle: req.body.vTitle,
-        vDiscription: req.body.vDiscription,
-        tCreatedDate: req.body.tCreatedDate,
-        tUpdatedDate: req.body.tUpdatedDate
+    const portfolio = new Portfolio({
+        Id: req.body.Id,
+        vLinkdin: req.body.vLinkdin,
+        vBehance: req.body.vBehance,
     });
 
     //   POST
 
-    Tab.create(tab, (err, data) => {
+    Portfolio.create(portfolio, (err, data) => {
         if (err) {
             res.status(400).json({
                 success: false,
-                message: "failed to generate tab"
+                message: "failed to generate portfolio"
             });
         } else {
-            console.log("tab submited successfully");
+            console.log("portfolio submited successfully");
             console.log(req.body);
             res.status(200).json({
                 success: true,
                 data: req.body,
-                message: "tab submited successfully"
+                message: "portfolio submited successfully"
             });
         }
     });
@@ -39,19 +36,18 @@ exports.create = (req, res) => {
 // GET all  
 
 exports.findAll = (req, res) => {
-    Tab.getAll((err, data) => {
+    Portfolio.getAll((err, data) => {
         if (err) {
             res.status(400).json({
                 success: false,
-                message: "can not get tab list"
+                message: "can not get portfolio"
             });
         } else {
-            console.log("tab");
             console.log(req.body);
             res.status(200).json({
                 success: true,
                 data: data,
-                message: "Tab statement"
+                message: "Portfolio"
             });
         }
     });
@@ -60,19 +56,19 @@ exports.findAll = (req, res) => {
 // get by id
 
 exports.findId = (req, res) => {
-    Tab.findData(req.params.tabId, (err, data) => {
+    Portfolio.findData(req.params.pId, (err, data) => {
         if (err) {
             res.status(404).json({
                 success: false,
-                message: "error can not find tab with id " + req.params.tabId + " Id not found "
+                message: "error can not find Portfolio with id " + req.params.pId + " Id not found "
             });
         } else {
-            console.log("types");
+            console.log("portfolio");
             console.log(req.body);
             res.status(200).json({
                 success: true,
                 data: data,
-                message: "tab with id:" + req.params.tabId
+                message: "portfolio with id:" + req.params.pId
             });
         }
     });
@@ -81,18 +77,18 @@ exports.findId = (req, res) => {
 // delete tab
 
 exports.delete = (req, res) => {
-    Tab.remove(req.params.tabId, (err, data) => {
+    Portfolio.remove(req.params.pId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found tab with id ${req.params.tabId}.`
+                    message: `Not found portfolio with id ${req.params.pId}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Could not delete tab with id " + req.params.tabId
+                    message: "Could not delete portfolio with id " + req.params.pId
                 });
             }
-        } else res.send({ message: `tab was deleted successfully!` });
+        } else res.send({ message: `Portfolio deleted successfully!` });
     });
 };
 
@@ -101,14 +97,13 @@ exports.Update = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "please insert data" })
     }
-    const tab = new Tab({
-        hId: req.body.hId,
+    const update = new Portfolio({
+        Id: req.body.Id,
         vTitle: req.body.vTitle,
-        vDiscription: req.body.vDiscription,
-        tCreatedDate: req.body.tCreatedDate,
-        tUpdatedDate: req.body.tUpdatedDate
+        vLinkdin: req.body.vLinkdin,
+        vBehance: req.body.vBehance,
     });
-    Tab.Update(req.params.tabId, tab, (err, data) => {
+    Portfolio.Update(req.params.pId, update, (err, data) => {
         if (err) {
             res.json({
                 success: false,

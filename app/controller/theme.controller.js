@@ -74,3 +74,29 @@ exports.findId = (req, res) => {
         }
     });
 };
+
+// update theme
+
+exports.Update = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({ message: "please insert data" })
+    }
+    const theme = new Theme({
+        vTheme: req.body.vTheme,
+        keyStatus: req.body.keyStatus,
+    });
+    Theme.Update(req.params.theId, theme, (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Error while update database"
+            });
+        }
+        else {
+            res.json({
+                success: true,
+                message: "Database update successfully",
+            });
+        }
+    })
+}

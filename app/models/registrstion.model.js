@@ -11,9 +11,13 @@ const Registration = function (registration) {
   this.vProfession = registration.vProfession;
   this.vTeamType = registration.vTeamType;
   this.iNumberOfMembers = registration.iNumberOfMembers;
-  this.vProblemStatement = '';
+  this.vProblemStatement = registration.vProblemStatement;
   this.Document = registration.Document;
   this.keyStatus = registration.keyStatus
+  this.iRanking = registration.iRanking
+  this.vUniversity = registration.vUniversity
+  this.gender = registration.gender
+
 };
 Registration.create = (registration, result) => {
   const { vEmail } = registration;
@@ -41,7 +45,7 @@ Registration.create = (registration, result) => {
           result(err, null);
           return;
         }
-
+        
         console.log("created registration: ", { Id: res.insertId, ...registration });
         result(null, { Id: res.insertId, ...registration });
 
@@ -49,7 +53,7 @@ Registration.create = (registration, result) => {
         // send mail
 
         var transport = nodemailer.createTransport({
-          mailer:'smtp',
+          mailer: 'smtp',
           host: "server116.web-hosting.com",
           port: 465,
           auth: {
@@ -229,8 +233,8 @@ Registration.findId = (Id, result) => {
       return;
     }
     if (res.length) {
-      console.log("student details: ", res[0]); 
-      result(null, res[0]); 
+      console.log("student details: ", res[0]);
+      result(null, res[0]);
       return;
     }
     result({ kind: "not_found" }, null);
@@ -239,30 +243,94 @@ Registration.findId = (Id, result) => {
 
 //update status 
 
-Registration.status = (Id,status,result)=>{
+Registration.status = (Id, status, result) => {
   let query = `UPDATE student SET keyStatus =? WHERE Id = ?`
 
-  sql.query(query,[status.keyStatus,Id] ,(err, data) => {
+  sql.query(query, [status.keyStatus, Id], (err, data) => {
     if (err) {
       res.json({
         success: false,
-        // data: req.body,
         message: "Database update failed"
       });
     } else {
       console.log("status change successfully");
-      result(null,"Status change successfully")
-      // console.log(req.body);
-      // res.json({
-      //   success: true,
-      //   // data: req.body,
-      //   message: "status change sucessfully"
-      // });
+      result(null, "Status change successfully")
     }
 
   });
-
-
 }
+
+// update rankigs
+Registration.ranking = (Id, ranking, result) => {
+  let query = `UPDATE student SET iRanking =? WHERE Id = ?`
+
+  sql.query(query, [ranking.iRanking, Id], (err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: "Database update failed"
+      });
+    } else {
+      console.log("Ranking change successfully");
+      result(null, "Ranking change successfully")
+    }
+
+  });
+}
+
+// update giturl
+Registration.giturl = (Id, url, result) => {
+  let query = `UPDATE student SET vGitUrl =? WHERE Id = ?`
+
+  sql.query(query, [url.vGitUrl, Id], (err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: "Database update failed"
+      });
+    } else {
+      console.log("GitUrl change successfully");
+      result(null, "GitUrl change successfully")
+    }
+
+  });
+}
+
+// update data
+Registration.update = (Id, registration, result) => {
+  let query = `UPDATE student SET vName=?,vMobileNumber=?,vGitUrl=?,vAddress=?,vQualification=?,vProfession=?,vTeamType=?,iNumberOfMembers=?,vProblemStatement=?,keyStatus=?,vUniversity=?`;
+  if (registration.Document) {
+    query += ", Document=?";
+  }
+
+  query += " WHERE Id = ?";
+   
+  const queryParams = [
+    registration.vName,
+    registration.vMobileNumber,
+    registration.vGitUrl,
+    registration.vAddress,
+    registration.vQualification,
+    registration.vProfession,
+    registration.vTeamType,
+    registration.iNumberOfMembers,
+    registration.vProblemStatement,
+    registration.keyStatus,
+    registration.vUniversity,
+    registration.Document,
+    Id
+  ];
+ 
+
+  sql.query(query, queryParams, (err, res) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log("Data Updated Successfully", { Id: Id, registration });
+      result(null, "Data Updated Successfully", { Id: Id, registration });
+    }
+  });
+};
+
 
 module.exports = Registration

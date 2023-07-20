@@ -95,3 +95,32 @@ exports.delete = (req, res) => {
     });
 };
 
+// update ptoblem statement
+exports.update = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    console.log(req.body);
+
+    Problem.update(
+        req.params.pId,
+        new Problem(req.body),
+        (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Not found Problem statement with id ${req.params.pId}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Error updating statement with id " + req.params.pId
+                    });
+                }
+            } else res.send({ message: `problemstatement updated successfully!` });
+        }
+    );
+};

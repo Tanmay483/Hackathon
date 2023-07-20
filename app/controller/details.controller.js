@@ -1,5 +1,5 @@
 const Details = require('../models/details.model');
-
+const upload = require('../documentController/image.controller')
 // Create and Save a new Description
 
 exports.create = (req, res) => {
@@ -120,5 +120,49 @@ exports.brif = (req, res) => {
         message: "User with id:" + req.params.hId
       });
     }
+  });
+};
+
+// update
+exports.update = (req, res) => {
+  upload(req, res, function (err) {
+      if (err) {
+          console.error("Error uploading image:", err);
+          res.status(500).send({ message: "Failed to upload image." });
+          return;
+      }
+
+      if (!req.body) {
+          res.status(400).send({ message: "Content can not be empty!" });
+          return;
+      }
+
+      const updatedData = {
+          vTitle: req.body.vTitle || '',
+          vImage: req.file.path.replace(/\\/g, '/') || '',
+          vUniversity: req.body.vUniversity || '',
+          vAddress: req.body.vAddress || '',
+          vBrif: req.body.vBrif || '',
+          vDetails: req.body.vDetails || '',
+          vDeadline: req.body.vDeadline || '',
+          iTeamSize: req.body.iTeamSize || '',
+          vEligibility: req.body.vEligibility || '',
+          tCreatedDate: req.body.tCreatedDate || '',
+          tUpdatedDate: req.body.tUpdatedDate || ''
+      };
+
+      Details.update(req.params.hId, updatedData, (err, data) => {
+          if (err) {
+              console.error("Error updating data:", err);
+              res.status(500).send({ message: "Failed to update data." });
+              return;
+          }else{
+              res.status(200).json({
+                  status: 1,
+                  message: "Token verify sucessfully",
+                  data : data
+              });
+          }
+      });
   });
 };

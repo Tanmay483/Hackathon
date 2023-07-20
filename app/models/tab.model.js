@@ -78,4 +78,21 @@ Tab.remove = (tabId, result) => {
     });
 };
 
+// update tab
+Tab.Update = (tabId, tab, result) => {
+    let query = `UPDATE tab SET hId =?,vTitle=?,vDiscription=?,tCreatedDate=?,tUpdatedDate=? WHERE tabId = ?`
+
+    sql.query(query, [tab.hId, tab.vTitle, tab.vDiscription, tab.tCreatedDate, tab.tUpdatedDate, tabId], (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Database update failed"
+            });
+        } else {
+            console.log("Tab change successfully");
+            result(null, "Tab change successfully")
+        }
+
+    });
+}
 module.exports = Tab;

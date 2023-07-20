@@ -76,4 +76,22 @@ Problem.remove = (pId, result) => {
     });
 };
 
+// update problem statement
+Problem.update = (pId, statement, result) => {
+    let query = `UPDATE ptoblemstatement SET hId = ?,theId = ?,vProblemStatement = ? WHERE pId = ${pId}`
+    sql.query(query, [statement.hId,statement.theId,statement.vProblemStatement,pId], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+            return;
+        }
+        console.log("ptoblemstatement update with Id: ", pId);
+        result(null, res);
+    });
+};
+
 module.exports = Problem;

@@ -15,31 +15,7 @@ module.exports = app => {
     router.get("/:theId", Theme.findId)
 
     //update problem statement
-    router.put('/update/:theId', (req, res) => {
-        let theId = req.params.theId
-        const vTheme = req.body.vTheme;
-        const keyStatus = req.body.keyStatus;
-
-        var sql = "UPDATE `hackathontheme` SET `vTheme`='" + vTheme + "',`keyStatus`='" + keyStatus + "' WHERE `theId` = '" + theId + "' ";
-
-        conn.query(sql, (err, data) => {
-            if (err) {
-                res.json({
-                    success: false,
-                    data: req.body,
-                    message: "Database update failed"
-                });
-            } else {
-                console.log("Theme changed successfully");
-                console.log(req.body);
-                res.json({
-                    success: true,
-                    data: req.body,
-                    message: "Database updated successfully"
-                });
-            }
-        })
-    })
+    router.put('/update/:theId',Theme.Update)
 
     app.use('/api/theme', router);
 };
