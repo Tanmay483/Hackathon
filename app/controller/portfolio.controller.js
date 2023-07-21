@@ -99,7 +99,6 @@ exports.Update = (req, res) => {
     }
     const update = new Portfolio({
         Id: req.body.Id,
-        vTitle: req.body.vTitle,
         vLinkdin: req.body.vLinkdin,
         vBehance: req.body.vBehance,
     });
