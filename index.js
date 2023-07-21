@@ -33,11 +33,11 @@ app.post('/token', (req, resp) => {
     }
   });
 });
+app.use('/app/Images', express.static(path.join(__dirname, 'app/Images')));
 
 const hello = require('./app/middleware/jwt.middleware')
 app.use(hello)
 
-app.use('/app/Images', express.static(path.join(__dirname, 'app/Images')));
 
 require('./app/routes/registration.routes')(app)
 require('./app/routes/login.routes')(app)
