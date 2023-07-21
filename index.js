@@ -49,7 +49,7 @@ require('./app/routes/problemStatement.routes')(app)
 require('./app/routes/theme.routes')(app)
 require('./app/routes/tab.routes')(app)
 require('./app/routes/portfolio.routes')(app)
-
+require('./app/routes/forgetpassword.routes')(app)
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {

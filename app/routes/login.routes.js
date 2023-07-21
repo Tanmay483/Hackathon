@@ -1,5 +1,3 @@
-// const verifyToken = require('../controller/jwt')
-
 module.exports = app => {
     const signin = require('../controller/login.controller');
 

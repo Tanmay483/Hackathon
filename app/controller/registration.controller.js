@@ -40,7 +40,6 @@ exports.create = (req, res) => {
       const responseData = {Id: data.Id,...req.body };
       res.status(200).json({
         success: true,
-        // Id: data.Id, 
         data: responseData,
         message: "congratulation your entry has been register successfully"
       });

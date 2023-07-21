@@ -4,7 +4,7 @@ const sql = require('../config/db');
 const Details = function (details) {
 
     this.vTitle = details.vTitle;
-    this.vImage = "http://localhost:8085/" + details.vImage;
+    this.vImage =  details.vImage;
     this.vUniversity = details.vUniversity;
     this.vAddress = details.vAddress;
     this.vBrif = details.vBrif;

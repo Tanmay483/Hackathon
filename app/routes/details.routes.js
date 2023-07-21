@@ -1,5 +1,4 @@
 const upload = require('../documentController/image.controller')
-const conn = require('../config/db');
 
 module.exports = app => {
   const Description = require('../controller/details.controller');
