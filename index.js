@@ -7,7 +7,6 @@ const secretKey = "secretKey"
 
 
 
-
 const app = express();
 
 app.use(cors());
@@ -19,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Hackathon" });
 });
+
+
 
 
 // Generate JWT token
@@ -59,3 +60,5 @@ const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+//http://localhost:8085/auth/google

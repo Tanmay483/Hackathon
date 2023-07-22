@@ -25,7 +25,7 @@ Categories.create = (categories, result) => {
 //GET All
 
 Categories.getAll = (result) => {
-    let query = "SELECT * FROM categories";
+    let query = "SELECT * FROM categories WHERE iParentId = 0";
 
     sql.query(query, (err, res) => {
         if (err) {
@@ -79,7 +79,7 @@ Categories.remove = (catId, result) => {
 Categories.Update = (catId, categories, result) => {
     let query = `UPDATE categories SET vcatagoryName =?,iParentId=? WHERE catId = ?`
 
-    sql.query(query, [categories.vcatagoryName, categories.iParentId,catId], (err, data) => {
+    sql.query(query, [categories.vcatagoryName, categories.iParentId, catId], (err, data) => {
         if (err) {
             res.json({
                 success: false,
@@ -97,45 +97,45 @@ Categories.Update = (catId, categories, result) => {
 
 Categories.subCategories = (catId, result) => {
     sql.query(
-      `SELECT * FROM categories WHERE catId = ${catId}`,
-      (err, res) => {
-        if (err) {
-          console.log('error: ', err);
-          result(err, null);
-          return;
-        }
-        if (res.length === 0) {
-          console.log('data not found');
-          result('error', null);
-          return;
-        }
-  
-        const categories = res[0];
-  
-        sql.query(
-          `SELECT * FROM categories WHERE iParentId = ${catId}`,
-          (err, res) => {
+        `SELECT * FROM categories WHERE catId = ${catId} && iParentId = 0 `,
+        (err, res) => {
             if (err) {
-              console.log('Error:', err);
-              result(err, null);
-              return;
+                console.log('error: ', err);
+                result(err, null);
+                return;
             }
-  
-            const subCategories = res.length > 0 ? res : [];
-  
-            const resultData = {
-              categories: categories,
-              subCategories: subCategories
-            };
-  
-            console.log('found categories:', resultData);
-            result(null, resultData);
-          }
-        );
-      }
+            if (res.length === 0) {
+                console.log('data not found');
+                result('error', null);
+                return;
+            }
+
+            const categories = res[0];
+
+            sql.query(
+                `SELECT * FROM categories WHERE iParentId = ${catId}`,
+                (err, res) => {
+                    if (err) {
+                        console.log('Error:', err);
+                        result(err, null);
+                        return;
+                    }
+
+                    const subCategories = res.length > 0 ? res : [];
+
+                    const resultData = {
+                        categories: categories,
+                        categorylist: subCategories
+                    };
+
+                    console.log('found categories:', resultData);
+                    result(null, resultData);
+                }
+            );
+        }
     );
-  };
-  
-  
+};
+
+
 
 module.exports = Categories;

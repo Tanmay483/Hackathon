@@ -132,7 +132,7 @@ exports.subCategories = (req, res) => {
         res.json({
             success: true,
             Data: data,
-            message: "Categories and subcategories:"
+            message: "Categories and categorylist"
         });
       }
     });
