@@ -45,7 +45,7 @@ Registration.create = (registration, result) => {
           result(err, null);
           return;
         }
-        
+
         console.log("created registration: ", { Id: res.insertId, ...registration });
         result(null, { Id: res.insertId, ...registration });
 
@@ -298,15 +298,9 @@ Registration.giturl = (Id, url, result) => {
 
 // update data
 Registration.update = (Id, registration, result) => {
-  let query = `UPDATE student SET vName=?,vMobileNumber=?,vGitUrl=?,vAddress=?,vQualification=?,vProfession=?,vTeamType=?,iNumberOfMembers=?,vProblemStatement=?,keyStatus=?,vUniversity=?`;
-  if (registration.Document) {
-    query += ", Document=?";
-  }
-
-  query += " WHERE Id = ?";
-   
+  let query =
+    "UPDATE student SET vMobileNumber=?, vGitUrl=?, vAddress=?, vQualification=?, vProfession=?, vTeamType=?, iNumberOfMembers=?, vProblemStatement=?, keyStatus=?, vUniversity=?";
   const queryParams = [
-    registration.vName,
     registration.vMobileNumber,
     registration.vGitUrl,
     registration.vAddress,
@@ -317,20 +311,29 @@ Registration.update = (Id, registration, result) => {
     registration.vProblemStatement,
     registration.keyStatus,
     registration.vUniversity,
-    registration.Document,
-    Id
   ];
- 
+
+  if (registration.vName) {
+    query += ", vName=?";
+    queryParams.push(registration.vName);
+  }
+  if (registration.Document) {
+    query += ", Document=?";
+    queryParams.push(registration.Document);
+  }
+
+  query += " WHERE Id = ?";
+  queryParams.push(Id);
 
   sql.query(query, queryParams, (err, res) => {
     if (err) {
-      throw err;
+      console.error("Error updating data:", err);
+      result(err, null);
     } else {
       console.log("Data Updated Successfully", { Id: Id, registration });
       result(null, "Data Updated Successfully", { Id: Id, registration });
     }
   });
 };
-
 
 module.exports = Registration

@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     vTeamType: req.body.vTeamType,
     iNumberOfMembers: req.body.iNumberOfMembers,
     vProblemStatement: req.body.vProblemStatement,
-    Document: req.file.path.replace(/\\/g, '/'),
+    Document: req.file.filename,
     keyStatus: req.body.keyStatus,
     iRanking: req.body.iRanking,
     vUniversity: req.body.vUniversity,
@@ -37,7 +37,7 @@ exports.create = (req, res) => {
     } else {
       console.log("Registration add successfully");
       console.log(req.body);
-      const responseData = {Id: data.Id,...req.body };
+      const responseData = { Id: data.Id, ...req.body };
       res.status(200).json({
         success: true,
         data: responseData,
@@ -185,9 +185,9 @@ exports.update = (req, res) => {
       vTeamType: req.body.vTeamType || '',
       iNumberOfMembers: req.body.iNumberOfMembers || '',
       vProblemStatement: req.body.vProblemStatement || '',
-      Document: req.file? req.file.path.replace(/\\/g, '/') : '',
+      Document: req.file ? req.file.filename : '',
       keyStatus: req.body.keyStatus || '',
-      vUniversity:req.body.vUniversity || '',
+      vUniversity: req.body.vUniversity || '',
     };
 
     Registration.update(req.params.Id, updatedData, (err, data) => {

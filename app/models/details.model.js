@@ -4,7 +4,7 @@ const sql = require('../config/db');
 const Details = function (details) {
 
     this.vTitle = details.vTitle;
-    this.vImage =  details.vImage;
+    this.vImage = details.vImage;
     this.vUniversity = details.vUniversity;
     this.vAddress = details.vAddress;
     this.vBrif = details.vBrif;
@@ -155,13 +155,13 @@ Details.ById = (hId, result) => {
 //update
 Details.update = (hId, details, result) => {
     let query = `UPDATE hackathon SET vTitle=?,vImage=?,vUniversity=?,vAddress=?,vBrif=?,vDetails=?,vDeadline=?,iTeamSize=?,vEligibility=?,tCreatedDate=?,tUpdatedDate=? WHERE hId = ?`
-    sql.query(query,[details.vTitle,details.vImage,details.vUniversity,details.vAddress,details.vBrif,details.vDetails,details.vDeadline,details.iTeamSize,details.vEligibility,details.tCreatedDate,details.tUpdatedDate,hId],(err,res)=>{
-        if(err){
+    sql.query(query, [details.vTitle, details.vImage, details.vUniversity, details.vAddress, details.vBrif, details.vDetails, details.vDeadline, details.iTeamSize, details.vEligibility, details.tCreatedDate, details.tUpdatedDate, hId], (err, res) => {
+        if (err) {
             throw err
         }
-        else{
-            console.log("Data Updated Scessfully",{hId: hId, details})
-            result(null,"Data Updated Scessfully",{hId: hId, details})
+        else {
+            console.log("Data Updated Scessfully", { hId: hId, details })
+            result(null, "Data Updated Scessfully", { hId: hId, details })
         }
     })
 
