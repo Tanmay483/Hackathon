@@ -47,6 +47,8 @@ require("./app/routes/tab.routes")(app);
 require("./app/routes/portfolio.routes")(app);
 require("./app/routes/forgetpassword.routes")(app);
 require("./app/routes/categories.routes")(app);
+require("./app/routes/team.routes")(app);
+require("./app/routes/applyToHackathon.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;

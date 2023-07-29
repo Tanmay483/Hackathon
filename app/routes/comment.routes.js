@@ -1,5 +1,3 @@
-// const verifyToken = require('../controller/jwt')
-
 module.exports = app => {
     const contact = require('../controller/comment.controller');
 
