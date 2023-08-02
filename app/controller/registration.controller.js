@@ -24,7 +24,12 @@ exports.create = (req, res) => {
     keyStatus: req.body.keyStatus,
     iRanking: req.body.iRanking,
     vUniversity: req.body.vUniversity,
-    gender: req.body.gender
+    gender: req.body.gender,
+    Termsandcondition: req.body.Termsandcondition,
+    subscibe: req.body.subscibe,
+    sId: req.body.sId,
+    hId: req.body.hId,
+    iTeamId: req.body.iTeamId,
   });
   // POST
 
@@ -188,6 +193,9 @@ exports.update = (req, res) => {
       Document: req.file ? req.file.filename : '',
       keyStatus: req.body.keyStatus || '',
       vUniversity: req.body.vUniversity || '',
+      gender: req.body.gender || '',
+      Termsandcondition: req.body.Termsandcondition || '',
+      subscibe: req.body.subscibe || ''
     };
 
     Registration.update(req.params.Id, updatedData, (err, data) => {

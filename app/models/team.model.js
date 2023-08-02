@@ -5,7 +5,7 @@ const Team = function (team) {
     this.vTeamName = team.vTeamName;
     this.sId = team.sId;
     this.hId = team.hId;
-    // console.log(this.sId, this.hId)
+    this.leader = team.leader;
 };
 
 // POST 
@@ -13,12 +13,12 @@ Team.create = (team, result) => {
     // Generate teamId
     var TeamId = teamId();
     console.log("Generated TeamId: ", TeamId);
-
+    console.log(team)
     const team1 = {
         vTeamName: team.vTeamName,
         iTeamId: TeamId
     };
-    // console.log(team.hId, team.sId)
+    console.log(team1)
 
     sql.query("INSERT INTO team SET ?", team1, (err, res) => {
         if (err) {
@@ -32,7 +32,10 @@ Team.create = (team, result) => {
             iTeamId: TeamId,
             hId: team.hId,
             sId: team.sId,
+            leader: team.leader,
+            Type : "team"
         };
+        console.log(hackathon)
 
         sql.query("INSERT INTO applytohackathon SET ?", hackathon, (err, res) => {
             if (err) {

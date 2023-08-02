@@ -10,9 +10,9 @@ exports.create = (req, res) => {
     const team = new Team({
         vTeamName: req.body.vTeamName,
         hId : req.body.hId,
-        sId : req.body.sId
+        sId : req.body.sId,
+        leader : req.body.leader
     })
-    console.lo
 
     Team.create(team, (err, data) => {
         if (err) {
@@ -53,7 +53,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-//find by id
+// find by id
 exports.findId = (req, res) => {
     Team.findId(req.params.t_Id, (err, data) => {
         if (err) {
@@ -73,7 +73,7 @@ exports.findId = (req, res) => {
     });
 };
 
-//update
+// update
 exports.update = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "please insert data" })

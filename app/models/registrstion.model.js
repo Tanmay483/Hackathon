@@ -1,5 +1,8 @@
 const sql = require('../config/db');
-const nodemailer = require('nodemailer')
+// const nodemailer = require('nodemailer')
+const sendmail = require('../middleware/newPassword.tamplate')
+
+
 // constructor
 const Registration = function (registration) {
   this.vName = registration.vName;
@@ -17,6 +20,11 @@ const Registration = function (registration) {
   this.iRanking = registration.iRanking
   this.vUniversity = registration.vUniversity
   this.gender = registration.gender
+  this.Termsandcondition = registration.Termsandcondition
+  this.subscibe = registration.subscibe
+  this.sId = registration.sId
+  this.hId = registration.hId
+  this.iTeamId = registration.iTeamId
 
 };
 Registration.create = (registration, result) => {
@@ -39,7 +47,29 @@ Registration.create = (registration, result) => {
 
       registration.password = password;
 
-      sql.query("INSERT INTO student SET ?", registration, (err, res) => {
+      const student = {
+        vName: registration.vName,
+        vEmail: registration.vEmail,
+        vMobileNumber: registration.vMobileNumber,
+        vGitUrl: registration.vGitUrl,
+        vAddress: registration.vAddress,
+        vQualification: registration.vQualification,
+        vProfession: registration.vProfession,
+        vTeamType: registration.vTeamType,
+        iNumberOfMembers: registration.iNumberOfMembers,
+        vProblemStatement: registration.vProblemStatement,
+        Document: registration.Document,
+        keyStatus: registration.keyStatus,
+        iRanking: registration.iRanking,
+        vUniversity: registration.vUniversity,
+        gender: registration.gender,
+        Termsandcondition: registration.Termsandcondition,
+        subscibe: registration.subscibe,
+        password: password
+      }
+
+
+      sql.query("INSERT INTO student SET ?", student, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -49,149 +79,30 @@ Registration.create = (registration, result) => {
         console.log("created registration: ", { Id: res.insertId, ...registration });
         result(null, { Id: res.insertId, ...registration });
 
+        // apply to hackathon 
+        if (registration.vTeamType === "team") {
 
+          const apply = {
+            sId: res.insertId,
+            hId: registration.hId,
+            iTeamId: registration.iTeamId,
+            leader: 0,
+            Type: "team"
+          }
+
+          sql.query("INSERT INTO applytohackathon SET ?", apply, (err, res) => {
+            if (err) {
+              console.log("error: ", err);
+              result(err, null);
+              return;
+            } else {
+              console.log("applied to hackathon: ", res);
+            }
+          });
+
+        }
         // send mail
-
-        var transport = nodemailer.createTransport({
-          mailer: 'smtp',
-          host: "server116.web-hosting.com",
-          port: 465,
-          auth: {
-            user: "info@infinitysoftech.co",
-            pass: "?VlXMbhSU}r#"
-          }
-        });
-        const Template =
-          `<!DOCTYPE html>
-        <html>
-        <head>
-          <title>template</title>
-          <style>
-         
-          .logo{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 315px;
-            padding-top: 25px;
-        }
-        .img{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 18px;
-            width: 400px;
-            height: 250px;
-        }
-        
-        .text{
-            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            text-align: center;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-size: 16px;
-        }
-        
-        .footers{
-            background-color:gray;
-            margin-top: 50px;
-            margin-left: 0px;
-            margin-right: 0px;
-            text-align: center;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            
-        }
-        
-        .bg{
-            width: 500px;
-            align-content: center;
-            margin: auto;
-            background-color: antiquewhite;
-        }
-        .social{
-            text-align: center;
-            width: auto;
-        }
-        
-          
-          .social ul {
-            padding: 0%;
-            justify-content: center;
-          }
-          
-          .social li {
-            margin: 0 10px;
-          }
-          
-          .social img {
-            height: 25px;
-            width: 25px;
-            margin-left: 15px;
-            margin-right: 15px;
-            text-align: center;
-          }
-          
-        
-        
-          </style>
-        </head>
-        <body>
-            <link rel="stylesheet" type="text/css" href="style.css">
-            <div class="bg">
-            
-            <header>
-            <img src="https://www.infinitysoftech.co/wp-content/uploads/2023/02/logo-black-text.png" alt="logo" class="logo">
-          </header>
-        
-          <img src="https://media.istockphoto.com/id/1146517111/photo/taj-mahal-mausoleum-in-agra.jpg?s=612x612&w=0&k=20&c=vcIjhwUrNyjoKbGbAQ5sOcEzDUgOfCsm9ySmJ8gNeRk=" alt="image" class="img">
-        
-        
-          <div class="text">
-            <h1>Registration Successful</h1>
-                <p>Dear ${vEmail},
-                Congratulations on your successful registration!
-                Your generated password is: <b>${password}</b>
-                
-                Thank you for registering with us!
-              </p>
-          </div>
-        
-          
-        <footer class="footers">
-          <p>&copy; 2023 Infinity Softech. All rights reserved.</p>
-          <div class="social">
-            <ul>
-              <a href="https://www.instagram.com"><img src="https://img.freepik.com/premium-vector/purple-gradiend-social-media-logo_197792-1883.jpg" alt="Instagram"></a>
-              <a href="https://www.facebook.com"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook"></a>
-              <a href="https://linkedin.com"><img src="https://www.freepnglogos.com/uploads/linkedin-in-logo-png-1.png" alt="LinkedIn"></a>
-              <a href="https://twitter.com"><img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png" alt="Twitter"></a>
-            </ul>
-          </div>
-        </footer>
-        
-        
-          </footer>
-        </div>
-        </body>
-        </html>
-        `
-        var mailOption = {
-          from: 'info@infinitysoftech.co',
-          to: vEmail,
-          subject: 'Hackathon Registration',
-          html: Template
-        };
-
-        transport.sendMail(mailOption, (error, info) => {
-          if (error) {
-            console.log(error)
-          }
-          else {
-            console.log("Email sent scessfully:" + info.response)
-          }
-        })
-
+        sendmail(registration.vEmail, registration.password);
       });
     }
   });
@@ -299,7 +210,7 @@ Registration.giturl = (Id, url, result) => {
 // update data
 Registration.update = (Id, registration, result) => {
   let query =
-    "UPDATE student SET vMobileNumber=?, vGitUrl=?, vAddress=?, vQualification=?, vProfession=?, vTeamType=?, iNumberOfMembers=?, vProblemStatement=?, keyStatus=?, vUniversity=?";
+    "UPDATE student SET vMobileNumber=?, vGitUrl=?, vAddress=?, vQualification=?, vProfession=?, vTeamType=?, iNumberOfMembers=?, vProblemStatement=?, keyStatus=?, vUniversity=?,gender=?,Termsandcondition=?,subscibe=?";
   const queryParams = [
     registration.vMobileNumber,
     registration.vGitUrl,
@@ -311,6 +222,9 @@ Registration.update = (Id, registration, result) => {
     registration.vProblemStatement,
     registration.keyStatus,
     registration.vUniversity,
+    registration.gender,
+    registration.Termsandcondition,
+    registration.subscibe,
   ];
 
   if (registration.vName) {

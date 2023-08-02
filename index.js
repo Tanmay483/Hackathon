@@ -3,9 +3,11 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const secretKey = "secretKey";
 const authMiddleware = require('./app/middleware/google.authentication')
 const app = express();
+const env = require('dotenv');
+
+env.config();
 
 app.use(cors());
 
@@ -20,9 +22,12 @@ app.use(authMiddleware)
 
 // Generate JWT token
 app.post("/token", (req, resp) => {
-  const user = {};
+  const user = {
+    Id: 1,
+    name : "hi"
+  };
 
-  jwt.sign({ user }, secretKey, {}, (err, token) => {
+  jwt.sign({ user }, process.env.JWT_SECRET_KEY, {}, (err, token) => {
     if (err) {
       resp.status(500).json({ error: "Failed to generate token" });
     } else {
@@ -30,6 +35,7 @@ app.post("/token", (req, resp) => {
     }
   });
 });
+
 app.use("/app/Images", express.static(path.join(__dirname, "app/Images")));
 
 const hello = require("./app/middleware/jwt.middleware");
