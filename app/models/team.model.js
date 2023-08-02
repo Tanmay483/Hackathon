@@ -1,4 +1,5 @@
 const sql = require('../config/db');
+const mail = require('../middleware/teamRegistration.mail')
 
 // constructor
 const Team = function (team) {
@@ -9,45 +10,73 @@ const Team = function (team) {
 };
 
 // POST 
-Team.create = (team, result) => {
+Team.create = (team, res) => {
     // Generate teamId
     var TeamId = teamId();
     console.log("Generated TeamId: ", TeamId);
-    console.log(team)
+
     const team1 = {
         vTeamName: team.vTeamName,
         iTeamId: TeamId
     };
-    console.log(team1)
 
-    sql.query("INSERT INTO team SET ?", team1, (err, res) => {
+    const hackathon = {
+        iTeamId: TeamId,
+        hId: team.hId,
+        sId: team.sId,
+        leader: team.leader,
+        Type: "team"
+    };
+
+    const hackathonId = hackathon.hId
+    const studentId = hackathon.sId
+
+    const query1 = "INSERT INTO team SET ?"
+    const query2 = "INSERT INTO applytohackathon SET ?"
+    const query3 = `SELECT vTitle FROM hackathon WHERE hId = ${hackathonId}`
+    const query4 = `SELECT vEmail FROM student WHERE Id = ${studentId}`
+
+    sql.query(query1, team1, (err, result1) => {
         if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        } else {
-            console.log("created Team: ", { Id: res.insertId, ...team });
+            console.error('Error executing query1:', err);
+            return res.status(500).json({ error: 'Something went wrong' });
         }
-        const hackathon = {
-            iTeamId: TeamId,
-            hId: team.hId,
-            sId: team.sId,
-            leader: team.leader,
-            Type : "team"
-        };
-        console.log(hackathon)
 
-        sql.query("INSERT INTO applytohackathon SET ?", hackathon, (err, res) => {
+        sql.query(query2, hackathon, (err, result2) => {
             if (err) {
-                console.log("error: ", err);
-                result(err, null);
-                return;
-            } else {
-                result(null, { Id: res.insertId });
-                console.log("applied to hackathon: ", res);
+                console.error('Error executing query2:', err);
+                return res.status(500).json({ error: 'Something went wrong' });
             }
-        });
-    });
+            sql.query(query3, (err, result3) => {
+                if (err) {
+                    console.error('Error executing query3:', err);
+                    return res.status(500).json({ error: 'Something went wrong' });
+                }
+                sql.query(query4, (err, result4) => {
+                    if (err) {
+                        console.error('Error executing query4:', err);
+                        return res.status(500).json({ error: 'Something went wrong' });
+                    }
+
+
+                    const hackathonTitle = result3[0].vTitle;
+                    const studentEmail = result4[0].vEmail;
+
+                    //send mail
+                    mail(studentEmail,hackathonTitle,hackathon.iTeamId)
+                    
+                    // response
+                    const combinedResults = {
+                        hackathonTitle: result3,
+                        studentDetails: result4,
+                        inputData: team
+                    };
+                    res.json(combinedResults);
+                })
+            })
+        })
+    })
+
 };
 
 

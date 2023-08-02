@@ -10,7 +10,7 @@ exports.create = (req, res) => {
 
   const details = new Details({
     vTitle: req.body.vTitle,
-    vImage: req.file.path.replace(/\\/g, '/'),
+    vImage: req.file.filename,
     vUniversity: req.body.vUniversity,
     vAddress: req.body.vAddress,
     vBrif: req.body.vBrif,

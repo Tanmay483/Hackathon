@@ -5,33 +5,35 @@ exports.create = (req, res) => {
     if (!req.body) {
         return res.status(400).send({
             message: "Content can not be empty!"
-        })
+        });
     }
+
     const team = new Team({
         vTeamName: req.body.vTeamName,
-        hId : req.body.hId,
-        sId : req.body.sId,
-        leader : req.body.leader
-    })
+        hId: req.body.hId,
+        sId: req.body.sId,
+        leader: req.body.leader
+    });
 
-    Team.create(team, (err, data) => {
+    // Pass the 'res' object to the model function.
+    Team.create(team, res, (err, data) => {
         if (err) {
-            res.status(400).json({
+            console.error('Error creating team:', err);
+            return res.status(500).json({
                 success: false,
-                message: "Team creation failed"
+                message: "Team creation failed. Please try again later."
             });
-        }
-        else {
+        } else {
             console.log("Team created successfully");
             console.log(req.body);
             res.status(200).json({
                 success: true,
                 data: req.body,
-                message: "Team created successfully"
+                message: "Team created successfully."
             });
         }
-    })
-}
+    });
+};
 
 // find all
 exports.findAll = (req, res) => {
