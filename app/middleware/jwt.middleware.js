@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const secretKey = "secretKey"
+
+
  
  function verifyToken(req, resp, next) {
     const bearerHeader = req.headers['authorization'];

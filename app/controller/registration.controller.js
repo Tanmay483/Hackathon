@@ -3,38 +3,43 @@ const upload = require('../documentController/document.control')
 
 // Create and Save
 exports.create = (req, res) => {
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content can not be empty!"
+  const defaultValues = {
+    vName: '',
+    vEmail: '',
+    vMobileNumber: '',
+    vGitUrl: '',
+    vAddress: '',
+    vQualification: '',
+    vProfession: '',
+    vTeamType: '',
+    iNumberOfMembers: 0,
+    vProblemStatement: '',
+    Document: '',
+    keyStatus: 0,
+    iRanking: 0,
+    vUniversity: '',
+    gender: '',
+    Termsandcondition: 0,
+    subscibe: 0,
+    sId: 0,
+    hId: 0,
+    iTeamId: "",
+    tId: 0,
+    domId: 0,
+    themeId: 0,
+  };
+
+  const registration = { ...defaultValues, ...req.body };
+
+  // Check if any required fields are missing
+  if (!registration.vName || !registration.vEmail || !registration.vMobileNumber || !registration.vTeamType) {
+    res.status(400).json({
+      success: false,
+      message: "Required fields (vName, vEmail, vMobileNumber, vTeamType) cannot be empty!"
     });
+    return;
   }
 
-  const registration = new Registration({
-    vName: req.body.vName,
-    vEmail: req.body.vEmail,
-    vMobileNumber: req.body.vMobileNumber,
-    vGitUrl: req.body.vGitUrl,
-    vAddress: req.body.vAddress,
-    vQualification: req.body.vQualification,
-    vProfession: req.body.vProfession,
-    vTeamType: req.body.vTeamType,
-    iNumberOfMembers: req.body.iNumberOfMembers,
-    vProblemStatement: req.body.vProblemStatement,
-    Document: req.file.filename,
-    keyStatus: req.body.keyStatus,
-    iRanking: req.body.iRanking,
-    vUniversity: req.body.vUniversity,
-    gender: req.body.gender,
-    Termsandcondition: req.body.Termsandcondition,
-    subscibe: req.body.subscibe,
-    sId: req.body.sId,
-    hId: req.body.hId,
-    iTeamId: req.body.iTeamId,
-    tId: req.body.tId,
-    domId: req.body.domId,
-    themeId: req.body.themeId
-  });
-  // POST
 
   Registration.create(registration, (err, data) => {
     if (err) {
