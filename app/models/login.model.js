@@ -17,7 +17,7 @@ const Signin = function(signin){
   
       if (res.length) {
         console.log("Login successful");
-        result(null, "Login successful");
+        result(null, res);
       } else {
         console.log("Invalid email or Password");
         result("Invalid email or password", null);
