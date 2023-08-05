@@ -30,6 +30,9 @@ exports.create = (req, res) => {
     sId: req.body.sId,
     hId: req.body.hId,
     iTeamId: req.body.iTeamId,
+    tId: req.body.tId,
+    domId: req.body.domId,
+    themeId: req.body.themeId
   });
   // POST
 
@@ -76,7 +79,7 @@ exports.findAll = (req, res) => {
 // get by id
 
 exports.findId = (req, res) => {
-  Registration.findId(req.params.Id, (err, data) => {
+  Registration.findId(req.params.Id,res, (err, data) => {
     if (err) {
       res.status(404).json({
         success: false,
@@ -195,7 +198,12 @@ exports.update = (req, res) => {
       vUniversity: req.body.vUniversity || '',
       gender: req.body.gender || '',
       Termsandcondition: req.body.Termsandcondition || '',
-      subscibe: req.body.subscibe || ''
+      subscibe: req.body.subscibe || '',
+      hId: req.body.hId || '',
+      iTeamId: req.body.iTeamId || '',
+      tId: req.body.tId || '',
+      domId: req.body.domId || '',
+      themeId: req.body.themeId || ''
     };
 
     Registration.update(req.params.Id, updatedData, (err, data) => {

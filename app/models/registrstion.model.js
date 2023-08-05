@@ -1,5 +1,4 @@
 const sql = require('../config/db');
-// const nodemailer = require('nodemailer')
 const sendmail = require('../middleware/newPassword.tamplate')
 
 
@@ -25,6 +24,9 @@ const Registration = function (registration) {
   this.sId = registration.sId
   this.hId = registration.hId
   this.iTeamId = registration.iTeamId
+  this.tId = registration.tId
+  this.domId = registration.domId
+  this.themeId = registration.themeId
 
 };
 Registration.create = (registration, result) => {
@@ -80,14 +82,17 @@ Registration.create = (registration, result) => {
         result(null, { Id: res.insertId, ...registration });
 
         // apply to hackathon 
-        if (registration.vTeamType === "team") {
+        if (registration.vTeamType == "team" || registration.vTeamType == "individual") {
 
           const apply = {
             sId: res.insertId,
             hId: registration.hId,
             iTeamId: registration.iTeamId,
             leader: 0,
-            Type: "team"
+            vtype: registration.vTeamType,
+            tId: registration.tId,
+            domId: registration.domId,
+            themeId: registration.themeId
           }
 
           sql.query("INSERT INTO applytohackathon SET ?", apply, (err, res) => {
@@ -134,22 +139,66 @@ Registration.getAll = (result) => {
 };
 
 
-//GET blog by id 
+//GET by id 
 
-Registration.findId = (Id, result) => {
-  sql.query(`SELECT * FROM student WHERE Id = ${Id}`, (err, res) => {
+Registration.findId = (Id, res) => {
+  let query1 = `SELECT * FROM student INNER JOIN applytohackathon ON student.Id = applytohackathon.sId WHERE student.Id = ${Id};`
+
+  sql.query(query1, (err, result1) => {
     if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
+      console.error('Error executing query1:', err);
+      return res.status(500).json({ error: 'Something went wrong' });
     }
-    if (res.length) {
-      console.log("student details: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-    result({ kind: "not_found" }, null);
-  });
+
+    // query 2
+    let hId = result1[0].hId
+    let query2 = `SELECT * FROM hackathon WHERE hId = ${hId}`;
+    sql.query(query2, (err, result2) => {
+      if (err) {
+        console.error('Error executing query2:', err);
+        return res.status(500).json({ error: 'Something went wrong' });
+      }
+
+      // query 3
+      let tId = result1[0].tId
+      let query3 = `SELECT * FROM type WHERE tId = ${tId}`
+      sql.query(query3, (err, result3) => {
+        if (err) {
+          console.error('Error executing query3:', err);
+          return res.status(500).json({ error: 'Something went wrong' });
+        }
+
+        // query 4
+        let domId = result1[0].domId
+        let query4 = `SELECT * FROM type WHERE tId = ${domId}`
+        sql.query(query4, (err, result4) => {
+          if (err) {
+            console.error('Error executing query4:', err);
+            return res.status(500).json({ error: 'Something went wrong' });
+          }
+
+          // query 5
+
+          let themeId = result1[0].themeId
+          let query5 = `SELECT * FROM hackathontheme WHERE theId = ${themeId}`
+          sql.query(query5, (err, result5) => {
+            if (err) {
+              console.error('Error executing query5:', err);
+              return res.status(500).json({ error: 'Something went wrong' });
+            }
+            const combinedResults = {
+              student: result1[0],
+              hackathon: result2[0],
+              type: result3[0],
+              domain: result4[0],
+              theme: result5[0]
+            };
+            res.json(combinedResults);
+          })
+        })
+      })
+    })
+  })
 };
 
 //update status 
@@ -209,7 +258,7 @@ Registration.giturl = (Id, url, result) => {
 
 // update data
 Registration.update = (Id, registration, result) => {
-  let query =
+  let query1 =
     "UPDATE student SET vMobileNumber=?, vGitUrl=?, vAddress=?, vQualification=?, vProfession=?, vTeamType=?, iNumberOfMembers=?, vProblemStatement=?, keyStatus=?, vUniversity=?,gender=?,Termsandcondition=?,subscibe=?";
   const queryParams = [
     registration.vMobileNumber,
@@ -228,25 +277,63 @@ Registration.update = (Id, registration, result) => {
   ];
 
   if (registration.vName) {
-    query += ", vName=?";
+    query1 += ", vName=?";
     queryParams.push(registration.vName);
   }
   if (registration.Document) {
-    query += ", Document=?";
+    query1 += ", Document=?";
     queryParams.push(registration.Document);
   }
 
-  query += " WHERE Id = ?";
+  query1 += " WHERE Id = ?";
   queryParams.push(Id);
 
-  sql.query(query, queryParams, (err, res) => {
+  let query2 = "UPDATE applytohackathon SET ";
+  const queryParams2 = [];
+
+  if (registration.hId) {
+    query2 += "hId=?, ";
+    queryParams2.push(registration.hId);
+  }
+  if (registration.iTeamId) {
+    query2 += "iTeamId=?, ";
+    queryParams2.push(registration.iTeamId);
+  }
+  if (registration.tId) {
+    query2 += "tId=?, ";
+    queryParams2.push(registration.tId);
+  }
+  if (registration.domId) {
+    query2 += "domId=?, ";
+    queryParams2.push(registration.domId);
+  }
+  if (registration.themeId) {
+    query2 += "themeId=?, ";
+    queryParams2.push(registration.themeId);
+  }
+
+  // Remove the trailing comma and space if any fields were provided
+  if (queryParams2.length > 0) {
+    query2 = query2.slice(0,-2);
+  }
+
+  query2 += " WHERE sId = ?";
+  queryParams2.push(Id);
+
+  sql.query(query1, queryParams, (err, res) => {
     if (err) {
       console.error("Error updating data:", err);
       result(err, null);
-    } else {
-      console.log("Data Updated Successfully", { Id: Id, registration });
-      result(null, "Data Updated Successfully", { Id: Id, registration });
     }
+    sql.query(query2, queryParams2, (err, res) => {
+      if (err) {
+        console.error("Error updating data:", err);
+      }
+      else{
+        console.log("Data updated successfully");
+        result(null, "Data updated successfully")
+      }
+    })
   });
 };
 
