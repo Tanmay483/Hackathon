@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     vTeamType: '',
     iNumberOfMembers: 0,
     vProblemStatement: '',
-    Document: '',
+    Document: req.file.path.replace(/\\/g, '/'),
     keyStatus: 0,
     iRanking: 0,
     vUniversity: '',
