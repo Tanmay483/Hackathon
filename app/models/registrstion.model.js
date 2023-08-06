@@ -186,14 +186,25 @@ Registration.findId = (Id, res) => {
               console.error('Error executing query5:', err);
               return res.status(500).json({ error: 'Something went wrong' });
             }
-            const combinedResults = {
-              student: result1[0],
-              hackathon: result2[0],
-              type: result3[0],
-              domain: result4[0],
-              theme: result5[0]
-            };
-            res.json(combinedResults);
+            // query6
+            let qId = result1[0].vQualification
+            console.log(qId)
+            let query6 = `SELECT * FROM  qualification WHERE qId = ${qId}`;
+            sql.query(query6, (err, result6) => {
+              if (err) {
+                console.error('Error executing query6:', err);
+                return res.status(500).json({ error: 'Something went wrong' });
+              }
+              const combinedResults = {
+                student: result1[0],
+                hackathon: result2[0],
+                type: result3[0],
+                domain: result4[0],
+                theme: result5[0],
+                qualification: result6[0],
+              };
+              res.json(combinedResults);
+            })
           })
         })
       })
@@ -314,7 +325,7 @@ Registration.update = (Id, registration, result) => {
 
   // Remove the trailing comma and space if any fields were provided
   if (queryParams2.length > 0) {
-    query2 = query2.slice(0,-2);
+    query2 = query2.slice(0, -2);
   }
 
   query2 += " WHERE sId = ?";
@@ -329,7 +340,7 @@ Registration.update = (Id, registration, result) => {
       if (err) {
         console.error("Error updating data:", err);
       }
-      else{
+      else {
         console.log("Data updated successfully");
         result(null, "Data updated successfully")
       }
