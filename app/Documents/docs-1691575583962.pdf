@@ -1,0 +1,92 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 09, 2023 at 08:46 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `hackathon`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `Id` int(11) NOT NULL,
+  `vName` varchar(100) NOT NULL,
+  `vUserName` varchar(500) NOT NULL,
+  `vEmail` varchar(150) NOT NULL,
+  `Type` enum('normal','google') NOT NULL DEFAULT 'normal',
+  `vMobileNumber` varchar(20) NOT NULL,
+  `vGitUrl` varchar(500) NOT NULL,
+  `vAddress` varchar(250) NOT NULL,
+  `vQualification` int(10) NOT NULL,
+  `vProfession` varchar(200) NOT NULL,
+  `vTeamType` enum('individual','team') NOT NULL DEFAULT 'individual',
+  `iNumberOfMembers` int(11) NOT NULL,
+  `vProblemStatement` varchar(500) NOT NULL,
+  `Document` varchar(200) NOT NULL,
+  `Password` varchar(10) NOT NULL,
+  `keyStatus` enum('active','deactive','block') NOT NULL DEFAULT 'active',
+  `iRanking` int(11) NOT NULL DEFAULT 0,
+  `vUniversity` varchar(5000) NOT NULL,
+  `gender` enum('male','female','other') NOT NULL,
+  `Token` varchar(5000) NOT NULL,
+  `g_Id` varchar(500) NOT NULL,
+  `Termsandcondition` enum('0','1') NOT NULL DEFAULT '0',
+  `subscibe` enum('0','1') NOT NULL DEFAULT '0',
+  `iTeamId` varchar(500) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`Id`, `vName`, `vUserName`, `vEmail`, `Type`, `vMobileNumber`, `vGitUrl`, `vAddress`, `vQualification`, `vProfession`, `vTeamType`, `iNumberOfMembers`, `vProblemStatement`, `Document`, `Password`, `keyStatus`, `iRanking`, `vUniversity`, `gender`, `Token`, `g_Id`, `Termsandcondition`, `subscibe`, `iTeamId`) VALUES
+(1, 'tanmay makwana', '', 'test1@gmail.com', 'normal', '8905691100', 'https://github.com/', 'bhavnager', 2, 'web-devloper', 'team', 0, 'convert JSON data into XML', 'docs-1691237910178.pdf', 'dczwxEC0', 'active', 2, 'gmiu', 'male', '', '', '1', '1', '0'),
+(2, 'Tanmay Makwana', '', 'test2@gmail.com', 'normal', '1236548265', 'nice ffdffr', 'bhavnager', 5, 'web-devloper', 'individual', 0, 'signin with google', 'docs-1691554641748.pdf', 'LzvhF13m', 'active', 10, 'gmit', 'female', '', '', '1', '1', '0'),
+(3, 'tanmay makwana', '', 'test3@gmail.com', 'normal', '8905691100', 'https://github.com/', 'bhavnager', 1, 'web-devloper', 'team', 0, 'convert JSON data into XML', 'app/Documents/docs-1691238093134.pdf', '!zC?RcRV', 'active', 2, 'gmiu', 'male', '', '', '1', '1', '0'),
+(4, 'tanmay makwana', '', 'test4@gmail.com', 'normal', '8905691100', 'hello', 'bhavnager', 4, 'web-devloper', 'team', 0, 'convert JSON data into XML', 'app/Documents/docs-1691238875956.pdf', 'qeKVwG88', 'deactive', 2, 'gmiu', 'male', '', '', '1', '1', '0'),
+(5, 'tanmay makwana', '', 'test5@gmail.com', 'normal', '8905691100', 'https://github.com/', 'bhavnager', 1, 'web-devloper', 'team', 0, 'convert JSON data into XML', 'app/Documents/docs-1691297532108.pdf', '0Ulgel$Y', 'active', 2, 'gmiu', 'male', '', '', '1', '1', '0'),
+(6, 'tanmay makwana', '', 'test6@gmail.com', 'normal', '8905691100', 'https://github.com/', 'bhavnager', 1, 'web-devloper', 'team', 0, 'convert JSON data into XML', 'app/Documents/docs-1691550270561.pdf', 'JMvOIByi', 'active', 2, 'gmiu', 'male', '', '', '1', '1', '0');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -11,6 +11,8 @@ exports.create = (req, res) => {
     vMobileNumber: '',
     vGitUrl: '',
     vAddress: '',
+    country: '',
+    organization: '',
     vQualification: '',
     vProfession: '',
     vTeamType: '',
@@ -34,7 +36,7 @@ exports.create = (req, res) => {
   const registration = { ...defaultValues, ...req.body };
 
   // Check if any required fields are missing
-  if (!registration.vName || !registration.vEmail || !registration.vMobileNumber || !registration.vTeamType) {
+  if (!registration.vName || !registration.vEmail || !registration.vMobileNumber) {
     res.status(404).json({
       success: false,
       message: "Required fields (vName, vEmail, vMobileNumber, vTeamType) cannot be empty!"
@@ -52,7 +54,7 @@ exports.create = (req, res) => {
     } else {
       console.log("Registration add successfully");
       console.log(req.body);
-      const responseData = { Id: data.Id, ...req.body };
+      const responseData = { Id: data.Id, data};
       res.status(201).json({
         success: true,
         data: responseData,
@@ -195,6 +197,7 @@ exports.update = (req, res) => {
       vMobileNumber: req.body.vMobileNumber || '',
       vGitUrl: req.body.vGitUrl || '',
       vAddress: req.body.vAddress || '',
+      country: req.body.country || '',
       vQualification: req.body.vQualification || '',
       vProfession: req.body.vProfession || '',
       vTeamType: req.body.vTeamType || '',
