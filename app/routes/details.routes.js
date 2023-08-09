@@ -23,6 +23,9 @@ module.exports = app => {
   // Delete a Description with id
   router.delete("/:hId", Description.delete);
 
+  //only image
+  router.post("/image", upload, Description.image);
+
   app.use('/api/hackathon', router);
 };
 

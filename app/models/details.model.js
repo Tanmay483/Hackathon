@@ -193,5 +193,19 @@ Details.update = (hId, details, result) => {
 
 }
 
+// only image
+Details.image = (details, result) => {
+    sql.query("INSERT INTO hackathon SET ?", details, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("created tutorial: ", { hId: res.inserthId, ...details });
+        result(null, { hId: res.inserthId, ...details });
+    });
+};
+
 
 module.exports = Details;

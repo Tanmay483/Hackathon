@@ -137,7 +137,7 @@ exports.update = (req, res) => {
 
     const updatedData = {
       vTitle: req.body.vTitle || '',
-      vImage: req.file ? req.file.path.replace(/\\/g, '/'): '',
+      vImage: req.file ? req.file.path.replace(/\\/g, '/') : '',
       vUniversity: req.body.vUniversity || '',
       vAddress: req.body.vAddress || '',
       vBrif: req.body.vBrif || '',
@@ -162,5 +162,47 @@ exports.update = (req, res) => {
         });
       }
     });
+  });
+};
+
+// only image
+exports.image = (req, res) => {
+  if (!req.body) {
+    res.send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  const details = new Details({
+    vTitle: '',
+    vImage: req.file.path.replace(/\\/g, '/'),
+    vUniversity: '',
+    vAddress: '',
+    vBrif: '',
+    vDetails: '',
+    vDeadline: '',
+    iTeamSize: '',
+    vEligibility: '',
+    tCreatedDate: '',
+    tUpdatedDate: '',
+  });
+
+  //    POST
+
+  Details.image(details, (err, data) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: "failed to add details"
+      });
+    } else {
+      console.log("Details add successfully");
+      console.log(req.body);
+      res.status(201).json({
+        success: true,
+        data: data,
+        message: "add details scesfully"
+      });
+    }
   });
 };
