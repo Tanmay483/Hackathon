@@ -3,7 +3,7 @@ const Team = require('../models/team.model')
 // create
 exports.create = (req, res) => {
     if (!req.body) {
-        return res.status(400).send({
+        return res.send({
             message: "Content can not be empty!"
         });
     }
@@ -15,20 +15,20 @@ exports.create = (req, res) => {
         leader: req.body.leader
     });
 
-    // Pass the 'res' object to the model function.
+
     Team.create(team, res, (err, data) => {
         if (err) {
             console.error('Error creating team:', err);
-            return res.status(500).json({
+            return res.json({
                 success: false,
                 message: "Team creation failed. Please try again later."
             });
         } else {
             console.log("Team created successfully");
             console.log(req.body);
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
-                data: req.body,
+                data: data,
                 message: "Team created successfully."
             });
         }
@@ -39,7 +39,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Team.getAll((err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(404).json({
                 success: false,
                 message: "can not get data"
             });
@@ -78,20 +78,20 @@ exports.findId = (req, res) => {
 // update
 exports.update = (req, res) => {
     if (!req.body) {
-        res.status(400).send({ message: "please insert data" })
+        res.send({ message: "please insert data" })
     }
     const team = new Team({
         vTeamName: req.body.vTeamName
     });
     Team.update(req.params.t_Id, team, (err, data) => {
         if (err) {
-            res.json({
+            res.send({
                 success: false,
                 message: "Error while updating Team"
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "team updated successfully"
             });
@@ -103,13 +103,13 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     Team.delete(req.params.t_Id, (err, data) => {
         if (err) {
-            res.json({
+            res.send({
                 success: false,
                 message: "Error while deleting Team"
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "team deleted successfully"
             });

@@ -154,14 +154,40 @@ Details.ById = (hId, result) => {
 
 //update
 Details.update = (hId, details, result) => {
-    let query = `UPDATE hackathon SET vTitle=?,vImage=?,vUniversity=?,vAddress=?,vBrif=?,vDetails=?,vDeadline=?,iTeamSize=?,vEligibility=?,tCreatedDate=?,tUpdatedDate=? WHERE hId = ?`
-    sql.query(query, [details.vTitle, details.vImage, details.vUniversity, details.vAddress, details.vBrif, details.vDetails, details.vDeadline, details.iTeamSize, details.vEligibility, details.tCreatedDate, details.tUpdatedDate, hId], (err, res) => {
+    let query = `UPDATE hackathon SET vTitle=?,vUniversity=?,vAddress=?,vBrif=?,vDetails=?,vDeadline=?,iTeamSize=?,vEligibility=?,tCreatedDate=?,tUpdatedDate=?`
+    const queryParams = [
+        details.vTitle,
+        details.vUniversity,
+        details.vAddress,
+        details.vBrif,
+        details.vDetails,
+        details.vDeadline,
+        details.iTeamSize,
+        details.vEligibility,
+        details.tCreatedDate,
+        details.tUpdatedDate,
+    ]
+
+
+    if (details.vImage) {
+        query += ", vImage=?";
+        queryParams.push(details.vImage);
+    }
+    query += " WHERE hId = ?";
+    queryParams.push(hId);
+
+
+
+    sql.query(query, queryParams, (err, res) => {
         if (err) {
             throw err
         }
+        if(res.affectedRows == 0){
+            result("data not found with id " + hId)
+        }
         else {
-            console.log("Data Updated Scessfully", { hId: hId, details })
-            result(null, "Data Updated Scessfully", { hId: hId, details })
+            console.log("Data Updated Scessfully", { hId: hId, res })
+            result(null, "Data Updated Scessfully", { hId: hId, res })
         }
     })
 

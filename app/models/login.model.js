@@ -6,8 +6,6 @@ const Signin = function(signin){
   }
 
   Signin.login = (vEmail, Password, result) => {
-    console.log(vEmail)
-    console.log(Password)
     sql.query(`SELECT * FROM student WHERE vEmail = '${vEmail}' AND Password = '${Password}'`, (err, res) => {
       if (err) {
         console.log("error: ", err);

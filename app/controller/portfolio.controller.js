@@ -3,7 +3,7 @@ const Portfolio = require('../models/portfolio.model');
 // insert
 exports.create = (req, res) => {
     if (!req.body) {
-        res.status(400).send({
+        res.send({
             message: "Content can not be empty!"
         });
     }
@@ -17,14 +17,14 @@ exports.create = (req, res) => {
 
     Portfolio.create(portfolio, (err, data) => {
         if (err) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "failed to generate portfolio"
             });
         } else {
             console.log("portfolio submited successfully");
             console.log(req.body);
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 data: req.body,
                 message: "portfolio submited successfully"
@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Portfolio.getAll((err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(404).json({
                 success: false,
                 message: "can not get portfolio"
             });
@@ -84,18 +84,18 @@ exports.delete = (req, res) => {
                     message: `Not found portfolio with id ${req.params.pId}.`
                 });
             } else {
-                res.status(500).send({
+                res.send({
                     message: "Could not delete portfolio with id " + req.params.pId
                 });
             }
-        } else res.send({ message: `Portfolio deleted successfully!` });
+        } else res.status(200).send({ message: `Portfolio deleted successfully!` });
     });
 };
 
 // tab update
 exports.Update = (req, res) => {
     if (!req.body) {
-        res.status(400).send({ message: "please insert data" })
+        res.send({ message: "please insert data" })
     }
     const update = new Portfolio({
         Id: req.body.Id,
@@ -104,13 +104,13 @@ exports.Update = (req, res) => {
     });
     Portfolio.Update(req.params.pId, update, (err, data) => {
         if (err) {
-            res.json({
+            res.send({
                 success: false,
                 message: "Error while update database"
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "Database update successfully"
             });

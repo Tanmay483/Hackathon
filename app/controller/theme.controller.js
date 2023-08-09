@@ -17,14 +17,14 @@ exports.create = (req, res) => {
 
     Theme.create(contact, (err, data) => {
         if (err) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "Theme failed to add"
             });
         } else {
             console.log("Theme add successfully");
             console.log(req.body);
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 data: req.body,
                 message: "Theme add successfully"
@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Theme.getAll((err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(404).json({
                 success: false,
                 message: "can not get Theme list"
             });
@@ -79,7 +79,7 @@ exports.findId = (req, res) => {
 
 exports.Update = (req, res) => {
     if (!req.body) {
-        res.status(400).send({ message: "please insert data" })
+        res.send({ message: "please insert data" })
     }
     const theme = new Theme({
         vTheme: req.body.vTheme,
@@ -93,7 +93,7 @@ exports.Update = (req, res) => {
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "Database update successfully",
             });

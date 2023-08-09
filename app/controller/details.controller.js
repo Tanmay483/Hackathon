@@ -3,14 +3,14 @@ const upload = require('../documentController/image.controller')
 
 exports.create = (req, res) => {
   if (!req.body) {
-    res.status(400).send({
+    res.send({
       message: "Content can not be empty!"
     });
   }
 
   const details = new Details({
     vTitle: req.body.vTitle,
-    vImage: req.file.filename,
+    vImage: req.file.path.replace(/\\/g, '/'),
     vUniversity: req.body.vUniversity,
     vAddress: req.body.vAddress,
     vBrif: req.body.vBrif,
@@ -26,16 +26,16 @@ exports.create = (req, res) => {
 
   Details.create(details, (err, data) => {
     if (err) {
-      res.status(400).json({
+      res.json({
         success: false,
         message: "failed to add details"
       });
     } else {
       console.log("Details add successfully");
       console.log(req.body);
-      res.status(200).json({
+      res.status(201).json({
         success: true,
-        data: req.body,
+        data: data,
         message: "add details scesfully"
       });
     }
@@ -47,7 +47,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   Details.getAll((err, data) => {
     if (err) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
         message: "can not get data"
       });
@@ -91,14 +91,14 @@ exports.delete = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Description with id ${req.params.hId}.`
+          message: `Not found hackathon  with id ${req.params.hId}.`
         });
       } else {
-        res.status(500).send({
-          message: "Could not delete Description with id " + req.params.hId
+        res.send({
+          message: "Could not delete hackathon with id " + req.params.hId
         });
       }
-    } else res.send({ message: `Description was deleted successfully!` });
+    } else res.status(200).send({ message: `hackathon was deleted successfully!` });
   });
 };
 
@@ -126,18 +126,18 @@ exports.update = (req, res) => {
   upload(req, res, function (err) {
     if (err) {
       console.error("Error uploading image:", err);
-      res.status(500).send({ message: "Failed to upload image." });
+      res.send({ message: "Failed to upload image." });
       return;
     }
 
     if (!req.body) {
-      res.status(400).send({ message: "Content can not be empty!" });
+      res.status(404).send({ message: "Content can not be empty!" });
       return;
     }
 
     const updatedData = {
       vTitle: req.body.vTitle || '',
-      vImage: req.file.path.replace(/\\/g, '/') || '',
+      vImage: req.file ? req.file.path.replace(/\\/g, '/'): '',
       vUniversity: req.body.vUniversity || '',
       vAddress: req.body.vAddress || '',
       vBrif: req.body.vBrif || '',
@@ -152,7 +152,7 @@ exports.update = (req, res) => {
     Details.update(req.params.hId, updatedData, (err, data) => {
       if (err) {
         console.error("Error updating data:", err);
-        res.status(500).send({ message: "Failed to update data." });
+        res.send({ message: "Failed to update data." });
         return;
       } else {
         res.status(200).json({

@@ -1,7 +1,7 @@
 const Contact = require('../models/contact.model');
 
 
-// Create and Save a new Description
+// Create and Save a new contact
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a Description
+  // Create a contact
   const contact = new Contact({
     vFullName	:req.body.vFullName,
     vEmail: req.body.vEmail,
@@ -22,14 +22,14 @@ exports.create = (req, res) => {
 
 Contact.create(contact, (err, data) => {
   if (err) {
-    res.status(400).json({
+    res.json({
       success: false,
       message: "contact failed"
     });
   } else {
     console.log("contact submited successfully");
     console.log(req.body);
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       data: req.body,
       message: "Thankyou for contact us"
@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
   
     Contact.getAll(title, (err, data) => {
       if (err) {
-        res.status(400).json({ 
+        res.status(404).json({ 
           success: false,
           message: "can not get contact list"
         });

@@ -3,7 +3,7 @@ const Problem = require('../models/problemStatement.models');
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
-        res.status(400).send({
+        res.send({
             message: "Content can not be empty!"
         });
     }
@@ -19,14 +19,14 @@ exports.create = (req, res) => {
 
     Problem.create(contact, (err, data) => {
         if (err) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "Problem satement failed to add"
             });
         } else {
             console.log("problem statement submited successfully");
             console.log(req.body);
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 data: req.body,
                 message: "problem statement submited successfully"
@@ -40,14 +40,14 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Problem.getAll((err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(404).json({
                 success: false,
                 message: "can not get problem statement list"
             });
         } else {
             console.log("contact");
             console.log(req.body);
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 data: data,
                 message: "Problem statement"
@@ -87,11 +87,11 @@ exports.delete = (req, res) => {
                     message: `Not found problemstatement with id ${req.params.pId}.`
                 });
             } else {
-                res.status(500).send({
+                res.send({
                     message: "Could not delete problemstatement with id " + req.params.pId
                 });
             }
-        } else res.send({ message: `problemstatement was deleted successfully!` });
+        } else res.status(200).send({ message: `problemstatement was deleted successfully!` });
     });
 };
 
@@ -99,7 +99,7 @@ exports.delete = (req, res) => {
 exports.update = (req, res) => {
 
     if (!req.body) {
-        res.status(400).send({
+        res.send({
             message: "Content can not be empty!"
         });
     }
@@ -116,7 +116,7 @@ exports.update = (req, res) => {
                         message: `Not found Problem statement with id ${req.params.pId}.`
                     });
                 } else {
-                    res.status(500).send({
+                    res.send({
                         message: "Error updating statement with id " + req.params.pId
                     });
                 }

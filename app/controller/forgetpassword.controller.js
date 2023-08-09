@@ -2,7 +2,7 @@ const Forgetpassword = require('../models/forgetpassword.model')
 
 exports.newpassword = (req, res) => {
     if (!req.body) {
-        res.status(400).send({
+        res.send({
             message: "Content cannot be empty!"
         });
         return;
@@ -13,7 +13,7 @@ exports.newpassword = (req, res) => {
 
     Forgetpassword.newpassword(login.vEmail, (err, data) => {
         if (err) {
-            res.status(401).json({
+            res.status(404).json({
                 success: false,
                 message: "Invalid Email"
             });

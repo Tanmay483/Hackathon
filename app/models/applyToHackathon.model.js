@@ -5,6 +5,12 @@ const sql = require('../config/db');
 const Apply = function (apply) {
     this.hId = apply.hId;
     this.sId = apply.sId;
+    this.iTeamId = apply.iTeamId;
+    this.leader = apply.leader;
+    this.vtype = apply.vtype;
+    this.tId = apply.tId;
+    this.domId  = apply.domId;
+    this.themeId = apply.themeId;
 }
 
 Apply.create = (apply, result) => {

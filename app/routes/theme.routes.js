@@ -1,5 +1,3 @@
-// const verifyToken = require('../controller/jwt')
-const conn = require('../config/db');
 module.exports = app => {
     const Theme = require('../controller/theme.controller');
 

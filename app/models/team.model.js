@@ -25,7 +25,7 @@ Team.create = (team, res) => {
         hId: team.hId,
         sId: team.sId,
         leader: team.leader,
-        Type: "team"
+        vtype: "team"
     };
 
     const hackathonId = hackathon.hId

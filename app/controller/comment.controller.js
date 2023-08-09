@@ -5,7 +5,7 @@ const Comment = require('../models/comment.model');
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
-    res.status(400).send({
+    res.send({
       message: "Content can not be empty!"
     });
   }
@@ -21,14 +21,14 @@ exports.create = (req, res) => {
 
   Comment.create(comment, (err, data) => {
     if (err) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
         message: "comment failed"
       });
     } else {
       console.log("comment submited successfully");
       console.log(req.body);
-      res.status(200).json({
+      res.status(201).json({
         success: true,
         data: req.body,
         message: "Thankyou for let us know your thoughts "
@@ -44,7 +44,7 @@ exports.findAll = (req, res) => {
 
   Comment.getAll(title, (err, data) => {
     if (err) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
         message: "can not get comment"
       });

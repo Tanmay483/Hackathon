@@ -3,7 +3,7 @@ const Categories = require('../models/categories.model');
 // insert
 exports.create = (req, res) => {
     if (!req.body) {
-        res.status(400).send({
+        res.send({
             message: "Content can not be empty!"
         });
     }
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     //   POST
     Categories.create(categories, (err, data) => {
         if (err) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "failed to generate categories"
             });
@@ -23,7 +23,7 @@ exports.create = (req, res) => {
             console.log("categories submited successfully");
             console.log(req.body);
             const responseData = {catId: data.insertId,...req.body };
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 data: responseData,
                 message: "categories submited successfully"
@@ -37,7 +37,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Categories.getAll((err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(404).json({
                 success: false,
                 message: "can not get categories"
             });
@@ -82,18 +82,18 @@ exports.delete = (req, res) => {
                     message: `Not found categories with id ${req.params.catId}.`
                 });
             } else {
-                res.status(500).send({
+                res.send({
                     message: "Could not delete categories with id " + req.params.catId
                 });
             }
-        } else res.send({ message: `Categories deleted successfully!` });
+        } else res.status(200).send({ message: `Categories deleted successfully!` });
     });
 };
 
 // update
 exports.Update = (req, res) => {
     if (!req.body) {
-        res.status(400).send({ message: "please insert data" })
+        res.send({ message: "please insert data" })
     }
     const update = new Categories({
         vcatagoryName: req.body.vcatagoryName,
@@ -101,13 +101,13 @@ exports.Update = (req, res) => {
     });
     Categories.Update(req.params.catId, update, (err, data) => {
         if (err) {
-            res.json({
+            res.send({
                 success: false,
                 message: "Error while update database"
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "Database update successfully"
             });
@@ -124,12 +124,12 @@ exports.subCategories = (req, res) => {
             message: `Not found categories with id ${req.params.catId}.`,
           });
         } else {
-          res.status(500).send({
+          res.send({
             message: 'Error retrieving categories with Id ' + req.params.catId,
           });
         }
       } else{
-        res.json({
+        res.status(200).send({
             success: true,
             Data: data,
             message: "Categories and categorylist"

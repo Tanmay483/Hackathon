@@ -15,14 +15,13 @@ exports.create = (req, res) => {
 
     Qualification.create(qualification, (err, data) => {
         if (err) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: "failed to generate qualification"
             });
         } else {
             console.log("qualification submited successfully");
-            console.log(req.body);
-            res.status(200).json({
+            res.status(201).json({
                 success: true,
                 data: data,
                 message: "qualification submited successfully"
@@ -36,7 +35,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Qualification.getAll((err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(404).json({
                 success: false,
                 message: "can not get qualification"
             });
@@ -82,31 +81,31 @@ exports.delete = (req, res) => {
                     message: `Not found qualification with id ${req.params.qId}.`
                 });
             } else {
-                res.status(500).send({
+                res.send({
                     message: "Could not delete qualification with id " + req.params.qId
                 });
             }
-        } else res.send({ message: `Qualification deleted successfully!` });
+        } else res.status(200).send({ message: `Qualification deleted successfully!` });
     });
 };
 
 // tab update
 exports.Update = (req, res) => {
     if (!req.body) {
-        res.status(400).send({ message: "please insert data" })
+        res.send({ message: "please insert data" })
     }
     const update = new Qualification({
         vqualification: req.body.vqualification,
     });
     Qualification.Update(req.params.qId, update, (err, data) => {
         if (err) {
-            res.json({
+            res.send({
                 success: false,
                 message: "Error while update database"
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "Database update successfully"
             });

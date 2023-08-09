@@ -26,7 +26,10 @@ Forgetpassword.newpassword = (vEmail, result) => {
       return;
     }
 
-    if (res.length) {
+    if (res.length == 0){
+      result("plese enter valid email")
+    }
+    else {
       const vName = res[0].vName;
       const password = getPassword();
       console.log(password)

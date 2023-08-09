@@ -2,7 +2,7 @@ const Signin = require('../models/login.model')
 
 exports.login = (req, res) => {
   if (!req.body) {
-    res.status(400).send({
+    res.send({
       message: "Content cannot be empty!"
     });
     return;
@@ -14,7 +14,7 @@ exports.login = (req, res) => {
 
   Signin.login(login.vEmail, login.Password, (err, data) => {
     if (err) {
-      res.status(401).json({
+      res.status(404).json({
         success: false,
         message: "login failed " + " Invalid Username or Password"
       });

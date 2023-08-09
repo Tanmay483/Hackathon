@@ -5,6 +5,8 @@ const upload = require('../documentController/document.control')
 exports.create = (req, res) => {
   const defaultValues = {
     vName: '',
+    vUserName:'',
+    vUserName: '',
     vEmail: '',
     vMobileNumber: '',
     vGitUrl: '',
@@ -33,7 +35,7 @@ exports.create = (req, res) => {
 
   // Check if any required fields are missing
   if (!registration.vName || !registration.vEmail || !registration.vMobileNumber || !registration.vTeamType) {
-    res.status(400).json({
+    res.status(404).json({
       success: false,
       message: "Required fields (vName, vEmail, vMobileNumber, vTeamType) cannot be empty!"
     });
@@ -43,7 +45,7 @@ exports.create = (req, res) => {
 
   Registration.create(registration, (err, data) => {
     if (err) {
-      res.status(400).json({
+      res.json({
         success: false,
         message: "Registration failed"
       });
@@ -51,7 +53,7 @@ exports.create = (req, res) => {
       console.log("Registration add successfully");
       console.log(req.body);
       const responseData = { Id: data.Id, ...req.body };
-      res.status(200).json({
+      res.status(201).json({
         success: true,
         data: responseData,
         message: "congratulation your entry has been register successfully"
@@ -65,9 +67,9 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   Registration.getAll((err, data) => {
     if (err) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
-        message: "can not get data"
+        message: "can not found data"
       });
     } else {
       console.log("user detail");
@@ -84,7 +86,7 @@ exports.findAll = (req, res) => {
 // get by id
 
 exports.findId = (req, res) => {
-  Registration.findId(req.params.Id,res, (err, data) => {
+  Registration.findId(req.params.Id, res, (err, data) => {
     if (err) {
       res.status(404).json({
         success: false,
@@ -105,7 +107,7 @@ exports.findId = (req, res) => {
 // status change
 exports.status = (req, res) => {
   if (!req.body) {
-    res.status(400).send({ message: "please insert data" })
+    res.status(404).send({ message: "please insert data" })
   }
   const registration = new Registration({
     keyStatus: req.body.keyStatus
@@ -118,7 +120,7 @@ exports.status = (req, res) => {
       });
     }
     else {
-      res.json({
+      res.status(200).send({
         success: true,
         message: "status change sucessfully"
       });
@@ -129,7 +131,7 @@ exports.status = (req, res) => {
 // ranking update
 exports.ranking = (req, res) => {
   if (!req.body) {
-    res.status(400).send({ message: "please insert data" })
+    res.status(404).send({ message: "please insert data" })
   }
   const registration = new Registration({
     iRanking: req.body.iRanking
@@ -142,7 +144,7 @@ exports.ranking = (req, res) => {
       });
     }
     else {
-      res.json({
+      res.status(200).send({
         success: true,
         message: "Ranking update successfully"
       });
@@ -153,7 +155,7 @@ exports.ranking = (req, res) => {
 // giturl update
 exports.giturl = (req, res) => {
   if (!req.body) {
-    res.status(400).send({ message: "please insert data" })
+    res.status(404).send({ message: "please insert data" })
   }
   const registration = new Registration({
     vGitUrl: req.body.vGitUrl
@@ -166,7 +168,7 @@ exports.giturl = (req, res) => {
       });
     }
     else {
-      res.json({
+      res.status(200).send({
         success: true,
         message: "GitUrl update successfully"
       });
@@ -179,12 +181,12 @@ exports.update = (req, res) => {
   upload(req, res, function (err) {
     if (err) {
       console.error("Error uploading Document:", err);
-      res.status(500).send({ message: "Failed to upload Document." });
+      res.send({ message: "Failed to upload Document." });
       return;
     }
 
     if (!req.body) {
-      res.status(400).send({ message: "Content can not be empty!" });
+      res.status(404).send({ message: "Content can not be empty!" });
       return;
     }
 
@@ -214,13 +216,12 @@ exports.update = (req, res) => {
     Registration.update(req.params.Id, updatedData, (err, data) => {
       if (err) {
         console.error("Error updating data:", err);
-        res.status(500).send({ message: "Failed to update data." });
+        res.send({ message: "Failed to update data." });
         return;
       } else {
         res.status(200).json({
           status: 1,
-          message: "Token verify sucessfully",
-          data: data
+          message: "database updated successfully",
         });
       }
     });

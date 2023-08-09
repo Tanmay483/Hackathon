@@ -92,7 +92,7 @@ exports.delete = (req, res) => {
                     message: "Could not delete tab with id " + req.params.tabId
                 });
             }
-        } else res.send({ message: `tab was deleted successfully!` });
+        } else res.status(200).send({ message: `tab was deleted successfully!` });
     });
 };
 
@@ -110,13 +110,13 @@ exports.Update = (req, res) => {
     });
     Tab.Update(req.params.tabId, tab, (err, data) => {
         if (err) {
-            res.json({
+            res.status(500).send({
                 success: false,
                 message: "Error while update database"
             });
         }
         else {
-            res.json({
+            res.status(200).send({
                 success: true,
                 message: "Database update successfully"
             });
