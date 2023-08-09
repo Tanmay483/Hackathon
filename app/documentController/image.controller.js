@@ -6,7 +6,7 @@ const image = multer({
             cb(null, './app/Images')
         },
         filename: (req, file, cb) => {
-            cb(null, file.fieldname + "-" + Date.now() + '.png','.jpg')
+            cb(null, file.fieldname + "-" + Date.now() + '.png')
         }
     })
 }).single('image')

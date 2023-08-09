@@ -81,7 +81,7 @@ require("./app/routes/categories.routes")(app);
 require("./app/routes/team.routes")(app);
 require("./app/routes/applyToHackathon.routes")(app);
 require('./app/routes/qualification.routes')(app);
-
+require('./app/routes/image.routes')(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {
