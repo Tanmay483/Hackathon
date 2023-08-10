@@ -8,14 +8,25 @@ exports.create = (req, res) => {
         });
     }
     const portfolio = new Portfolio({
-        Id: req.body.Id,
-        vLinkdin: req.body.vLinkdin,
-        vBehance: req.body.vBehance,
+        sId: req.body.sId,
+        Linkdin: '',
+        Behance: '',
+        Facebook: '',
+        Instagram: '',
+        Twitter: '',
+        Git: '',
+        Reddit: '',
+        Figma: '',
+        Blogger: '',
+        Website: '',
+        Other: '',
+
     });
 
     //   POST
+    const values = { ...portfolio, ...req.body }
 
-    Portfolio.create(portfolio, (err, data) => {
+    Portfolio.create(values, (err, data) => {
         if (err) {
             res.json({
                 success: false,

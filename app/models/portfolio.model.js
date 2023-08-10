@@ -3,12 +3,22 @@ const sql = require('../config/db');
 // constructor
 const Portfolio = function (portfolio) {
 
-    this.Id = portfolio.Id;
-    this.vLinkdin = portfolio.vLinkdin;
-    this.vBehance = portfolio.vBehance;
+    this.sId = portfolio.sId;
+    this.Linkdin = portfolio.Linkdin;
+    this.Behance = portfolio.Behance;
+    this.Facebook = portfolio.Facebook;
+    this.Instagram = portfolio.Instagram;
+    this.Twitter = portfolio.Twitter;
+    this.Git = portfolio.Git;
+    this.Reddit = portfolio.Reddit;
+    this.Figma = portfolio.Figma;
+    this.Blogger = portfolio.Blogger;
+    this.Website = portfolio.Website;
+    this.Other = portfolio.Other;
 };
 
 // POST 
+
 
 Portfolio.create = (portfolio, result) => {
     sql.query("INSERT INTO portfolio SET ?", portfolio, (err, res) => {

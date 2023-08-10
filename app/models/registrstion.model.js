@@ -210,6 +210,7 @@ Registration.findId = (Id, res) => {
                 console.error('Error executing query5:', err);
                 return res.status(500).json({ error: 'Something went wrong' });
               }
+              
               // query6
               let qId = result1[0].vQualification
               let query6 = `SELECT * FROM  qualification WHERE qId = ${qId}`;

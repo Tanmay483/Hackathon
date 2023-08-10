@@ -44,7 +44,6 @@ exports.create = (req, res) => {
     return;
   }
 
-
   Registration.create(registration, (err, data) => {
     if (err) {
       res.json({
