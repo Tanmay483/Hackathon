@@ -20,7 +20,6 @@ exports.create = (req, res) => {
         Blogger: '',
         Website: '',
         Other: '',
-
     });
 
     //   POST
@@ -109,9 +108,18 @@ exports.Update = (req, res) => {
         res.send({ message: "please insert data" })
     }
     const update = new Portfolio({
-        Id: req.body.Id,
-        vLinkdin: req.body.vLinkdin,
-        vBehance: req.body.vBehance,
+        sId: req.body.sId,
+        Linkdin: req.body.Linkdin,
+        Behance: req.body.Behance,
+        Facebook: req.body.Facebook,
+        Instagram: req.body.Instagram,
+        Twitter: req.body.Twitter,
+        Git: req.body.Git,
+        Reddit: req.body.Reddit,
+        Figma: req.body.Figma,
+        Blogger: req.body.Blogger,
+        Website: req.body.Website,
+        Other: req.body.Other,
     });
     Portfolio.Update(req.params.pId, update, (err, data) => {
         if (err) {
@@ -123,7 +131,7 @@ exports.Update = (req, res) => {
         else {
             res.status(200).send({
                 success: true,
-                message: "Database update successfully"
+                message: data
             });
         }
     })

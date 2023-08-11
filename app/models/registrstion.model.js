@@ -29,7 +29,10 @@ const Registration = function (registration) {
   this.tId = registration.tId
   this.domId = registration.domId
   this.themeId = registration.themeId
-
+  this.domainId = registration.domainId
+  this.courseId = registration.courseId
+  this.CourseProgramme = registration.CourseProgramme
+  this.YearofGraduation = registration.YearofGraduation
 };
 Registration.create = (registration, result) => {
   const { vEmail, vUserName } = registration;
@@ -88,7 +91,11 @@ Registration.create = (registration, result) => {
         gender: registration.gender,
         Termsandcondition: registration.Termsandcondition,
         subscibe: registration.subscibe,
-        password: password
+        password: password,
+        domainId: registration.domainId,
+        courseId: registration.courseId,
+        CourseProgramme: registration.CourseProgramme,
+        YearofGraduation: registration.YearofGraduation
       };
 
       // Insert student record into the database
@@ -210,7 +217,7 @@ Registration.findId = (Id, res) => {
                 console.error('Error executing query5:', err);
                 return res.status(500).json({ error: 'Something went wrong' });
               }
-              
+
               // query6
               let qId = result1[0].vQualification
               let query6 = `SELECT * FROM  qualification WHERE qId = ${qId}`;
@@ -294,8 +301,7 @@ Registration.giturl = (Id, url, result) => {
 
 // update data
 Registration.update = (Id, registration, result) => {
-  let query1 =
-    `UPDATE student SET vMobileNumber=?, vGitUrl=?, vAddress=?, country=?,vQualification=?, vProfession=?, vTeamType=?, iNumberOfMembers=?, vProblemStatement=?, keyStatus=?, vUniversity=?,gender=?,Termsandcondition=?,subscibe=?`
+  let query1 = `UPDATE student SET vMobileNumber=?, vGitUrl=?, vAddress=?, country=?,vQualification=?, vProfession=?, vTeamType=?, iNumberOfMembers=?, vProblemStatement=?, keyStatus=?, vUniversity=?,gender=?,Termsandcondition=?,subscibe=?,domainId=?,courseId=?,CourseProgramme=?,YearofGraduation=?`
   const queryParams = [
     registration.vMobileNumber,
     registration.vGitUrl,
@@ -311,6 +317,10 @@ Registration.update = (Id, registration, result) => {
     registration.gender,
     registration.Termsandcondition,
     registration.subscibe,
+    registration.domainId,
+    registration.courseId,
+    registration.CourseProgramme,
+    registration.YearofGraduation
   ];
 
   if (registration.vName) {
@@ -324,77 +334,60 @@ Registration.update = (Id, registration, result) => {
 
   query1 += " WHERE Id = ?";
   queryParams.push(Id);
-console.log(query1 + " " + queryParams);
 
   // update applytohackathon
+  let query2 = "UPDATE applytohackathon SET ";
   const queryParams2 = [];
 
+  // Additional fields in applytohackathon, similar to above
+  if (registration.hId) {
+    query2 += "hId=?, ";
+    queryParams2.push(registration.hId);
+  }
+  if (registration.iTeamId) {
+    query2 += "iTeamId=?, ";
+    queryParams2.push(registration.iTeamId);
+  }
+  if (registration.tId) {
+    query2 += "tId=?, ";
+    queryParams2.push(registration.tId);
+  }
+  if (registration.domId) {
+    query2 += "domId=?, ";
+    queryParams2.push(registration.domId);
+  }
+  if (registration.themeId) {
+    query2 += "themeId=?, ";
+    queryParams2.push(registration.themeId);
+  }
+
+  // Remove the trailing comma and space if any fields were provided
   if (queryParams2.length > 0) {
-    let query2 = "UPDATE applytohackathon SET ";
+    query2 = query2.slice(0, -2);
+  }
 
-    if (registration.hId) {
-      query2 += "hId=?, ";
-      queryParams2.push(registration.hId);
-    }
-    if (registration.iTeamId) {
-      query2 += "iTeamId=?, ";
-      queryParams2.push(registration.iTeamId);
-    }
-    if (registration.tId) {
-      query2 += "tId=?, ";
-      queryParams2.push(registration.tId);
-    }
-    if (registration.domId) {
-      query2 += "domId=?, ";
-      queryParams2.push(registration.domId);
-    }
-    if (registration.themeId) {
-      query2 += "themeId=?, ";
-      queryParams2.push(registration.themeId);
-    }
+  query2 += " WHERE sId = ?";
+  queryParams2.push(Id);
 
-    // Remove the trailing comma and space if any fields were provided
-    if (queryParams2.length > 0) {
-      query2 = query2.slice(0, -2);
-    }
-
-    query2 += " WHERE sId = ?";
-    queryParams2.push(Id);
-
-    sql.query(query1, queryParams, (err, res) => {
-      if (err) {
-        console.error("Error updating data:", err);
-        result(err, null);
-      } else {
-        // Check if any queryParams2 are populated before executing query2
-        if (queryParams2.length > 0) {
-          sql.query(query2, queryParams2, (err, res) => {
-            if (err) {
-              console.error("Error updating data:", err);
-            } else {
-              console.log("Data updated successfully");
-              result(null, "Data updated successfully");
-            }
-          });
-        } else {
-          console.log("Data updated successfully");
+  // Execute the queries
+  sql.query(query1, queryParams, (err, res) => {
+    if (err) {
+      console.error("Error updating data in student table:", err);
+      result(err, null);
+    } else {
+      if (queryParams2.length > 0) {
+        sql.query(query2, queryParams2, (err, res) => {
+          if (err) {
+            console.error("Error updating data in applytohackathon table:", err);
+          }
           result(null, "Data updated successfully");
-        }
-      }
-    });
-  } else {
-    // If no queryParams2 are populated, only execute query1
-    sql.query(query1, queryParams, (err, res) => {
-      if (err) {
-        console.error("Error updating data:", err);
-        result(err, null);
+        });
       } else {
-        console.log("Data updated successfully");
+        console.log("Data updated successfully in student table");
         result(null, "Data updated successfully");
       }
-    });
-  }
+    }
+  });
 };
-
 
 module.exports = Registration

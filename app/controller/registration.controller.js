@@ -31,6 +31,10 @@ exports.create = (req, res) => {
     tId: 0,
     domId: 0,
     themeId: 0,
+    domainId: 0,
+    courseId: 0,
+    CourseProgramme: 'full-time',
+    YearofGraduation: 2020
   };
 
   const registration = { ...defaultValues, ...req.body };
@@ -212,7 +216,11 @@ exports.update = (req, res) => {
       iTeamId: req.body.iTeamId || '',
       tId: req.body.tId || '',
       domId: req.body.domId || '',
-      themeId: req.body.themeId || ''
+      themeId: req.body.themeId || '',
+      domainId: req.body.domainId || '',
+      courseId: req.body.courseId || '',
+      CourseProgramme: req.body.CourseProgramme || '',
+      YearofGraduation: req.body.YearofGraduation || '',
     };
 
     Registration.update(req.params.Id, updatedData, (err, data) => {

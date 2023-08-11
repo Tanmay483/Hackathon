@@ -1,12 +1,12 @@
 const sql = require('../config/db');
 
 const Signin = function(signin){
-    this.vEmail = signin.vEmail;
+    this.vUserName = signin.vUserName;
     this.Password = signin.Password
   }
 
-  Signin.login = (vEmail, Password, result) => {
-    sql.query(`SELECT * FROM student WHERE vEmail = '${vEmail}' AND Password = '${Password}'`, (err, res) => {
+  Signin.login = (vUserName, Password, result) => {
+    sql.query(`SELECT * FROM student WHERE vUserName = '${vUserName}' AND Password = '${Password}'`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -17,8 +17,8 @@ const Signin = function(signin){
         console.log("Login successful");
         result(null, res);
       } else {
-        console.log("Invalid email or Password");
-        result("Invalid email or password", null);
+        console.log("Invalid username or Password");
+        result("Invalid username or password", null);
       }
     });
   };

@@ -88,19 +88,78 @@ Portfolio.remove = (pId, result) => {
 
 // update tab
 Portfolio.Update = (pId, portfolio, result) => {
-    let query = `UPDATE portfolio SET Id =?,vLinkdin=?,vBehance=? WHERE pId = ?`
+    let query = `UPDATE portfolio SET `
+    const queryParams = []
 
-    sql.query(query, [portfolio.Id, portfolio.vLinkdin, portfolio.vBehance,pId], (err, data) => {
-        if (err) {
-            res.json({
-                success: false,
-                message: "Database update failed"
-            });
-        } else {
-            console.log("Portfolio change successfully");
-            result(null, "Portfolio change successfully")
-        }
+    if (portfolio.sId) {
+        query += "sId=?, ";
+        queryParams.push(portfolio.sId);
+    }
+    if (portfolio.Linkdin) {
+        query += "Linkdin=?, ";
+        queryParams.push(portfolio.Linkdin);
+    }
+    if (portfolio.Behance) {
+        query += "Behance=?, ";
+        queryParams.push(portfolio.Behance);
+    }
+    if (portfolio.Facebook) {
+        query += "Facebook=?, ";
+        queryParams.push(portfolio.Facebook);
+    }
+    if (portfolio.Instagram) {
+        query += "Instagram=?, ";
+        queryParams.push(portfolio.Instagram);
+    }
+    if (portfolio.Twitter) {
+        query += "Twitter=?, ";
+        queryParams.push(portfolio.Twitter);
+    }
+    if (portfolio.Git) {
+        query += "Git=?, ";
+        queryParams.push(portfolio.Git);
+    }
+    if (portfolio.Reddit) {
+        query += "Reddit=?, ";
+        queryParams.push(portfolio.Reddit);
+    }
+    if (portfolio.Figma) {
+        query += "Figma=?, ";
+        queryParams.push(portfolio.Figma);
+    }
+    if (portfolio.Blogger) {
+        query += "Blogger=?, ";
+        queryParams.push(portfolio.Blogger);
+    }
+    if (portfolio.Website) {
+        query += "Website=?, ";
+        queryParams.push(portfolio.Website);
+    }
+    if (portfolio.Other) {
+        query += "Other=?, ";
+        queryParams.push(portfolio.Other);
+    }
+    console.log(query);
+    // Remove the trailing comma and space if any fields were provided
+    if (queryParams.length > 0) {
+        query = query.slice(0, -2);
+    }
 
-    });
+    query += " WHERE pId = ?";
+    queryParams.push(pId);
+
+    sql.query(query, queryParams,
+        (err, data) => {
+            if (err) {
+                result.json({
+                    success: false,
+                    message: "Database update failed"
+                });
+            } else {
+                console.log("Portfolio change successfully");
+                result(null, "Portfolio change successfully")
+            }
+
+        });
 }
 module.exports = Portfolio;

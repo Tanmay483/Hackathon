@@ -8,11 +8,11 @@ exports.login = (req, res) => {
     return;
   }
   const login = new Signin({
-    vEmail: req.body.vEmail,
+    vUserName: req.body.vUserName,
     Password: req.body.Password,
   });
 
-  Signin.login(login.vEmail, login.Password, (err, data) => {
+  Signin.login(login.vUserName, login.Password, (err, data) => {
     if (err) {
       res.status(404).json({
         success: false,

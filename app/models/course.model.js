@@ -87,7 +87,7 @@ Course.Update = (courseId, course, result) => {
             });
         } else {
             console.log("Course change successfully");
-            result(null, "Course change successfully")
+            result(null, "Course change successfully");
         }
 
     });

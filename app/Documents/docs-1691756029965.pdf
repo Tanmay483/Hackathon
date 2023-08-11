@@ -1,0 +1,696 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 10, 2023 at 07:30 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `hackathon`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applytohackathon`
+--
+
+CREATE TABLE `applytohackathon` (
+  `aId` int(11) NOT NULL,
+  `hId` int(11) NOT NULL DEFAULT 0,
+  `sId` int(11) NOT NULL,
+  `iTeamId` varchar(11) NOT NULL DEFAULT '0',
+  `leader` enum('0','1') NOT NULL DEFAULT '0',
+  `vtype` enum('team','individual') NOT NULL DEFAULT 'individual',
+  `tId` int(50) NOT NULL DEFAULT 0,
+  `domId` int(11) NOT NULL DEFAULT 0,
+  `themeId` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `applytohackathon`
+--
+
+INSERT INTO `applytohackathon` (`aId`, `hId`, `sId`, `iTeamId`, `leader`, `vtype`, `tId`, `domId`, `themeId`) VALUES
+(1, 3, 1, 'C7w!68r', '', 'team', 2, 7, 1),
+(2, 3, 1, 'C7w!68r', '', 'team', 2, 7, 1),
+(3, 2, 2, 'C7w!68r&', '', 'team', 3, 2, 4),
+(4, 2, 3, 'C7w!68r&', '', 'team', 3, 2, 4),
+(5, 2, 4, 'C7w!68r&', '', 'team', 3, 2, 4),
+(6, 3, 1, 'C7w!68r', '', 'team', 2, 7, 1),
+(7, 2, 4, 'C7w!68r&', '', 'individual', 3, 2, 4),
+(8, 3, 1, 'C7w!68r', '', 'individual', 2, 7, 1),
+(9, 2, 2, 'C7w!68r&', '', 'individual', 3, 2, 4),
+(10, 2, 3, 'C7w!68r&', '', 'individual', 3, 2, 4),
+(11, 2, 4, 'C7w!68r&', '', 'individual', 3, 2, 4),
+(12, 2, 5, 'C7w!68r&', '', 'individual', 3, 2, 4),
+(13, 2, 1, 'C7w!68r&', '', 'individual', 3, 2, 4),
+(14, 2, 2, 'C7w!68r&', '', 'individual', 3, 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `catId` int(11) NOT NULL,
+  `vcatagoryName` varchar(1000) NOT NULL,
+  `iParentId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`catId`, `vcatagoryName`, `iParentId`) VALUES
+(1, 'Learn', 0),
+(2, 'Practice', 0),
+(3, 'Mentorship', 0),
+(4, 'compete', 0),
+(5, 'Jobs', 0),
+(6, 'Crash Course To Placements', 1),
+(7, 'Certification Courses', 1),
+(8, '5 day interview prep', 2),
+(9, 'MCQ-based Mock Test', 2),
+(10, '100-days coding Sprint', 2),
+(11, 'Mock interview', 2),
+(12, 'Find mentor', 3),
+(13, 'be a mentor', 3),
+(14, 'compitition', 4),
+(15, 'hackathon', 4),
+(16, 'quizzes', 4),
+(17, 'Hiring Challanges', 4),
+(18, 'Explore now', 5),
+(19, 'Post jobs', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `comId` int(11) NOT NULL,
+  `hId` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
+  `vcomment` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comId`, `hId`, `Id`, `vcomment`) VALUES
+(1, 1, 1, 'very good'),
+(2, 1, 1, 'very nice'),
+(3, 1, 1, 'very nice'),
+(4, 1, 1, 'very nice'),
+(5, 1, 1, 'very nice'),
+(6, 1, 1, 'very nice'),
+(7, 1, 1, 'very nice'),
+(8, 1, 1, 'very nice');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `cId` int(11) NOT NULL,
+  `vFullName` varchar(500) NOT NULL,
+  `vEmail` varchar(500) NOT NULL,
+  `vMobileNumber` varchar(20) NOT NULL,
+  `vAddress` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`cId`, `vFullName`, `vEmail`, `vMobileNumber`, `vAddress`) VALUES
+(1, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(2, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(3, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(4, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(5, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(6, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(7, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(8, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth'),
+(9, 'tanmay makwana', 'abc@gmail.com', '1236547895', 'on earth');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course`
+--
+
+CREATE TABLE `course` (
+  `courseId` int(11) NOT NULL,
+  `vName` varchar(500) NOT NULL,
+  `tId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`courseId`, `vName`, `tId`) VALUES
+(1, '1-year MBA', 5),
+(2, '2-year MBA', 5),
+(3, 'BBA', 5),
+(4, 'B.Tech', 6),
+(5, 'M.Tech', 6),
+(6, 'Integrated/Dual Degree', 6),
+(7, 'B.Com', 7),
+(8, 'M.Com', 7),
+(9, 'B.Sc', 7),
+(10, 'M.Sc', 7),
+(11, 'B.A', 7),
+(12, 'M.A', 7),
+(13, 'B.Des.', 7),
+(14, 'M.Des.', 7),
+(15, 'B.Arch', 7),
+(16, 'M.Arch', 7),
+(17, 'B.F.Tech', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hackathon`
+--
+
+CREATE TABLE `hackathon` (
+  `hId` int(11) NOT NULL,
+  `vTitle` varchar(500) NOT NULL,
+  `vImage` varchar(250) NOT NULL,
+  `vUniversity` varchar(500) NOT NULL,
+  `vAddress` varchar(500) NOT NULL,
+  `vBrif` varchar(500) NOT NULL,
+  `vDetails` varchar(500) NOT NULL,
+  `vDeadline` varchar(100) NOT NULL,
+  `iTeamSize` int(11) NOT NULL,
+  `vEligibility` varchar(200) NOT NULL,
+  `tCreatedDate` datetime NOT NULL,
+  `tUpdatedDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hackathon`
+--
+
+INSERT INTO `hackathon` (`hId`, `vTitle`, `vImage`, `vUniversity`, `vAddress`, `vBrif`, `vDetails`, `vDeadline`, `iTeamSize`, `vEligibility`, `tCreatedDate`, `tUpdatedDate`) VALUES
+(1, 'hackathon', 'app/Images/image-1691555553647.png', 'gmit', 'sidser', 'timepass', 'sasti hackathon', 'never ending', 10000, 'you must born', '1885-05-10 00:00:00', '2089-10-05 00:00:00'),
+(2, 'hackathon', 'http://localhost:8085/app/Images/image-1689400592729.png', 'gmit', 'sidser', 'timepass', 'sasti hackathon', 'never ending', 10000, 'you must born', '1885-05-10 00:00:00', '2089-10-05 00:00:00'),
+(3, 'hackNuthon', 'http://localhost:8085/app/Images/image-1686281816828.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(4, 'hackNuthon', 'http://localhost:8085/app/Images/image-1686283013150.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(5, 'hackNuthon', 'http://localhost:8085/app/Images/image-1686283030201.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(8, 'hackNuthon', 'http://localhost:8085/app/Images/image-1687788088104.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(9, 'hackNuthon', 'http://localhost:8085/app/Images/image-1689400576787.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(10, 'hackathon', 'app/Images/image-1689769488575.png', 'gmit', 'sidser', 'timepass', 'sasti hackathon', 'never ending', 10000, 'you must born', '1885-05-10 00:00:00', '2089-10-05 00:00:00'),
+(11, 'hackathon', 'app/Images/image-1690519992774.png', 'gmit', 'sidser', 'timepass', 'sasti hackathon', 'never ending', 10000, 'you must born', '1885-05-10 00:00:00', '2089-10-05 00:00:00'),
+(12, 'hackathon', 'app/Images/image-1690520008671.png', 'gmit', 'sidser', 'timepass', 'sasti hackathon', 'never ending', 10000, 'you must born', '1885-05-10 00:00:00', '2089-10-05 00:00:00'),
+(16, 'hackNuthon', 'image-1691552284736.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(17, 'hackNuthon', 'app/Images/image-1691552342053.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(18, 'hackNuthon', 'app/Images/image-1691552392361.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(19, 'hackNuthon', 'app/Images/image-1691555934583.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(20, 'hackNuthon', 'app/Images/image-1691580928460.png', 'nirma', 'ahmdabad', 'hack nu thon', 'state leavel', '5 days left', 2, 'under garduate', '0000-00-00 00:00:00', '2024-05-06 00:00:00'),
+(21, '', 'app/Images/image-1691582824960.png', '', '', '', '', '', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hackathontheme`
+--
+
+CREATE TABLE `hackathontheme` (
+  `theId` int(11) NOT NULL,
+  `vTheme` varchar(500) NOT NULL,
+  `keyStatus` enum('active','deactive') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hackathontheme`
+--
+
+INSERT INTO `hackathontheme` (`theId`, `vTheme`, `keyStatus`) VALUES
+(1, 'web devlopment', 'active'),
+(2, 'app devlopment', 'active'),
+(3, 'app devlopment', 'active'),
+(4, 'app devlopment', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jwttoken`
+--
+
+CREATE TABLE `jwttoken` (
+  `Id` int(11) NOT NULL,
+  `Token` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jwttoken`
+--
+
+INSERT INTO `jwttoken` (`Id`, `Token`) VALUES
+(1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNjkxNTQ5NjAxfQ.Qvd4MUTXwtYguFh5c0TCl0VxVb4O_Dw017Ktb5Ni4rg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `onlyimage`
+--
+
+CREATE TABLE `onlyimage` (
+  `ID` int(11) NOT NULL,
+  `image` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `onlyimage`
+--
+
+INSERT INTO `onlyimage` (`ID`, `image`) VALUES
+(1, 'app/Images/image-1691584142510.png'),
+(2, 'app/Images/image-1691584184023.png'),
+(3, 'app/Images/image-1691584216389.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `portfolio`
+--
+
+CREATE TABLE `portfolio` (
+  `pId` int(11) NOT NULL,
+  `sId` int(11) NOT NULL,
+  `Linkdin` varchar(500) NOT NULL,
+  `Behance` varchar(500) NOT NULL,
+  `Facebook` varchar(500) NOT NULL,
+  `Instagram` varchar(500) NOT NULL,
+  `Twitter` varchar(500) NOT NULL,
+  `Git` varchar(500) NOT NULL,
+  `Reddit` varchar(500) NOT NULL,
+  `Figma` varchar(500) NOT NULL,
+  `Blogger` varchar(500) NOT NULL,
+  `Website` varchar(500) NOT NULL,
+  `Other` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `portfolio`
+--
+
+INSERT INTO `portfolio` (`pId`, `sId`, `Linkdin`, `Behance`, `Facebook`, `Instagram`, `Twitter`, `Git`, `Reddit`, `Figma`, `Blogger`, `Website`, `Other`) VALUES
+(1, 1, 'https://www.linkedin.com/', 'https://www.behance.net/', 'https://www.Facebook.net/', 'hi', 'hello', 'hi', 'hi', 'hi', 'hi', 'he', 'she'),
+(2, 1, 'https://www.linkedin.com/', '', 'https://www.Facebook.net/', '', '', 'hi', '', '', '', 'he', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ptoblemstatement`
+--
+
+CREATE TABLE `ptoblemstatement` (
+  `pId` int(50) NOT NULL,
+  `hId` int(50) NOT NULL,
+  `theId` int(50) NOT NULL,
+  `vProblemStatement` varchar(10000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ptoblemstatement`
+--
+
+INSERT INTO `ptoblemstatement` (`pId`, `hId`, `theId`, `vProblemStatement`) VALUES
+(3, 2, 2, 'convert json data into xml');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qualification`
+--
+
+CREATE TABLE `qualification` (
+  `qId` int(11) NOT NULL,
+  `vqualification` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `qualification`
+--
+
+INSERT INTO `qualification` (`qId`, `vqualification`) VALUES
+(1, 'Domain Expertise'),
+(2, 'Designing'),
+(3, 'Frontend Development'),
+(4, 'Backend Development'),
+(5, 'Project Management '),
+(6, 'MERN stack devloper');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `Id` int(11) NOT NULL,
+  `vName` varchar(100) NOT NULL,
+  `vUserName` varchar(500) NOT NULL,
+  `vEmail` varchar(150) NOT NULL,
+  `Type` enum('normal','google') NOT NULL DEFAULT 'normal',
+  `vMobileNumber` varchar(20) NOT NULL,
+  `vGitUrl` varchar(500) NOT NULL,
+  `vAddress` varchar(250) NOT NULL,
+  `country` varchar(500) NOT NULL,
+  `vQualification` int(10) NOT NULL,
+  `vProfession` varchar(200) NOT NULL,
+  `vTeamType` enum('individual','team','') NOT NULL DEFAULT 'individual',
+  `iNumberOfMembers` int(11) NOT NULL,
+  `vProblemStatement` varchar(500) NOT NULL,
+  `Document` varchar(200) NOT NULL,
+  `Password` varchar(10) NOT NULL,
+  `keyStatus` enum('active','deactive','block') NOT NULL DEFAULT 'active',
+  `iRanking` int(11) NOT NULL DEFAULT 0,
+  `vUniversity` varchar(5000) NOT NULL,
+  `gender` enum('male','female','other') NOT NULL,
+  `Token` varchar(5000) NOT NULL,
+  `g_Id` varchar(500) NOT NULL,
+  `Termsandcondition` enum('0','1') NOT NULL DEFAULT '0',
+  `subscibe` enum('0','1') NOT NULL DEFAULT '0',
+  `iTeamId` varchar(500) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`Id`, `vName`, `vUserName`, `vEmail`, `Type`, `vMobileNumber`, `vGitUrl`, `vAddress`, `country`, `vQualification`, `vProfession`, `vTeamType`, `iNumberOfMembers`, `vProblemStatement`, `Document`, `Password`, `keyStatus`, `iRanking`, `vUniversity`, `gender`, `Token`, `g_Id`, `Termsandcondition`, `subscibe`, `iTeamId`) VALUES
+(1, 'tanmay makwana', 'tanmay122', 'makwanatanmay4823@gmail.com', 'normal', '8905691100', 'https://github.com/', 'bhavnager', 'india', 1, 'web-devloper', 'individual', 0, 'convert JSON data into XML', 'app/Documents/docs-1691580817457.pdf', 'mpsPzUek', 'active', 2, 'gmiu', 'male', '', '', '1', '1', '0'),
+(2, 'tanmay makwana', 'tanmay12', 'makwanatanmay483@gmail.com', 'normal', '8905691100', 'https://github.com/', 'bhavnager', 'india', 1, 'web-devloper', 'individual', 0, 'convert JSON data into XML', 'app/Documents/docs-1691581569952.pdf', 'ngEWQzGK', 'active', 2, 'gmiu', 'male', '', '', '1', '1', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tab`
+--
+
+CREATE TABLE `tab` (
+  `tabId` int(11) NOT NULL,
+  `hId` int(11) NOT NULL,
+  `vTitle` varchar(1000) NOT NULL,
+  `vDiscription` varchar(10000) NOT NULL,
+  `tCreatedDate` datetime NOT NULL,
+  `tUpdatedDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tab`
+--
+
+INSERT INTO `tab` (`tabId`, `hId`, `vTitle`, `vDiscription`, `tCreatedDate`, `tUpdatedDate`) VALUES
+(2, 2, 'hi', 'niceee', '2021-06-21 00:00:00', '2025-08-04 00:00:00'),
+(3, 2, 'hi', 'niceee', '2021-06-21 00:00:00', '2025-08-04 00:00:00'),
+(4, 1, 'hello', 'hello world', '2023-05-15 00:00:00', '2023-06-28 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `team`
+--
+
+CREATE TABLE `team` (
+  `t_Id` int(11) NOT NULL,
+  `iTeamId` varchar(100) NOT NULL,
+  `vTeamName` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `team`
+--
+
+INSERT INTO `team` (`t_Id`, `iTeamId`, `vTeamName`) VALUES
+(1, 'Z!*mg%rV', 'noiceee'),
+(2, 'gh4xRB#O', 'infinity techforce'),
+(3, 'jgMwNMMu', 'infinity techforce'),
+(4, 'n$sqaOvs', 'infinity techforce'),
+(5, '9@Ue8Od$', 'infinity techforce'),
+(6, 'OMRtBo9S', 'infinity techforce');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type`
+--
+
+CREATE TABLE `type` (
+  `tId` int(11) NOT NULL,
+  `vType` varchar(500) NOT NULL,
+  `iParentId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `type`
+--
+
+INSERT INTO `type` (`tId`, `vType`, `iParentId`) VALUES
+(1, 'CollageStudent', 0),
+(2, 'SchoolStudent', 0),
+(3, 'Professional', 0),
+(4, 'Fresher', 0),
+(5, 'Management', 1),
+(6, 'Engineering', 1),
+(7, 'Arts&Science', 1),
+(8, 'std 1-5', 2),
+(9, 'std 6-10', 2),
+(10, 'std 11-12', 2),
+(11, '1 year', 3),
+(12, '3 year', 3),
+(13, '5 year', 3),
+(14, '7 year', 3),
+(15, '10 year', 3),
+(16, 'More then 10 year', 3),
+(17, 'Management', 4),
+(18, 'Engineering', 4),
+(19, 'Arts&Science', 4);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `applytohackathon`
+--
+ALTER TABLE `applytohackathon`
+  ADD PRIMARY KEY (`aId`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`catId`);
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`comId`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`cId`);
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`courseId`);
+
+--
+-- Indexes for table `hackathon`
+--
+ALTER TABLE `hackathon`
+  ADD PRIMARY KEY (`hId`);
+
+--
+-- Indexes for table `hackathontheme`
+--
+ALTER TABLE `hackathontheme`
+  ADD PRIMARY KEY (`theId`);
+
+--
+-- Indexes for table `jwttoken`
+--
+ALTER TABLE `jwttoken`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `onlyimage`
+--
+ALTER TABLE `onlyimage`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `portfolio`
+--
+ALTER TABLE `portfolio`
+  ADD PRIMARY KEY (`pId`);
+
+--
+-- Indexes for table `ptoblemstatement`
+--
+ALTER TABLE `ptoblemstatement`
+  ADD PRIMARY KEY (`pId`);
+
+--
+-- Indexes for table `qualification`
+--
+ALTER TABLE `qualification`
+  ADD PRIMARY KEY (`qId`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `tab`
+--
+ALTER TABLE `tab`
+  ADD PRIMARY KEY (`tabId`);
+
+--
+-- Indexes for table `team`
+--
+ALTER TABLE `team`
+  ADD PRIMARY KEY (`t_Id`);
+
+--
+-- Indexes for table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`tId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `applytohackathon`
+--
+ALTER TABLE `applytohackathon`
+  MODIFY `aId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `catId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `comId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `cId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `course`
+--
+ALTER TABLE `course`
+  MODIFY `courseId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `hackathon`
+--
+ALTER TABLE `hackathon`
+  MODIFY `hId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `hackathontheme`
+--
+ALTER TABLE `hackathontheme`
+  MODIFY `theId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `jwttoken`
+--
+ALTER TABLE `jwttoken`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `onlyimage`
+--
+ALTER TABLE `onlyimage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `portfolio`
+--
+ALTER TABLE `portfolio`
+  MODIFY `pId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ptoblemstatement`
+--
+ALTER TABLE `ptoblemstatement`
+  MODIFY `pId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `qualification`
+--
+ALTER TABLE `qualification`
+  MODIFY `qId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tab`
+--
+ALTER TABLE `tab`
+  MODIFY `tabId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `team`
+--
+ALTER TABLE `team`
+  MODIFY `t_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `type`
+--
+ALTER TABLE `type`
+  MODIFY `tId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
