@@ -57,10 +57,10 @@ exports.create = (req, res) => {
     } else {
       console.log("Registration add successfully");
       console.log(req.body);
-      const responseData = { Id: data.Id, data};
+      // const responseData = {data};
       res.status(201).json({
         success: true,
-        data: responseData,
+        data: data,
         message: "congratulation your entry has been register successfully"
       });
     }
