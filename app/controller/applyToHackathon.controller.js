@@ -12,13 +12,13 @@ exports.create = (req, res) => {
         iTeamId: req.body.iTeamId,
         leader: req.body.leader,
         vtype: req.body.vtype,
-        tId	: req.body.tId,
+        tId: req.body.tId,
         domId: req.body.domId,
-        themeId : req.body.themeId    
+        themeId: req.body.themeId
     });
     Apply.create(apply, (err, data) => {
         if (err) {
-            re.status(400).json({
+            res.status(400).json({
                 success: false,
                 message: "failed to  apply"
             });
@@ -29,6 +29,34 @@ exports.create = (req, res) => {
                 success: true,
                 data: responseData,
                 message: "applied successfully"
+            });
+        }
+    });
+};
+
+exports.find = (req, res) => {
+    if (!req.body) {
+        res.status(400).json({
+            success: false,
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+
+    const apply = new Apply({
+        iTeamId: req.body.iTeamId,
+    });
+
+    Apply.find(apply, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                success: false,
+                message: `Error: ${err.message}`
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: data,
             });
         }
     });

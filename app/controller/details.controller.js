@@ -43,7 +43,6 @@ exports.create = (req, res) => {
 };
 
 // GET all  
-
 exports.findAll = (req, res) => {
   Details.getAll((err, data) => {
     if (err) {
@@ -64,7 +63,6 @@ exports.findAll = (req, res) => {
 };
 
 // GET by Id
-
 exports.findOne = (req, res) => {
   Details.findById(req.params.hId, (err, data) => {
     if (err) {
@@ -85,7 +83,6 @@ exports.findOne = (req, res) => {
 };
 
 // DELETE Description 
-
 exports.delete = (req, res) => {
   Details.remove(req.params.hId, (err, data) => {
     if (err) {
@@ -102,6 +99,7 @@ exports.delete = (req, res) => {
   });
 };
 
+// get brif
 exports.brif = (req, res) => {
   Details.ById(req.params.hId, (err, data) => {
     if (err) {
@@ -202,6 +200,56 @@ exports.image = (req, res) => {
         success: true,
         data: data,
         message: "add details scesfully"
+      });
+    }
+  });
+};
+
+// search
+exports.search = (req, res) => {
+  if (!req.body) {
+    res.send({
+      message: "Content cannot be empty!"
+    });
+    return;
+  }
+  const search = new Details({
+    search: req.body.search
+  });
+
+  Details.search(search.search, (err, data) => {
+    if (err) {
+      res.status(404).json({
+        success: false,
+        message: "search failed "
+      });
+    } else {
+      console.log("search scessfull");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "search scessfull"
+
+      });
+    }
+  });
+};
+
+//
+exports.findNumber = (req, res) => {
+  Details.findNumber(req.params.hId, res, (err, data) => {
+    if (err) {
+      res.status(404).json({
+        success: false,
+        message: "error retrieving data with id " + req.params.hId + " Id not found ",
+      });
+    } else {
+      console.log("Registration count retrieved successfully");
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "Count of registrations for hackathon with id: " + req.params.hId,
       });
     }
   });

@@ -33,6 +33,7 @@ const Registration = function (registration) {
   this.courseId = registration.courseId
   this.CourseProgramme = registration.CourseProgramme
   this.YearofGraduation = registration.YearofGraduation
+  this.search = registration.search
 };
 Registration.create = (registration, result) => {
   const { vEmail, vUserName } = registration;
@@ -245,7 +246,6 @@ Registration.findId = (Id, res) => {
 };
 
 //update status 
-
 Registration.status = (Id, status, result) => {
   let query = `UPDATE student SET keyStatus =? WHERE Id = ?`
 
@@ -386,6 +386,61 @@ Registration.update = (Id, registration, result) => {
         console.log("Data updated successfully in student table");
         result(null, "Data updated successfully");
       }
+    }
+  });
+};
+
+// find hackathon
+Registration.hackathon = (Id, res) => {
+  let query1 = `SELECT * FROM student INNER JOIN applytohackathon ON student.Id = applytohackathon.sId WHERE student.Id = ${Id};`;
+  sql.query(query1, (err, result1) => {
+    if (err) {
+      console.error('Error executing query1:', err);
+      return res.status(500).json({ error: 'Something went wrong' });
+    }
+    if (result1.length === 0) {
+      return res.status(404).json({ error: `data not found with Id ${Id}` });
+    } else {
+      const combinedResults = {
+        hackathonList: []
+      };
+
+      let hackathon = 0;
+      for (let i = 0; i < result1.length; i++) {
+        const hId = result1[i].hId;
+        let query2 = `SELECT hId,vTitle,vDetails,vDeadline FROM hackathon WHERE hId = ${hId}`;
+        sql.query(query2, (err, result2) => {
+          if (err) {
+            console.error('Error executing query2:', err);
+            return res.status(500).json({ error: 'Something went wrong' });
+          }
+          combinedResults.hackathonList.push(result2[0]);
+          hackathon++;
+
+          if (hackathon === result1.length) {
+            res.json(combinedResults);
+          }
+        });
+      }
+    }
+  });
+};
+
+//serch
+Registration.search = (search, result) => {
+  sql.query(`SELECT * FROM student WHERE vName LIKE '%${search}%' OR vUserName LIKE '%${search}%' OR vEmail LIKE '%${search}%'`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("result: ", res);
+      result(null, res);
+    } else {
+      console.log("Invalid username or Password");
+      result("Result not found", null);
     }
   });
 };

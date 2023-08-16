@@ -25,5 +25,11 @@ module.exports = (app) => {
     // Retrieve registration by id
     router.get('/Id/:Id', registration.findId);
 
+    // get hackathon
+    router.get('/hackathonlist/:Id', registration.hackathon)
+
+    //search
+    router.post('/search', registration.search)
+
     app.use('/api/registration', router);
 };

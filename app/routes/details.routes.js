@@ -26,5 +26,11 @@ module.exports = app => {
   //only image
   router.post("/image", upload, Details.image);
 
+  // search
+  router.post("/search",Details.search)
+
+  // student apply for hackathon
+  router.get('/student/:hId', Details.findNumber)
+
   app.use('/api/hackathon', router);
 };

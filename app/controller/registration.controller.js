@@ -68,7 +68,6 @@ exports.create = (req, res) => {
 };
 
 // get all
-
 exports.findAll = (req, res) => {
   Registration.getAll((err, data) => {
     if (err) {
@@ -89,7 +88,6 @@ exports.findAll = (req, res) => {
 };
 
 // get by id
-
 exports.findId = (req, res) => {
   Registration.findId(req.params.Id, res, (err, data) => {
     if (err) {
@@ -235,5 +233,56 @@ exports.update = (req, res) => {
         });
       }
     });
+  });
+};
+
+// get hackathon
+exports.hackathon = (req, res) => {
+  Registration.hackathon(req.params.Id, res, (err, data) => {
+    if (err) {
+      res.status(404).json({
+        success: false,
+        message: "error retriving data with id " + req.params.Id + " Id not found "
+      });
+    } else {
+      console.log("Registration:");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "hackathon with id:" + req.params.Id
+      });
+    }
+  });
+};
+
+// serch
+exports.search = (req, res) => {
+  if (!req.body) {
+    res.send({
+      message: "Content cannot be empty!"
+    });
+    return;
+  }
+  const search = new Registration({
+    search: req.body.search
+  });
+
+  Registration.search(search.search, (err, data) => {
+    if (err) {
+      res.status(404).json({
+        success: false,
+        message: "search failed " 
+      });
+    } else {
+      console.log("search scessfull");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "search scessfull"
+
+      });
+    }
   });
 };

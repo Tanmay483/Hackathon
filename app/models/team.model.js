@@ -67,8 +67,8 @@ Team.create = (team, res) => {
                     
                     // response
                     const combinedResults = {
-                        hackathonTitle: result3,
-                        studentDetails: result4,
+                        hackathonTitle: result3[0],
+                        studentDetails: result4[0],
                         inputData: team
                     };
                     res.json(combinedResults);
@@ -78,8 +78,6 @@ Team.create = (team, res) => {
     })
 
 };
-
-
 function teamId() {
     var length = 8,
         charset = "!@#$%&*?0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -144,7 +142,6 @@ Team.update = (t_Id, team, result) => {
 }
 
 //delete
-
 Team.delete = (t_Id, result) => {
     let query = `DELETE FROM team WHERE t_Id = ${t_Id}`
 
@@ -161,5 +158,7 @@ Team.delete = (t_Id, result) => {
 
     });
 }
+
+
 
 module.exports = Team;

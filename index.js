@@ -84,9 +84,6 @@ require('./app/routes/qualification.routes')(app);
 require('./app/routes/image.routes')(app);
 require('./app/routes/course.routes')(app);
 
-
-
-
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {

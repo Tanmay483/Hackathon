@@ -14,6 +14,7 @@ const Details = function (details) {
     this.iTeamSize = details.iTeamSize;
     this.vEligibility = details.vEligibility;
     this.tUpdatedDate = details.tUpdatedDate;
+    this.search = details.search;
 };
 
 // POST 
@@ -111,9 +112,7 @@ Details.remove = (hId, result) => {
     });
 };
 
-
 // tab
-
 Details.ById = (hId, result) => {
     sql.query(`SELECT * FROM hackathon WHERE hId = ${hId}`, (err, res) => {
         if (err) {
@@ -182,7 +181,7 @@ Details.update = (hId, details, result) => {
         if (err) {
             throw err
         }
-        if(res.affectedRows == 0){
+        if (res.affectedRows == 0) {
             result("data not found with id " + hId)
         }
         else {
@@ -207,5 +206,42 @@ Details.image = (details, result) => {
     });
 };
 
+// search
+Details.search = (search, result) => {
+    sql.query(`SELECT * FROM hackathon WHERE vTitle LIKE '%${search}%' OR vUniversity LIKE '%${search}%' OR vDetails LIKE '%${search}%' OR vBrif LIKE '%${search}%'`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("result: ", res);
+            result(null, res);
+        } else {
+            console.log("Invalid username or Password");
+            result("Result not found", null);
+        }
+    });
+};
+
+// details
+Details.findNumber = (hId, result) => {
+    let query1 = `SELECT * FROM applytohackathon WHERE hId = ${hId}`;
+    sql.query(query1, (err, resp) => {
+        if (err) {
+                result.json({
+                    message: `some error occurred`,
+                    data: err
+                })
+            }
+        else {
+            result.json({
+                numberOfStudent: resp.length,
+                message: `Total number of student applied for hackathon is: ${resp.length}`,
+            })
+        }
+    })
+};
 
 module.exports = Details;
