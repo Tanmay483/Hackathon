@@ -166,9 +166,7 @@ Registration.getAll = (result) => {
   });
 };
 
-
 //GET by id 
-
 Registration.findId = (Id, res) => {
   let query1 = `SELECT * FROM student INNER JOIN applytohackathon ON student.Id = applytohackathon.sId WHERE student.Id = ${Id};`
 

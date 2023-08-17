@@ -43,7 +43,7 @@ exports.create = (req, res) => {
   if (!registration.vName || !registration.vEmail || !registration.vMobileNumber) {
     res.status(404).json({
       success: false,
-      message: "Required fields (vName, vEmail, vMobileNumber, vTeamType) cannot be empty!"
+      message: "Required fields vName, vEmail, vMobileNumber cannot be empty!"
     });
     return;
   }

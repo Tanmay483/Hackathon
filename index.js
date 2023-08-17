@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // fetch image
 app.use("/app/Images", express.static(path.join(__dirname, "app/Images")));
+app.use("/app/adImage", express.static(path.join(__dirname, "app/adImage")));
+app.use("/app/sponserImage", express.static(path.join(__dirname, "app/sponserImage")));
 //fetch documente
 app.use("/app/Documents", express.static(path.join(__dirname, "app/Documents")));
 
@@ -46,8 +48,6 @@ app.post("/token", (req, resp) => {
     }
   });
 });
-
-
 
 const hello = require("./app/middleware/jwt.middleware");
 app.use(hello);
@@ -83,6 +83,10 @@ require("./app/routes/applyToHackathon.routes")(app);
 require('./app/routes/qualification.routes')(app);
 require('./app/routes/image.routes')(app);
 require('./app/routes/course.routes')(app);
+require('./app/routes/ads.routes')(app);
+require('./app/routes/sponser.routes')(app);
+require('./app/routes/package.routes')(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;

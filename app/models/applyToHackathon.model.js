@@ -42,6 +42,7 @@ Apply.create = (apply, result) => {
     })
 }
 
+//
 Apply.find = (apply, result) => {
     let query1 = `SELECT * FROM applytohackathon WHERE BINARY iTeamId = ?`;
     sql.query(query1, [apply.iTeamId], (teamErr, response1) => {
@@ -84,9 +85,9 @@ Apply.find = (apply, result) => {
                     return;
                 }
                 else {
-                    let length = result3.length // student count of applytohackathon
+                    let length = result3.length    // student count of applytohackathon for team
                     let count = teamSize - length
-                    console.log(count , teamSize)
+                    console.log(count, teamSize)
                     if (length <= teamSize) {
                         result(null, {
                             message: "Team id verify successful",
@@ -95,7 +96,7 @@ Apply.find = (apply, result) => {
                             numberOfStudetRemain: count
                         });
                     }
-                    else{
+                    else {
                         result({
                             success: false,
                             message: "team is full"
