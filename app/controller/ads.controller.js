@@ -55,7 +55,7 @@ exports.findAll = (req, res) => {
 };
 
 
-// DELETE Description 
+// DELETE
 exports.delete = (req, res) => {
   Ads.remove(req.params.adId, (err, data) => {
     if (err) {

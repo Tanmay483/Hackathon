@@ -11,6 +11,14 @@ module.exports = app => {
 
     router.get("/domain", type.findType);
 
+    // insert
+    router.post('',type.create)
+
+    // update
+    router.put('/:tId',type.update)
+
+    // delete
+    router.delete('/:tId', type.delete)
   
     app.use('/api/type', router);
 };

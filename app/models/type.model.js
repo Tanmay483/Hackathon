@@ -4,8 +4,7 @@ const sql = require('../config/db');
 
 const Type = function (type) {
   this.vType = type.vType;
-  this.vParentId = type.vParentId;
-  this.vOther = type.vOther;
+  this.iParentId = type.iParentId;
 };
 
 // get all details
@@ -26,7 +25,6 @@ Type.getAll = (result) => {
 };
 
 //GET type by id 
-
 Type.findData = (iParentId, result) => {
   sql.query(`SELECT * FROM type WHERE iParentId = ${iParentId}`, (err, res) => {
     if (err) {
@@ -57,6 +55,63 @@ Type.findType = (result) => {
 
     console.log("types: ", res);
     result(null, res);
+  });
+};
+
+// insert
+Type.create = (type, result) => {
+  sql.query("INSERT INTO type SET ?", type, (err, res) => {
+      if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+      }
+
+      console.log("created ad: ", { tId: res.insertId, ...type });
+      result(null, { tId: res.insertId, ...type });
+  });
+};
+
+//update
+Type.update = (tId, type, result) => {
+  let query = `UPDATE type SET vType=?,iParentId=? WHERE tId = ?`
+  const queryParams = [
+      type.vType,
+      type.iParentId,
+      tId
+  ]
+
+  sql.query(query, queryParams, (err, res) => {
+      if (err) {
+          throw err
+      }
+      if (res.affectedRows == 0) {
+          result("data not found with id " + tId)
+      }
+      else {
+          console.log("Data Updated Scessfully", { tId: tId, res })
+          result(null, "Data Updated Scessfully", { tId: tId, res })
+      }
+  })
+
+}
+
+// delete
+Type.remove = (tId, result) => {
+  sql.query(`DELETE  FROM type WHERE tId = ${tId}`, (err, res) => {
+      if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+      }
+
+      if (res.affectedRows == 0) {
+          result({ kind: "not_found" }, null);
+          return;
+      }
+
+      console.log("deleted ad with Id: ", tId);
+      result(null, res);
   });
 };
 

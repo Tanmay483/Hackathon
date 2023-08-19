@@ -7,8 +7,6 @@ const app = require("express").Router();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-
 // Endpoint to create a card token
 app.post('/stripePayment', async (req, res) => {
     // genrate card token
@@ -91,6 +89,7 @@ app.post('/stripeAfterPayment', async (req, res) => {
     let paymentMethod = paymentIntent.payment_method
     let userId = req.body.userId
     let pacId = req.body.pacId;
+
     const sucess = {
         paymentId: paymentId,
         paymentStatus: paymentStatus,
@@ -98,7 +97,6 @@ app.post('/stripeAfterPayment', async (req, res) => {
         paymentMethod: paymentMethod,
         userId: userId,
         pacId: pacId
-
     }
 
     if (paymentStatus == 'requires_payment_method') {
