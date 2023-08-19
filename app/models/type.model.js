@@ -25,8 +25,8 @@ Type.getAll = (result) => {
 };
 
 //GET type by id 
-Type.findData = (iParentId, result) => {
-  sql.query(`SELECT * FROM type WHERE iParentId = ${iParentId}`, (err, res) => {
+Type.findData = (tId, result) => {
+  sql.query(`SELECT * FROM type WHERE tId = ${tId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -34,7 +34,7 @@ Type.findData = (iParentId, result) => {
     }
     if (res.length) {
       console.log("types: ", res);
-      result(null, res);
+      result(null, res[0]);
       return;
     }
     result({ kind: "not_found" }, null);
@@ -42,7 +42,6 @@ Type.findData = (iParentId, result) => {
 };
 
 // iParentId = 0
-
 Type.findType = (result) => {
   let query = "SELECT * FROM type WHERE iParentId = 0";
 
@@ -114,5 +113,6 @@ Type.remove = (tId, result) => {
       result(null, res);
   });
 };
+
 
 module.exports = Type

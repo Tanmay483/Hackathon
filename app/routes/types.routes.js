@@ -6,7 +6,7 @@ module.exports = app => {
     router.get("/", type.findAll);
 
 
-    router.get("/Id/:iParentId", type.findId);
+    router.get("/Id/:tId", type.findId);
 
 
     router.get("/domain", type.findType);
@@ -19,6 +19,7 @@ module.exports = app => {
 
     // delete
     router.delete('/:tId', type.delete)
+
   
     app.use('/api/type', router);
 };

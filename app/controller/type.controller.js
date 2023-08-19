@@ -24,11 +24,11 @@ exports.findAll = (req, res) => {
 // get by id
 
 exports.findId = (req, res) => {
-  Registration.findData(req.params.iParentId, (err, data) => {
+  Registration.findData(req.params.tId, (err, data) => {
     if (err) {
       res.status(404).json({
         success: false,
-        message: "error can not find type with id " + req.params.iParentId + " Id not found "
+        message: "error can not find type with id " + req.params.tId + " Id not found "
       });
     } else {
       console.log("types");
@@ -36,7 +36,7 @@ exports.findId = (req, res) => {
       res.status(200).json({
         success: true,
         data: data,
-        message: "type with id:" + req.params.iParentId
+        message: "type with id:" + req.params.tId
       });
     }
   });
@@ -134,3 +134,4 @@ exports.delete = (req, res) => {
     } else res.status(200).send({ message: `Type was deleted successfully!` });
   });
 };
+
