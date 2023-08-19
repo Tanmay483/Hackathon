@@ -15,5 +15,8 @@ module.exports = app => {
     //update problem statement
     router.put('/update/:theId',Theme.Update)
 
+    // delete
+    router.delete('/delete/:theId',Theme.delete)
+
     app.use('/api/theme', router);
 };

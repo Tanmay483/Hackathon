@@ -49,7 +49,7 @@ Theme.findData = (theId, result) => {
         }
         if (res.length) {
             console.log("theme: ", res);
-            result(null, res);
+            result(null, res[0]);
             return;
         }
         result({ kind: "not_found" }, null);
@@ -72,5 +72,24 @@ Theme.Update = (theId, theme, result) => {
 
     });
 }
+
+// DELET
+Theme.remove = (theId, result) => {
+    sql.query(`DELETE  FROM hackathontheme WHERE theId = ${theId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+            return;
+        }
+
+        console.log("deleted theme with Id: ", theId);
+        result(null, res);
+    });
+};
 
 module.exports = Theme;

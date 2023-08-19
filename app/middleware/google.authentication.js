@@ -56,16 +56,14 @@ passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
 // Google OAuth route for login
-app.get(
-  '/auth/google',
+app.get('/auth/google',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   })
 );
 
 // Google OAuth callback route
-app.get(
-  '/auth/google/callback',
+app.get('/auth/google/callback',
   passport.authenticate('google', {
     successRedirect: '/profile',
     failureRedirect: '/',

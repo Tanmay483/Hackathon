@@ -13,8 +13,6 @@ exports.create = (req, res) => {
         keyStatus: req.body.keyStatus,
     });
 
-    //   POST
-
     Theme.create(contact, (err, data) => {
         if (err) {
             res.json({
@@ -34,7 +32,6 @@ exports.create = (req, res) => {
 };
 
 // GET all  
-
 exports.findAll = (req, res) => {
     Theme.getAll((err, data) => {
         if (err) {
@@ -55,7 +52,6 @@ exports.findAll = (req, res) => {
 };
 
 // get by id
-
 exports.findId = (req, res) => {
     Theme.findData(req.params.theId, (err, data) => {
         if (err) {
@@ -76,7 +72,6 @@ exports.findId = (req, res) => {
 };
 
 // update theme
-
 exports.Update = (req, res) => {
     if (!req.body) {
         res.send({ message: "please insert data" })
@@ -100,3 +95,20 @@ exports.Update = (req, res) => {
         }
     })
 }
+
+// delete
+exports.delete = (req, res) => {
+    Theme.remove(req.params.theId, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Theme  with id ${req.params.theId}.`
+                });
+            } else {
+                res.send({
+                    message: "Could not delete Theme with id " + req.params.theId
+                });
+            }
+        } else res.status(200).send({ message: `Theme was deleted successfully!` });
+    });
+};

@@ -49,11 +49,15 @@ app.post("/token", (req, resp) => {
   });
 });
 
+const stripe = require('./app/middleware/stripe.payment.checkout')
+app.use(stripe)
+
+
 const hello = require("./app/middleware/jwt.middleware");
 app.use(hello);
 
-// logout
 
+// logout
 app.post('/logout', (req, res) => {
   let query = `UPDATE jwttoken SET Token = ' ' WHERE Id = 1`
   sql.query(query, (err, resp) => {
