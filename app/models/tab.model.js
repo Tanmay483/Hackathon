@@ -51,8 +51,8 @@ Tab.findData = (tabId, result) => {
             return;
         }
         if (res.length) {
-            console.log("tab: ", res);
-            result(null, res);
+            console.log("tab: ", res[0]);
+            result(null, res[0]);
             return;
         }
         result({ kind: "not_found" }, null);
