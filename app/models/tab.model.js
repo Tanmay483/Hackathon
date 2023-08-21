@@ -11,7 +11,6 @@ const Tab = function (tab) {
 };
 
 // POST 
-
 Tab.create = (newtab, result) => {
     sql.query("INSERT INTO tab SET ?", newtab, (err, res) => {
         if (err) {
@@ -26,7 +25,6 @@ Tab.create = (newtab, result) => {
 };
 
 //GET All
-
 Tab.getAll = (result) => {
     let query = "SELECT * FROM tab";
 
@@ -59,9 +57,7 @@ Tab.findData = (tabId, result) => {
     });
 };
 
-
 // delete problemStatement
-
 Tab.remove = (tabId, result) => {
     sql.query(`DELETE  FROM tab WHERE tabId = ${tabId}`, (err, res) => {
         if (err) {

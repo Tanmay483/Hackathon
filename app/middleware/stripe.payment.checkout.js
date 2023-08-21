@@ -9,9 +9,9 @@ app.use(bodyParser.json());
 
 // Endpoint to create a card token
 app.post('/stripePayment', async (req, res) => {
-    // genrate card token
     let customerId = ''
 
+    // genrate card token
     try {
         const token = await stripe.tokens.create({
             card: {
@@ -26,13 +26,16 @@ app.post('/stripePayment', async (req, res) => {
         //genrate customer id
         const email = req.body.email;
 
+        // check user by mail id 
         const customers = await stripe.customers.list({
             email: email,
             limit: 1,
         });
+        // if user already exists then it retrive userid
         if (customers.data.length > 0) {
             customerId = customers.data[0].id
         }
+        // else it genrate new user and get user id
         else {
             const newCustomer = await stripe.customers.create({
                 name: req.body.name,

@@ -13,22 +13,36 @@ const Details = function (details) {
     this.iTeamSize = details.iTeamSize;
     this.iTeamSize = details.iTeamSize;
     this.vEligibility = details.vEligibility;
+    this.tCreatedDate = details.tCreatedDate;
     this.tUpdatedDate = details.tUpdatedDate;
     this.search = details.search;
 };
 
 // POST 
 
-Details.create = (newdetails, result) => {
-    sql.query("INSERT INTO hackathon SET ?", newdetails, (err, res) => {
+Details.create = (detail, result) => {
+    const details = {
+        vTitle: detail.vTitle,
+        vImage: detail.vImage,
+        vUniversity: detail.vUniversity,
+        vAddress: detail.vAddress,
+        vBrif: detail.vBrif,
+        vDetails: detail.vDetails,
+        vDeadline: detail.vDeadline,
+        iTeamSize: detail.iTeamSize,
+        vEligibility: detail.vEligibility,
+        tCreatedDate: detail.tCreatedDate,
+        tUpdatedDate: detail.tUpdatedDate,
+    }
+    sql.query("INSERT INTO hackathon SET ?", details, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
 
-        console.log("created tutorial: ", { hId: res.inserthId, ...newdetails });
-        result(null, { hId: res.inserthId, ...newdetails });
+        console.log("created tutorial: ", { hId: res.insertId, ...detail });
+        result(null, { hId: res.inserthId, ...detail });
     });
 };
 
