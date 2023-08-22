@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const conn = require('../config/db')
-const stripe = require('stripe')('');
+const stripe = require('stripe')('sk_test_51J3GsmSEC2amdbjF0fYAezfBU0RYX0WMY3JzKjloVlsSv7Ek1HvudbA2SxldhhoD5ZbfL74UZ42pofS8fw4VZVGG00NA0ez0GJ');
 
 const app = require("express").Router();
 

@@ -2,7 +2,7 @@ const sql = require('../config/db');
 
 // constructor
 const Theme = function (theme) {
-
+    this.hId = theme.hId
     this.vTheme = theme.vTheme;
     this.keyStatus = theme.keyStatus;
 };
@@ -17,13 +17,12 @@ Theme.create = (newtheme, result) => {
             return;
         }
 
-        console.log("Theme created : ", { pId: res.insertpId, ...newtheme });
-        result(null, { pId: res.insertpId, ...newtheme });
+        console.log("Theme created : ", { pId: res.insertId, ...newtheme });
+        result(null, { pId: res.insertId, ...newtheme });
     });
 };
 
-//GET All
-
+//GET All`
 Theme.getAll = (result) => {
     let query = "SELECT * FROM hackathontheme";
 
@@ -57,13 +56,14 @@ Theme.findData = (theId, result) => {
 };
 
 Theme.Update = (theId, theme, result) => {
-    let query = `UPDATE hackathontheme SET vTheme =?,keyStatus=? WHERE theId = ?`
+    let query = `UPDATE hackathontheme SET hId = ?, vTheme =?,keyStatus=? WHERE theId = ?`
 
-    sql.query(query, [theme.vTheme, theme.keyStatus,theId], (err, data) => {
+    sql.query(query, [theme.hId,theme.vTheme, theme.keyStatus,theId], (err, data) => {
         if (err) {
-            res.json({
+            console.error(err);
+            result({
                 success: false,
-                message: "Database update failed"
+                message: "Database update failed",
             });
         } else {
             console.log("Theme change successfully");
@@ -89,6 +89,23 @@ Theme.remove = (theId, result) => {
 
         console.log("deleted theme with Id: ", theId);
         result(null, res);
+    });
+};
+
+// get by ID
+Theme.findId = (hId, result) => {
+    sql.query(`SELECT * FROM hackathontheme WHERE hId = ${hId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("theme: ", res);
+            result(null, res);
+            return;
+        }
+        result({ kind: "not_found" }, null);
     });
 };
 

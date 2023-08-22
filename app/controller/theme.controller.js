@@ -9,6 +9,7 @@ exports.create = (req, res) => {
 
     // Create a theme
     const contact = new Theme({
+        hId: req.body.hId,
         vTheme: req.body.vTheme,
         keyStatus: req.body.keyStatus,
     });
@@ -77,6 +78,7 @@ exports.Update = (req, res) => {
         res.send({ message: "please insert data" })
     }
     const theme = new Theme({
+        hId: req.body.hId,
         vTheme: req.body.vTheme,
         keyStatus: req.body.keyStatus,
     });
@@ -84,7 +86,8 @@ exports.Update = (req, res) => {
         if (err) {
             res.json({
                 success: false,
-                message: "Error while update database"
+                message: "Error while update database",
+                error : err
             });
         }
         else {
@@ -110,5 +113,25 @@ exports.delete = (req, res) => {
                 });
             }
         } else res.status(200).send({ message: `Theme was deleted successfully!` });
+    });
+};
+
+// get by id
+exports.findById = (req, res) => {
+    Theme.findId(req.params.hId, (err, data) => {
+        if (err) {
+            res.status(404).json({
+                success: false,
+                message: "error can not find Theme with id " + req.params.hId + " Id not found "
+            });
+        } else {
+            console.log("Theme");
+            console.log(req.body);
+            res.status(200).json({
+                success: true,
+                data: data,
+                message: "Theme with id:" + req.params.hId
+            });
+        }
     });
 };

@@ -18,5 +18,8 @@ module.exports = app => {
     // delete
     router.delete('/delete/:theId',Theme.delete)
 
+    // get theme by hId
+    router.get('/hId/:hId', Theme.findById)
+
     app.use('/api/theme', router);
 };
