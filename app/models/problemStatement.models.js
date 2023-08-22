@@ -50,7 +50,7 @@ Problem.findData = (pId, result) => {
         }
         if (res.length) {
             console.log("ptoblemstatement: ", res);
-            result(null, res);
+            result(null, res[0]);
             return;
         }
         result({ kind: "not_found" }, null);
@@ -59,7 +59,6 @@ Problem.findData = (pId, result) => {
 
 
 // delete problemStatement
-
 Problem.remove = (pId, result) => {
     sql.query(`DELETE  FROM ptoblemstatement WHERE pId = ${pId}`, (err, res) => {
         if (err) {
