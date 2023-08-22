@@ -53,8 +53,8 @@ Theme.findData = (theId, result) => {
                     result(null, `hackathon data not found in database`);
                 } else {
                     const combineresult = {
-                        Theme: result1[0],
-                        hackathon: result2[0]
+                        ...result1[0], 
+                        vTitle: result2[0].vTitle 
                     };
                     result(null, combineresult);
                 }
@@ -63,7 +63,7 @@ Theme.findData = (theId, result) => {
     });
 };
 
-
+// update
 Theme.Update = (theId, theme, result) => {
     let query = `UPDATE hackathontheme SET hId = ?, vTheme =?,keyStatus=? WHERE theId = ?`
 
