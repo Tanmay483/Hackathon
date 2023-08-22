@@ -24,7 +24,6 @@ Problem.create = (newproblem, result) => {
 };
 
 //GET All
-
 Problem.getAll = (result) => {
     let query = "SELECT * FROM ptoblemstatement";
 

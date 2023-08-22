@@ -135,3 +135,20 @@ exports.delete = (req, res) => {
   });
 };
 
+// get all domain
+exports.findAllDomain = (req, res) => {
+  Registration.getAllDomain((err, data) => {
+    if (err) {
+      res.status(400).json({
+        success: false,
+        message: "can not find Domain"
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "Domain"
+      });
+    }
+  });
+};

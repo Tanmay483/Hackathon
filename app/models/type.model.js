@@ -114,5 +114,22 @@ Type.remove = (tId, result) => {
   });
 };
 
+// get domain
+
+Type.getAllDomain = (result) => {
+  let query = "SELECT * FROM type WHERE iParentId != 0";
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("types: ", res);
+    result(null, res);
+  });
+};
+
 
 module.exports = Type

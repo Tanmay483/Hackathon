@@ -9,7 +9,7 @@ module.exports = app => {
     router.get("/Id/:tId", type.findId);
 
 
-    router.get("/domain", type.findType);
+    router.get("/type", type.findType);
 
     // insert
     router.post('',type.create)
@@ -20,6 +20,8 @@ module.exports = app => {
     // delete
     router.delete('/:tId', type.delete)
 
+    // get all domains
+    router.get('/domains', type.findAllDomain)
   
     app.use('/api/type', router);
 };
