@@ -22,43 +22,52 @@ Theme.create = (newtheme, result) => {
     });
 };
 
-//GET All`
+//GET All 
 Theme.getAll = (result) => {
-    let query = "SELECT * FROM hackathontheme";
-
-    sql.query(query, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
+    let query = "SELECT hackathontheme.theId,hackathontheme.hId, hackathontheme.vTheme , hackathontheme.keyStatus, hackathon.vTitle FROM hackathontheme INNER JOIN hackathon ON hackathontheme.hId = hackathon.hId";
+    sql.query(query,(err,resp)=>{
+        if(err) {
+            result(`error: ${err.message}`)
         }
-
-        console.log("theme: ", res);
-        result(null, res);
-    });
+        else{
+            result(null,resp)
+        }
+    })
 };
 
 // get by ID
 Theme.findData = (theId, result) => {
-    sql.query(`SELECT * FROM hackathontheme WHERE theId = ${theId}`, (err, res) => {
+    let query1 = `SELECT * FROM hackathontheme WHERE theId = ${theId}`;
+    sql.query(query1, (err, result1) => {
         if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
+            result(err, `error executing query1`);
+        } else if (result1.length === 0) {
+            result(null, `not found theme with Id ${theId}`);
+        } else {
+            let hId = result1[0].hId;
+            let query2 = `SELECT vTitle FROM hackathon WHERE hId = ${hId}`;
+            sql.query(query2, (err, result2) => {
+                if (err) {
+                    result(err, `error executing query2`);
+                } else if (result2.length === 0) {
+                    result(null, `hackathon data not found in database`);
+                } else {
+                    const combineresult = {
+                        Theme: result1[0],
+                        hackathon: result2[0]
+                    };
+                    result(null, combineresult);
+                }
+            });
         }
-        if (res.length) {
-            console.log("theme: ", res);
-            result(null, res[0]);
-            return;
-        }
-        result({ kind: "not_found" }, null);
     });
 };
+
 
 Theme.Update = (theId, theme, result) => {
     let query = `UPDATE hackathontheme SET hId = ?, vTheme =?,keyStatus=? WHERE theId = ?`
 
-    sql.query(query, [theme.hId,theme.vTheme, theme.keyStatus,theId], (err, data) => {
+    sql.query(query, [theme.hId, theme.vTheme, theme.keyStatus, theId], (err, data) => {
         if (err) {
             console.error(err);
             result({
@@ -92,7 +101,7 @@ Theme.remove = (theId, result) => {
     });
 };
 
-// get by ID
+// get by hId 
 Theme.findId = (hId, result) => {
     sql.query(`SELECT * FROM hackathontheme WHERE hId = ${hId}`, (err, res) => {
         if (err) {

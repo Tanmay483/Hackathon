@@ -36,21 +36,27 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Theme.getAll((err, data) => {
         if (err) {
-            res.status(404).json({
+            res.status(500).json({
                 success: false,
-                message: "can not get Theme list"
+                message: "An error occurred while fetching Theme list."
             });
         } else {
-            console.log("theme");
-            console.log(req.body);
-            res.status(200).json({
-                success: true,
-                data: data,
-                message: "Theme"
-            });
+            if (data.length === 0) {
+                res.status(404).json({
+                    success: false,
+                    message: "No themes found."
+                });
+            } else {
+                res.status(200).json({
+                    success: true,
+                    data: data,
+                    message: "Themes fetched successfully."
+                });
+            }
         }
     });
 };
+
 
 // get by id
 exports.findId = (req, res) => {
@@ -58,16 +64,21 @@ exports.findId = (req, res) => {
         if (err) {
             res.status(404).json({
                 success: false,
-                message: "error can not find Theme with id " + req.params.theId + " Id not found "
+                message: "Error: " + err
             });
         } else {
-            console.log("Theme");
-            console.log(req.body);
-            res.status(200).json({
-                success: true,
-                data: data,
-                message: "Theme with id:" + req.params.theId
-            });
+            if (typeof data === "string") {
+                res.status(404).json({
+                    success: false,
+                    message: data
+                });
+            } else {
+                res.status(200).json({
+                    success: true,
+                    data: data,
+                    message: "Theme with id:" + req.params.theId
+                });
+            }
         }
     });
 };
