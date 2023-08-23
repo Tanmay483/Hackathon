@@ -13,7 +13,7 @@ exports.newpassword = (req, res) => {
 
     Forgetpassword.newpassword(login.vEmail, (err, data) => {
         if (err) {
-            res.status(404).json({
+            res.json({
                 success: false,
                 message: "Invalid Email"
             });

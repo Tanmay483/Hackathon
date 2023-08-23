@@ -20,7 +20,7 @@ app.post('/stripePayment', async (req, res) => {
                 exp_month: req.body.exp_month,
                 exp_year: req.body.exp_year,
                 cvc: req.body.cvc
-            }
+            }   
         });
 
         //genrate customer id
@@ -110,7 +110,7 @@ app.post('/stripeAfterPayment', async (req, res) => {
             paymentMethod: '',
             userId: userId,
             pacId: pacId,
-            message:paymentIntent.last_payment_error.code
+            message: paymentIntent.last_payment_error.code
         }
 
         let query = ` INSERT INTO transaction SET ?`
@@ -129,20 +129,20 @@ app.post('/stripeAfterPayment', async (req, res) => {
         })
 
     }
-    else{
-    let query = ` INSERT INTO transaction SET ?`
-    conn.query(query, sucess, (err, result) => {
-        if (err) {
-            res.status(500).send('Error inserting data into the database:', err);
-        } else {
-            res.status(200).send({
-                sucess: true,
-                message: 'Data inserted into the database',
-                data: sucess
-            });
-        }
-    })
-}
+    else {
+        let query = ` INSERT INTO transaction SET ?`
+        conn.query(query, sucess, (err, result) => {
+            if (err) {
+                res.status(500).send('Error inserting data into the database:', err);
+            } else {
+                res.status(200).send({
+                    sucess: true,
+                    message: 'Data inserted into the database',
+                    data: sucess
+                });
+            }
+        })
+    }
 })
 
 module.exports = app
