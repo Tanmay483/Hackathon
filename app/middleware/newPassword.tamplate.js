@@ -211,7 +211,7 @@ module.exports = function sendEmail(vEmail, password) {
         port: 465,
         auth: {
             user: "info@infinitysoftech.co",
-            pass: "?VlXMbhSU}r#"
+            pass: "7GDFq.jW7Id@"
         }
     });
 

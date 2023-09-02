@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const sql = require('../config/db'); // Adjust the path to your database configuration
+const sql = require('../config/db');
 
 const secretKey = process.env.JWT_SECRET_KEY;
 

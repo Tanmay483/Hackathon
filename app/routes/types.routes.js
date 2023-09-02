@@ -12,7 +12,7 @@ module.exports = app => {
     router.get("/type", type.findType);
 
     // insert
-    router.post('',type.create)
+    router.post('/',type.create)
 
     // update
     router.put('/:tId',type.update)
@@ -22,6 +22,9 @@ module.exports = app => {
 
     // get all domains
     router.get('/domains', type.findAllDomain)
+
+    //
+    router.get('/domain/:tId', type.findById)
   
     app.use('/api/type', router);
 };

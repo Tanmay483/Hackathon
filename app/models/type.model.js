@@ -131,5 +131,22 @@ Type.getAllDomain = (result) => {
   });
 };
 
-
+//
+Type.findDataById = (tId, result) => {
+  // let query1 = `SELECT * FROM type WHERE 
+  let query2 = `SELECT * FROM type WHERE iParentId = ${tId}`
+  sql.query(query2, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if (res.length) {
+      console.log("domains: ", res);
+      result(null, res);
+      return;
+    }
+    result({ kind: "not_found" }, null);
+  });
+};
 module.exports = Type
