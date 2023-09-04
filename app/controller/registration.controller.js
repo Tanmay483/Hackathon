@@ -52,12 +52,11 @@ exports.create = (req, res) => {
     if (err) {
       res.json({
         success: false,
-        message: "Registration failed"
+        message: "Registration failed",
+        Error: err
       });
     } else {
-      console.log("Registration add successfully");
-      console.log(req.body);
-      // const responseData = {data};
+
       res.status(201).json({
         success: true,
         data: data,

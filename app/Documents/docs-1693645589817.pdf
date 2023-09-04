@@ -1,0 +1,374 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 30, 2023 at 06:45 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `infinity_blogs`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_additional_blogs_desc`
+--
+
+CREATE TABLE `tbl_additional_blogs_desc` (
+  `abId` int(11) NOT NULL,
+  `bId` int(11) NOT NULL,
+  `vBlogDescription` mediumtext NOT NULL,
+  `vBlogImage` mediumtext NOT NULL,
+  `tCreatedDate` datetime NOT NULL,
+  `tUpdatedDate` datetime NOT NULL,
+  `Mode` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_additional_blogs_desc`
+--
+
+INSERT INTO `tbl_additional_blogs_desc` (`abId`, `bId`, `vBlogDescription`, `vBlogImage`, `tCreatedDate`, `tUpdatedDate`, `Mode`) VALUES
+(1, 6, 'hello', 'https://blog.infinitytuts.com/app/Images/description_img/description_img-1688881454352.jpg', '2019-06-27 00:00:00', '2020-05-02 00:00:00', 2),
+(2, 1, '<h2>Create a New React App</h2><p>To create a new React app, you can follow these steps:</p><p><br></p><h3>Step 1: Install Node.js</h3><p>Make sure you have Node.js installed on your computer. You can download the latest version from the official website: https://nodejs.org</p>', 'https://blog.infinitytuts.com/app/Images/description_img/description_img-1688881454352.jpg', '2023-07-09 11:14:14', '2023-05-05 00:00:00', 0),
+(3, 1, '<h3>Step 2: Install Create React App</h3><p>Open your terminal or command prompt and run the following command to install Create React App globally:</p><p><br></p><p><strong>npm install -g create-react-app</strong></p>', 'https://blog.infinitytuts.com/app/Images/description_img/description_img-1688881454352.jpg', '2023-07-09 11:14:14', '2023-05-05 00:00:00', 0),
+(4, 1, '<h3>Step 3: Create a New React App</h3><p>Once Create React App is installed, navigate to the directory where you want to create your new React app. Then run the following command:</p><p><br></p><p><strong>npx create-react-app my-app</strong></p><p><br></p><p>Replace \"my-app\" with the desired name of your app. This command will create a new directory called \"my-app\" (or your chosen name) and set up a basic React app structure inside it.</p><p><br></p>', 'https://blog.infinitytuts.com/app/Images/description_img/description_img-1688881454352.jpg', '2023-07-09 11:14:14', '2023-05-05 00:00:00', 0),
+(5, 1, '<h3>Step 4: Navigate to the App Directory</h3><p>After the app is created, navigate to the app directory by running the following command:</p><p><br></p><p><strong>cd my-app</strong></p>', 'https://blog.infinitytuts.com/app/Images/description_img/description_img-1688881454352.jpg', '2023-07-09 11:14:14', '2023-05-05 00:00:00', 0),
+(6, 6, 'hello', 'app/Images/description_img/description_img-1692014720555.jpg', '2019-06-27 00:00:00', '2020-05-02 00:00:00', 2),
+(7, 6, 'hello world', 'app/Images/description_img/description_img-1691988134158.jpg', '2019-06-27 00:00:00', '2020-05-02 00:00:00', 0),
+(9, 6, 'hello world', 'app/Images/description_img/description_img-1691987142605.jpg', '2019-06-27 00:00:00', '2020-05-02 00:00:00', 0),
+(10, 6, 'hello world', 'app/Images/description_img/description_img-1691987078660.jpg', '2019-06-27 00:00:00', '2020-05-02 00:00:00', 0),
+(24, 3, '<h2>What is Content Management System (CMS)?</h2><p><span style=\"color: rgb(0, 0, 0);\">The&nbsp;</span>Content Management System (CMS)<span style=\"color: rgb(0, 0, 0);\">&nbsp;is a software which stores all the data such as text, photos, music, documents, etc. and is made available on your website. It helps in editing, publishing and modifying the content of the website.</span></p><p><br></p><p><span style=\"color: rgb(0, 0, 0);\">WordPress was initially released on 27th&nbsp;May, 2003 by Matt Mullenweg and Mike Little. WordPress was announced as open source in October 2009.</span></p>', 'http://localhost:8080/app/Images/description_img/description_img-1689223324414.jpg', '2023-07-13 10:12:01', '2023-05-05 00:00:00', 0),
+(25, 3, '<h3>Features</h3><ul><li class=\"ql-align-justify\">User Management&nbsp;− It allows managing the user information such as changing the role of the users to (subscriber, contributor, author, editor or administrator), create or delete the user, change the password and user information. The main role of the user manager is&nbsp;Authentication.</li><li class=\"ql-align-justify\">Media Management&nbsp;− It is the tool for managing the media files and folder, in which you can easily upload, organize and manage the media files on your website.</li><li class=\"ql-align-justify\">Theme System&nbsp;− It allows modifying the site view and functionality. It includes images, stylesheet, template files and custom pages.</li><li class=\"ql-align-justify\">Extend with Plugins&nbsp;− Several plugins are available which provides custom functions and features according to the users need.</li><li class=\"ql-align-justify\">Search Engine Optimization&nbsp;− It provides several search engine optimization (SEO) tools which makes on-site SEO simple.</li><li class=\"ql-align-justify\">Multilingual&nbsp;− It allows translating the entire content into the language preferred by the user.</li><li class=\"ql-align-justify\">Importers&nbsp;− It allows importing data in the form of posts. It imports custom files, comments, post pages and tags.</li></ul>', 'http://localhost:8080/app/Images/description_img/description_img-1689223324416.jpg', '2023-07-13 10:12:01', '2023-05-05 00:00:00', 0),
+(26, 3, '<h3>Advantages</h3><ul><li class=\"ql-align-justify\">It is an open source platform and available for free.</li><li class=\"ql-align-justify\">CSS files can be modified according to the design as per users need.</li><li class=\"ql-align-justify\">There are many plugins and templates available for free. Users can customize the various plugins as per their need.</li><li class=\"ql-align-justify\">It is very easy to edit the content as it uses WYSIWYG editor (What You See Is What You Get is a user interface that allows the user to directly manipulate the layout of document without having a layout command).</li><li class=\"ql-align-justify\">Media files can be uploaded easily and quickly.</li><li class=\"ql-align-justify\">It offers several SEO tools which makes on-site SEO simple.</li><li class=\"ql-align-justify\">Customization is easy according to the user\'s needs.</li><li class=\"ql-align-justify\">It allows creating different roles for users for website such as admin, author, editor and contributor.</li></ul>', 'http://localhost:8080/app/Images/description_img/description_img-1689223324417.jpg', '2023-07-13 10:12:01', '2023-05-05 00:00:00', 0),
+(27, 3, '<h3>Disadvantages</h3><ul><li class=\"ql-align-justify\">Using several plugins can make the website heavy to load and run.</li><li class=\"ql-align-justify\">PHP knowledge is required to make modifications or changes in the WordPress website.</li><li class=\"ql-align-justify\">Sometimes software needs to be updated to keep the WordPress up-to-date with the current browsers and mobile devices. Updating WordPress version leads to loss of data, so a backup copy of the website is required.</li><li class=\"ql-align-justify\">Modifying and formatting the graphic images and tables is difficult.</li></ul>', 'http://localhost:8080/app/Images/description_img/description_img-1689223324695.jpg', '2023-07-13 10:12:01', '2023-05-05 00:00:00', 0),
+(52, 4, '<h2>What Is Laravel?</h2><p>Laravel is a modern, open-source PHP framework designed for web application development. It was first released in 2011 and has since become one of the most popular PHP frameworks worldwide. Laravel provides an elegant and expressive syntax that simplifies the development process and makes it more enjoyable for developers.</p><p><br></p><h3>Here Are Some Of The Key Features Of Laravel:</h3><p><br></p><p>1. MVC Architecture: Laravel follows the Model-View-Controller (MVC) architectural pattern that separates an application into three interconnected components. This separation allows for a more organized and efficient codebase.</p><p><br></p><p>2. Artisan CLI: Laravel includes a powerful command-line interface called Artisan that provides many helpful commands to automate tasks, generate boilerplate code, and perform database migrations.</p><p><br></p><p>3. Blade Templating Engine: Laravel\'s built-in templating engine, Blade, provides a simple yet powerful way to create reusable templates and layouts.</p><p><br></p><p>4. Eloquent ORM: Laravel\'s ORM, Eloquent, provides a simple and intuitive way to interact with databases by using an object-oriented syntax.</p><p><br></p><p>5. Routing: Laravel provides a flexible routing system that allows developers to define routes in a simple and concise way.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689487221029.jpg', '2023-07-16 11:30:18', '2023-05-05 00:00:00', 0),
+(53, 4, '<h3>Some of the benefits of Laravel over other PHP frameworks include:</h3><p><br></p><p>1.&nbsp;Comprehensive documentation: Laravel has extensive and well-written documentation that makes it easy for developers to get started and find solutions to common problems.</p><p><br></p><p>2.&nbsp;Large community: Laravel has a Laracast large and active community of developers who contribute to the framework, develop packages, and provide support through forums, blogs, and social media.</p><p><br></p><p>3.&nbsp;Security: Laravel includes built-in security features such as encryption, authentication, and CSRF protection, making it easier for developers to create secure applications.</p><p><br></p><p>4.&nbsp;Rapid application development: Laravel\'s built-in features such as Artisan, Blade, and Eloquent make it easy for developers to create high-quality applications quickly and efficiently.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689487221030.jpg', '2023-07-16 11:30:18', '2023-05-05 00:00:00', 0),
+(54, 4, '<h2>Why use Laravel?</h2><p>There are several reasons why developers choose to use Laravel for web application development. Here are some of the most common:</p><p><br></p><p>1.&nbsp;Easy to learn and use: Laravel provides an elegant and expressive syntax that is easy to learn and use. Its MVC architecture, templating engine, and built-in features such as Eloquent ORM and Artisan CLI make it easy for developers to write clean, organized, and maintainable code.</p><p><br></p><p>2.&nbsp;Rapid development: Laravel\'s built-in features such as Artisan, Blade, and Eloquent make it easy for developers to create high-quality applications quickly and efficiently. This can help to reduce development time and costs, allowing businesses to bring their products to market faster.</p><p><br></p><p>3.&nbsp;Security: Laravel includes built-in security features such as encryption, authentication, and CSRF protection, making it easier for developers to create secure applications. Laravel also provides automatic protection against SQL injection attacks and cross-site scripting (XSS) attacks, which are common security vulnerabilities in web applications.</p><p><br></p><p>4.&nbsp;Large and active community: Laravel has a large and active community of developers who contribute to the framework, develop packages, and provide support through forums, blogs, and social media. This community helps to ensure that Laravel stays up-to-date with the latest trends and best practices in web application development.</p><p><br></p><p>5.&nbsp;Scalability: Laravel is highly scalable and can handle applications of any size. Its modular structure allows developers to add or remove components as needed, making it easy to adapt to changing business needs.</p><p><br></p><p>Overall, Laravel is a powerful and flexible framework that makes it easy for developers to create high-quality web applications quickly and efficiently. Its built-in features, security, and large community make it a popular choice for businesses of all sizes.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689487221033.jpg', '2023-07-16 11:30:18', '2023-05-05 00:00:00', 0),
+(55, 4, '<h2>Laravel\'s Architecture</h2><p>Laravel\'s architecture follows the Model-View-Controller (MVC) pattern, which separates an application into three interconnected components: the model, the view, and the controller. Here\'s a brief overview of each component:</p><p><br></p><p>1. Model: The model represents the data and the logic that manipulates the data. In Laravel, the model is responsible for interacting with the database and represents the application\'s data in an object-oriented manner.</p><p><br></p><p>2. View: The view is responsible for displaying the data to the user. In Laravel, the view is typically defined using the Blade templating engine, which provides an easy and intuitive way to create reusable templates and layouts.</p><p><br></p><p>3. Controller: The controller is responsible for handling the incoming requests and generating the appropriate response. In Laravel, the controller contains the business logic that connects the model and the view, and it\'s responsible for processing the input, retrieving data from the model, and passing it to the view.</p><p><br></p><p>In addition to the MVC pattern, Laravel also includes several other components that help to make web application development more efficient and enjoyable:</p><p><br></p><p>1. Service Container: Laravel\'s service container is a powerful tool that manages the application\'s dependencies and provides a centralized location for managing and injecting dependencies throughout the application.</p><p><br></p><p>2. Middleware: Middleware allows developers to add additional layers of functionality to an application\'s request/response cycle. Middleware can be used to authenticate users, perform validation, or manipulate incoming requests before they\'re processed by the application.</p><p><br></p><p>3. Eloquent ORM: Laravel\'s Eloquent ORM provides an easy and intuitive way to interact with databases by using an object-oriented syntax. Eloquent allows developers to work with database tables as if they were objects, making it easier to read, write, and update data.</p><p><br></p><p>4. Artisan CLI: Laravel\'s Artisan command-line interface provides many helpful commands to automate tasks, generate boilerplate code, and perform database migrations. Artisan makes it easy for developers to perform common tasks and speed up the development process.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689487221329.jpg', '2023-07-16 11:30:18', '2023-05-05 00:00:00', 0),
+(56, 4, '<h2>Conclusion</h2><p>Laravel is a powerful and popular PHP web application framework that provides developers with a robust set of tools and features for building modern web applications. We\'ve explored what Laravel is, why to use it, and its architecture in this blog post.</p><p><br></p><p>We\'ve seen that Laravel is an open-source framework that offers a number of advantages over other PHP frameworks, including its elegant syntax, powerful routing system, and built-in features. Additionally, we\'ve seen that Laravel follows the \"Convention over Configuration\" philosophy, which makes it easy to get started with and use.</p><p><br></p><p>We\'ve also explored the architecture of a Laravel application, including its Model-View-Controller (MVC) architecture, its Blade templating engine, Eloquent ORM, and Routing system. We\'ve seen how these components work together to provide a powerful and flexible development environment that can be used to build a wide range of web applications.</p><p><br></p><p>Overall, Laravel is an excellent choice for developers who want to build modern, scalable web applications quickly and efficiently. Its robust set of features, combined with its vibrant and supportive community, make it one of the most popular PHP frameworks available today. We hope this introduction to Laravel has been helpful, and we encourage you to explore the framework further and consider using it for your next web development project.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689487221331.jpg', '2023-07-16 11:30:18', '2023-05-05 00:00:00', 0),
+(68, 5, '<h2>Gold Price Plugin</h2><p>Establishing a global price per 1 gram of Gold, Silver, and Platinum: This involves determining a consistent price for each gram of these metals across the world, which can be used as a reference rate for calculating the price of products that contain these metals.</p><p><br></p><p>Setting up the rate for each metal: This means determining the price for one gram of Gold, Silver, and Platinum based on factors like market demand, supply, and other economic factors that influence the price of these metals. Once these rates are established, they can be used as a reference rate for calculating the price of products containing these metals.</p><p><br></p><p>Utilizing the weight of each product: The weight of a product plays a significant role in determining its price. By utilizing the weight of each product, the global rate per gram of the respective metal can be applied to automatically calculate the price of the product.</p><p><br></p><p>Automatic price calculation: With the global price per gram of Gold, Silver, and Platinum established and the weight of the product identified, the price can be automatically calculated based on this rate. This eliminates the need for manual calculations and ensures that pricing is consistent across products.</p><p><br></p><p>Compatibility with Woo-Commerce simple products and variable products: This process can be applied to both simple products (products with fixed weights) and variable products (products with different weights or sizes). This makes the pricing process more efficient and accurate for all products sold on the Woo-Commerce platform.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689489113128.jpg', '2023-07-16 12:01:50', '2023-05-05 00:00:00', 0),
+(69, 5, '<h2>Key Features</h2><ol><li>Establishing a global price per gram of Gold, Silver, and Platinum.</li><li>Utilizing the weight of each product.</li><li>Automatic price calculation based on the established rate.</li><li>Improved efficiency and accuracy in the pricing process.</li><li>Applicable to all Woo-Commerce simple products and variable products.</li></ol>', 'http://localhost:8080/app/Images/description_img/description_img-1689489113129.jpg', '2023-07-16 12:01:50', '2023-05-05 00:00:00', 0),
+(70, 5, '<h2>Installation</h2><h3>Installation Via WordPress Admin Area</h3><ol><li>Log into your WordPress admin area.</li><li>Go to Dashboard » Plugin.</li><li>Click on Add New Plugin button at top.</li><li>Search for “Gold Price Based on Weight”.</li><li>Now click on “Install Now” button of the “Gold Price Based on Weight” plugin.</li><li>Click on Activate once the plugin is installed.</li></ol><p><br></p><h3>Installation Using FTP</h3><ol><li>Download the ‘gold-price-based-on-weight.zip’ file.</li><li>Extract Zip file.</li><li>Using your FTP program, upload the non-zipped plugin folder into the “/wp-content/plugins/” folder.</li><li>Activate the plugin through the ‘Plugins’ menu in WordPress.</li></ol>', 'http://localhost:8080/app/Images/description_img/description_img-1689489113131.jpg', '2023-07-16 12:01:50', '2023-05-05 00:00:00', 0),
+(71, 5, '<h2>Support</h2><p>If you require assistance with customizations or wish to hire a developer,</p><p>please feel free to contact me via email at <a href=\"mailto:kavavimal@gmail.com\" rel=\"noopener noreferrer\" target=\"_blank\">kavavimal@gmail.com</a> or <a href=\"mailto:info@infinitysoftech.co\" rel=\"noopener noreferrer\" target=\"_blank\">info@infinitysoftech.co</a></p>', 'http://localhost:8080/app/Images/description_img/description_img-1689489113420.jpg', '2023-07-16 12:01:50', '2023-05-05 00:00:00', 0),
+(72, 6, '<h2>Open AI Search Bar</h2><p>The OpenAI Search Bar plugin gives access to a feature that allows you to Add a powerful AI search bar to your website using shortcodes.</p><p><br></p><p>This shortcode is a simple line of code that can be easily added to any page or post, without the need for you to manually edit your website’s source code.</p><p><br></p><p>This convenient plugin feature makes it easy for you to incorporate the OpenAI search bar into your website, providing your visitors with a more accurate and relevant search experience.</p><p><br></p><p>We are using 3rd party OpenAI Services to fetch results : <a href=\"https://api.openai.com/v1/chat/completions\" rel=\"noopener noreferrer\" target=\"_blank\">https://api.openai.com/v1/chat/completions</a></p>', 'http://localhost:8080/app/Images/description_img/description_img-1689489741416.jpg', '2023-07-16 12:12:20', '2023-05-05 00:00:00', 0),
+(73, 6, '<h2>Key Features</h2><p>Once you upload and activate the OpenAI search bar plugin, you will have access to a feature that allows you to add a powerful AI search bar to your website using a shortcode.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1689489741417.jpg', '2023-07-16 12:12:20', '2023-05-05 00:00:00', 0),
+(74, 6, '<h2>Installation</h2><h3>Installation Via WordPress Admin Area</h3><ol><li>Log into your WordPress admin area.</li><li>Go to Dashboard » Plugin.</li><li>Click on Add New Plugin button at top.</li><li>Search for “OpenAI : AI Search Bar”.</li><li>Now click on “Install Now” button of the “OpenAI : AI Search Bar” plugin.</li><li>Click on Activate once the plugin is installed.</li></ol><p><br></p><h3>Installation Using FTP</h3><ol><li>Download the openai-search-bar.zip’ file.</li><li>Extract Zip file.</li><li>Using your FTP program, upload the non-zipped plugin folder into the “/wp-content/plugins/” folder.</li><li>Activate the plugin through the ‘Plugins’ menu in WordPress.</li></ol>', 'http://localhost:8080/app/Images/description_img/description_img-1689489741423.jpg', '2023-07-16 12:12:20', '2023-05-05 00:00:00', 0),
+(75, 6, '<h2>Support</h2><p><span style=\"color: rgb(50, 55, 60);\">If you require assistance with customizations or wish to hire a developer,</span></p><p><span style=\"color: rgb(50, 55, 60);\">please feel free to contact me via email at&nbsp;</span></p><p><a href=\"mailto:kavavimal@gmail.com\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 115, 170);\">kavavimal@gmail.com</a></p><p><span style=\"color: rgb(50, 55, 60);\">&nbsp;or&nbsp;</span></p><p><a href=\"mailto:info@infinitysoftech.co\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(0, 115, 170);\">info@infinitysoftech.co</a></p>', 'http://localhost:8080/app/Images/description_img/description_img-1689489741696.jpg', '2023-07-16 12:12:20', '2023-05-05 00:00:00', 0),
+(97, 10, '<p>it offers a rich set of functionalities that incorporates the basic features of PHP frameworks like CodeIgniter, Yii, and other programming languages like Ruby on Rails. it has a very rich set of features that will boost the speed of web development.</p><p><br></p><p>it is a powerful and widely-used PHP framework for building web applications. Its simple and elegant syntax, as well as its robust set of features and tools, have made it a favorite among developers. In this article, we\'ll take a look at how to install and configure Laravel on your local development environment.</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320340.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(98, 10, '<h2>Installing Laravel</h2><p><br></p><p>Before you can begin building Laravel applications, you\'ll need to install it on your machine. Laravel has a few requirements that you should make sure are met before you begin the installation process. You\'ll need:</p><p><br></p><ul><li>PHP &gt;= 7.4</li><li>BCMath PHP Extension</li><li>Ctype PHP Extension</li><li>Fileinfo PHP extension</li><li>JSON PHP Extension</li><li>Mbstring PHP Extension</li><li>OpenSSL PHP Extension</li><li>PDO PHP Extension</li><li>Tokenizer PHP Extension</li><li>XML PHP Extension</li></ul><p><br></p><p>Once you\'ve verified that your machine meets these requirements, you can begin the installation process. The easiest way to install Laravel is through Composer, a dependency manager for PHP.</p><p><br></p><p>I am assuming you have already installed the composer in your system and if you have not installed the composer then read this article.</p><p><br></p><p>First, open up a terminal or command prompt and navigate to the directory where you want to install Laravel. Then, run the following command:</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320346.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(99, 10, '<p><strong>composer create-project --prefer-dist laravel/laravel your-project-name</strong></p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320347.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(100, 10, '<p><strong>php artisan key:generate</strong></p><p><br></p><p>This will generate a new key <strong>APP_KEY </strong>and add it to your .env file.</p><p><br></p><p>You can also configure your database settings in the .env file. Laravel supports a variety of database systems, including MySQL, PostgreSQL, SQLite, and SQL Server. Once you\'ve set your database credentials in the .env file, you can run the following command to create the necessary database tables:</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320621.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(101, 10, '<p>Once you\'ve installed Laravel, you\'ll need to configure a few things before you can begin building your application.</p><p><br></p><p>First, make sure that your environment is set to \"local\" in the .env file at the root of your project. This file contains configuration settings for your Laravel application, including your database credentials, email settings, and more.</p><p><br></p><p>Next, you\'ll want to generate an application key. This key is used to encrypt your application\'s data and should be unique to each installation. To generate an application key, run the following command in your terminal:</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320620.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(102, 10, '<p><strong>&nbsp;php artisan migrate</strong></p><p><br></p><p><span class=\"ql-cursor\">﻿</span>This will create the tables necessary for Laravel to function properly.</p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320628.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(103, 10, '<h2>Conclusion</h2><p><br></p><p>In this article, we\'ve covered the basics of installing and configuring Laravel. With these steps, you should now be able to begin building your Laravel application.</p><p><br></p><p>If you encounter any issues along the way, be sure to consult the Laravel documentation or the Laravel community for help. Good luck!</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1690772320631.jpg', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(104, 11, '<h2>Install Laravel 10 App</h2><p><br></p><p>Let us begin the tutorial by installing a new Laravel 10 application. if you have already created the project, then skip the following step.</p><p><br></p><p><strong>&nbsp;composer create-project laravel/laravel example-app&nbsp;&nbsp;&nbsp;</strong></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327635854.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(105, 11, '<h2>Database Configuration</h2><p>&nbsp;.env&nbsp;file</p><p><br></p><p><strong>&nbsp;DB_CONNECTION=mysql</strong></p><p><strong>&nbsp;DB_HOST=127.0.0.1</strong></p><p><strong>&nbsp;DB_PORT=3306</strong></p><p><strong>&nbsp;DB_DATABASE=here your database name(blog)</strong></p><p><strong>&nbsp;DB_USERNAME=here database username(root)</strong></p><p><strong>&nbsp;DB_PASSWORD=here database password(root)</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636015.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(106, 11, '<h2>Create Migration</h2><p><br></p><p>Here, we will create a \"products\" table using laravel migration. so let\'s use the following command to create a migration file.</p><p><br></p><p><strong>php artisan make:migration create_products_table --create=products</strong></p><p><br></p><p>After this command you will find one file in the following path \"database/migrations\" and you have to put the below code in your migration file for creating the products table.</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636167.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(107, 11, '<p><strong>&lt;?php</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>use Illuminate\\Database\\Migrations\\Migration;</strong></p><p><strong>use Illuminate\\Database\\Schema\\Blueprint;</strong></p><p><strong>use Illuminate\\Support\\Facades\\Schema;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>return new class extends Migration</strong></p><p><strong>{</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Run the migrations.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* @return void</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function up()</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Schema::create(\'products\', function (Blueprint $table) {</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$table-&gt;id();</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$table-&gt;string(\'name\');</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$table-&gt;text(\'detail\');</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$table-&gt;timestamps();</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;});</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Reverse the migrations.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* @return void</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function down()</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Schema::dropIfExists(\'products\');</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>};</strong></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636432.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(108, 11, '<p>Now you have to run this migration by the following command:</p><p><br></p><p><strong>php artisan migrate</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636546.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(109, 11, '<h2>Create Controller and Model</h2><p><br></p><p>In this step, now we should create a new resource controller as ProductController. So run the bellow command and create a new controller. bellow controller for create resource controller.</p><p><br></p><p><strong>php artisan make:controller ProductController --resource --model=Product</strong></p><p><br></p><p>After the bellow command, you will find a new file in this path \"app/Http/Controllers/ProductController.php\".</p><p><br></p><p>In this controller will create seven methods by default as bellow methods:</p><p><br></p><ol><li>index()</li><li>create()</li><li>store()</li><li>show()</li><li>edit()</li><li>update()</li><li>destroy()</li></ol><p><br></p><p>So, let\'s copy the below code and put it on ProductController.php file.</p><p><br></p><p>app/Http/Controllers/ProductController.php</p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636628.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(110, 11, '<p><strong>&lt;?php</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>namespace App\\Http\\Controllers;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>use App\\Models\\Product;</strong></p><p><strong>use Illuminate\\Http\\RedirectResponse;</strong></p><p><strong>use Illuminate\\Http\\Request;</strong></p><p><strong>use Illuminate\\Http\\Response;</strong></p><p><strong>use Illuminate\\View\\View;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>class ProductController extends Controller</strong></p><p><strong>{</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Display a listing of the resource.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function index(): View</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;$products = Product::latest()-&gt;paginate(5);</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return view(\'products.index\',compact(\'products\'))</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;with(\'i\', (request()-&gt;input(\'page\', 1) - 1) * 5);</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Show the form for creating a new resource.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function create(): View</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return view(\'products.create\');</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Store a newly created resource in storage.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function store(Request $request): RedirectResponse</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;$request-&gt;validate([</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\'name\' =&gt; \'required\',</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\'detail\' =&gt; \'required\',</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;]);</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Product::create($request-&gt;all());</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return redirect()-&gt;route(\'products.index\')</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;with(\'success\',\'Product created successfully.\');</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Display the specified resource.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function show(Product $product): View</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return view(\'products.show\',compact(\'product\'));</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Show the form for editing the specified resource.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function edit(Product $product): View</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return view(\'products.edit\',compact(\'product\'));</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Update the specified resource in storage.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function update(Request $request, Product $product): RedirectResponse</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;$request-&gt;validate([</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\'name\' =&gt; \'required\',</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\'detail\' =&gt; \'required\',</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;]);</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;$product-&gt;update($request-&gt;all());</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return redirect()-&gt;route(\'products.index\')</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;with(\'success\',\'Product updated successfully\');</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;/**</strong></p><p><strong>&nbsp;&nbsp;&nbsp;* Remove the specified resource from storage.</strong></p><p><strong>&nbsp;&nbsp;&nbsp;*/</strong></p><p><strong>&nbsp;&nbsp;public function destroy(Product $product): RedirectResponse</strong></p><p><strong>&nbsp;&nbsp;{</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;$product-&gt;delete();</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;return redirect()-&gt;route(\'products.index\')</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;with(\'success\',\'Product deleted successfully\');</strong></p><p><strong>&nbsp;&nbsp;}</strong></p><p><strong>}</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636789.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(111, 11, '<h2>Add Resource Route</h2><p>Here, we need to add a resource route for the product crud application. so open your \"routes/web.php\" file and add the following route.</p><p><br></p><p>routes/web.php</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327636887.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(112, 11, '<p><br></p><p><strong>&lt;?php</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>use Illuminate\\Support\\Facades\\Route;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>use App\\Http\\Controllers\\ProductController;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>/*</strong></p><p><strong>|--------------------------------------------------------------------------</strong></p><p><strong>| Web Routes</strong></p><p><strong>|--------------------------------------------------------------------------</strong></p><p><strong>|</strong></p><p><strong>| Here is where you can register web routes for your application. These</strong></p><p><strong>| routes are loaded by the RouteServiceProvider within a group that</strong></p><p><strong>| contains the \"web\" middleware group. Now create something great!</strong></p><p><strong>|</strong></p><p><strong>*/</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>Route::resource(\'products\', ProductController::class);</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637009.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(113, 11, '<h2>Add Blade Files</h2><p>In the last step. In this step, we have to create just blade files. So mainly we have to create a layout file and then create a new folder \"products\" and then create blade files of the crud app. So finally you have to create the following bellow blade file:</p><p><br></p><p>So let\'s just create the following file and put the bellow code.</p><p><br></p><p>resources/views/products/layout.blade.php</p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637158.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(114, 11, '<p>resources/views/products/index.blade.php</p><p><br></p><p><br></p><p><strong>@extends(\'products.layout\')</strong></p><p><strong>&nbsp;</strong></p><p><strong>@section(\'content\')</strong></p><p><strong>&nbsp;&nbsp;&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-lg-12 margin-tb\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-left\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Laravel 10 CRUD Example from scratch - ItSolutionStuff.com&lt;/h2&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-right\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=\"btn btn-success\" href=\"{{ route(\'products.create\') }}\"&gt; Create New Product&lt;/a&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;@if ($message = Session::get(\'success\'))</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"alert alert-success\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{{ $message }}&lt;/p&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;@endif</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&lt;table class=\"table table-bordered\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;No&lt;/th&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Name&lt;/th&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Details&lt;/th&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th width=\"280px\"&gt;Action&lt;/th&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;@foreach ($products as $product)</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;{{ ++$i }}&lt;/td&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;{{ $product-&gt;name }}&lt;/td&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;{{ $product-&gt;detail }}&lt;/td&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form action=\"{{ route(\'products.destroy\',$product-&gt;id) }}\" method=\"POST\"&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=\"btn btn-info\" href=\"{{ route(\'products.show\',$product-&gt;id) }}\"&gt;Show&lt;/a&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=\"btn btn-primary\" href=\"{{ route(\'products.edit\',$product-&gt;id) }}\"&gt;Edit&lt;/a&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@csrf</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@method(\'DELETE\')</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button type=\"submit\" class=\"btn btn-danger\"&gt;Delete&lt;/button&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;@endforeach</strong></p><p><strong>&nbsp;&nbsp;&lt;/table&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;{!! $products-&gt;links() !!}</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></p><p><strong>@endsection</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637418.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(115, 11, '<p><strong>&lt;!DOCTYPE html&gt;</strong></p><p><br></p><p><strong>&lt;html&gt;</strong></p><p><strong>&lt;head&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;title&gt;Laravel 10 CRUD Application - ItSolutionStuff.com&lt;/title&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\"&gt;</strong></p><p><strong>&lt;/head&gt;</strong></p><p><strong>&lt;body&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&lt;div class=\"container\"&gt;</strong></p><p><strong>&nbsp;&nbsp;@yield(\'content\')</strong></p><p><strong>&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;</strong></p><p><strong>&lt;/body&gt;</strong></p><p><strong>&lt;/html&gt;</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637573.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(116, 11, '<p>resources/views/products/create.blade.php</p><p><br></p><p><strong>@extends(\'products.layout\')</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>@section(\'content\')</strong></p><p><strong>&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;div class=\"col-lg-12 margin-tb\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-left\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Add New Product&lt;/h2&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-right\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=\"btn btn-primary\" href=\"{{ route(\'products.index\') }}\"&gt; Back&lt;/a&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>@if ($errors-&gt;any())</strong></p><p><strong>&nbsp;&nbsp;&lt;div class=\"alert alert-danger\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Whoops!&lt;/strong&gt; There were some problems with your input.&lt;br&gt;&lt;br&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@foreach ($errors-&gt;all() as $error)</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;{{ $error }}&lt;/li&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@endforeach</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>@endif</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&lt;form action=\"{{ route(\'products.store\') }}\" method=\"POST\"&gt;</strong></p><p><strong>&nbsp;&nbsp;@csrf</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"form-group\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Name:&lt;/strong&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type=\"text\" name=\"name\" class=\"form-control\" placeholder=\"Name\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"form-group\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Detail:&lt;/strong&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;textarea class=\"form-control\" style=\"height:150px\" name=\"detail\" placeholder=\"Detail\"&gt;&lt;/textarea&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12 text-center\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button type=\"submit\" class=\"btn btn-primary\"&gt;Submit&lt;/button&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&lt;/form&gt;</strong></p><p><strong>@endsection</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637753.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0);
+INSERT INTO `tbl_additional_blogs_desc` (`abId`, `bId`, `vBlogDescription`, `vBlogImage`, `tCreatedDate`, `tUpdatedDate`, `Mode`) VALUES
+(117, 11, '<p>resources/views/products/edit.blade.php</p><p><br></p><p><strong>@extends(\'products.layout\')</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>@section(\'content\')</strong></p><p><strong>&nbsp;&nbsp;&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-lg-12 margin-tb\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-left\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Edit Product&lt;/h2&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-right\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=\"btn btn-primary\" href=\"{{ route(\'products.index\') }}\"&gt; Back&lt;/a&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;@if ($errors-&gt;any())</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"alert alert-danger\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Whoops!&lt;/strong&gt; There were some problems with your input.&lt;br&gt;&lt;br&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@foreach ($errors-&gt;all() as $error)</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;{{ $error }}&lt;/li&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@endforeach</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;@endif</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&lt;form action=\"{{ route(\'products.update\',$product-&gt;id) }}\" method=\"POST\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;@csrf</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;@method(\'PUT\')</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"form-group\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Name:&lt;/strong&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type=\"text\" name=\"name\" value=\"{{ $product-&gt;name }}\" class=\"form-control\" placeholder=\"Name\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"form-group\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Detail:&lt;/strong&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;textarea class=\"form-control\" style=\"height:150px\" name=\"detail\" placeholder=\"Detail\"&gt;{{ $product-&gt;detail }}&lt;/textarea&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12 text-center\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button type=\"submit\" class=\"btn btn-primary\"&gt;Submit&lt;/button&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&lt;/form&gt;</strong></p><p><strong>@endsection</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637858.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(118, 11, '<h2>Conclusion</h2><p>	</p><p>All the required steps have been done, now you have to type the given below command and hit enter to run the Laravel app:</p><p><br></p><p><strong>&nbsp;php artisan serve&nbsp;</strong></p><p><br></p><p>Now, Go to your web browser, type the given URL and view the app output:</p><p><br></p><p><strong>http://localhost:8000/products</strong></p><p><br></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327637940.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(119, 11, '<p>resources/views/products/show.blade.php</p><p><br></p><p><strong>@extends(\'products.layout\')</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>@section(\'content\')</strong></p><p><strong>&nbsp;&nbsp;&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-lg-12 margin-tb\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-left\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt; Show Product&lt;/h2&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"pull-right\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=\"btn btn-primary\" href=\"{{ route(\'products.index\') }}\"&gt; Back&lt;/a&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;</strong></p><p><strong>&nbsp;&nbsp;&lt;div class=\"row\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"form-group\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Name:&lt;/strong&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $product-&gt;name }}</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"col-xs-12 col-sm-12 col-md-12\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=\"form-group\"&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;Details:&lt;/strong&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $product-&gt;detail }}</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>&nbsp;&nbsp;&lt;/div&gt;</strong></p><p><strong>@endsection</strong></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691327638031.jpg', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(120, 13, '<p><strong>const root = ReactDOM.createRoot(document.getElementById(\'root\'));</strong></p><p><strong>root.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;);</strong></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691665462801.jpg', '2023-08-10 04:34:15', '2023-05-05 00:00:00', 0),
+(121, 13, '<p><span style=\"color: rgb(0, 0, 0);\">It displays a heading saying “Hello, world!” on the page.</span></p>', 'http://localhost:8080/app/Images/description_img/description_img-1691665462808.jpg', '2023-08-10 04:34:15', '2023-05-05 00:00:00', 0),
+(147, 7, 'hy there', 'http://localhost:8080/app/Images/description_img/description_img-1692014741307.jpg', '2023-05-06 00:00:00', '2021-06-21 00:00:00', 0),
+(148, 7, 'hy there', 'app/Images/description_img/description_img-1692015105379.jpg', '2023-05-06 00:00:00', '2021-06-21 00:00:00', 0),
+(149, 7, 'hy there', '', '2023-05-06 00:00:00', '2021-06-21 00:00:00', 0),
+(150, 7, 'hy there', '', '2023-05-06 00:00:00', '2021-06-21 00:00:00', 0),
+(151, 7, 'hy there', '', '2023-05-06 00:00:00', '2021-06-21 00:00:00', 1),
+(152, 7, 'hy there', '', '2023-05-06 00:00:00', '2021-06-21 00:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_blogs`
+--
+
+CREATE TABLE `tbl_blogs` (
+  `bId` int(11) NOT NULL,
+  `cId` int(11) NOT NULL,
+  `iParentCatID` int(50) NOT NULL,
+  `vBlogTitle` varchar(100) NOT NULL,
+  `vBlogTitleSlug` varchar(100) NOT NULL,
+  `vBlogDescription` mediumtext NOT NULL,
+  `vBlogFeatureImage` varchar(200) NOT NULL,
+  `vBlogThumbnailImage` varchar(200) NOT NULL,
+  `tCreatedDate` datetime NOT NULL,
+  `tUpdatedDate` datetime NOT NULL,
+  `Mode` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_blogs`
+--
+
+INSERT INTO `tbl_blogs` (`bId`, `cId`, `iParentCatID`, `vBlogTitle`, `vBlogTitleSlug`, `vBlogDescription`, `vBlogFeatureImage`, `vBlogThumbnailImage`, `tCreatedDate`, `tUpdatedDate`, `Mode`) VALUES
+(1, 1, 1, 'Getting Started', 'react-js-getting-started', 'React is a powerful JavaScript library that provides developers with the tools to build interactive and dynamic user interfaces. With React, you can create reusable UI components and efficiently manage their state and rendering. It follows a component-based architecture, allowing you to break down your application into smaller, manageable pieces.', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688881454258.png', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688881454267.png', '2023-07-09 11:14:14', '2023-05-05 00:00:00', 0),
+(2, 7, 2, 'Node.js Introduction', 'node-js-introduction', 'Node.js is an open-source, server-side JavaScript runtime environment that allows you to run JavaScript code outside of a web browser.', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688896682479.png', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688896682481.png', '2023-07-09 00:00:00', '2023-07-09 00:00:00', 0),
+(4, 9, 3, 'Introduction - Laravel', 'introduction-laravel', 'Laravel is a powerful and elegant PHP framework known for its simplicity and expressive syntax, making it a preferred choice for web application development. With features like routing, ORM, and a robust ecosystem, Laravel empowers developers to build scalable and efficient web applications with ease.', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1689487220118.png', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1689487220118.png', '2023-07-16 00:00:00', '2023-07-16 00:00:00', 0),
+(5, 10, 4, 'Gold-Price Plugin', 'wordpress-gold-price-plugin', 'Establishing a global price per gram of Gold, Silver, and Platinum and utilizing the weight of each product, the price can be automatically calculated based on this rate, making the pricing process more efficient and accurate for all Woo-Commerce simple products and variable products.', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1689223323545.png', 'https://blog.infinitytuts.com/app/images/blog_Image/gold-price-plugin.jpg', '2023-07-16 00:00:00', '2023-07-16 00:00:00', 0),
+(6, 7, 1, 'javascript', 'javascript', 'hi', 'app/Images/blog_Image/b_img-1693228050202.png', 'app/Images/blog_Image/b_img-1693228050205.png', '2021-05-06 00:00:00', '2023-06-30 00:00:00', 1),
+(7, 7, 1, 'javascript', 'javascript', 'React is a powerful JavaScript library that has revolutionized the way we build user interfaces. With its efficient and declarative approach, React simplifies the process of creating interactive and dynamic web applications. Whether you`re working on a small project or a large-scale application, React provides the tools and flexibility to bring your ideas to life.', 'http://localhost:8080/app/Images/blog_Image/b_img-1691986082259.png', 'http://localhost:8080/app/Images/blog_Image/b_img-1691986082262.png', '2021-05-06 00:00:00', '2023-06-30 00:00:00', 0),
+(10, 12, 3, 'Installing and Configuring Laravel ', 'installing-and-configuring-laravel ', 'Laravel is an open-source PHP framework, which is robust and easy to understand. It follows a model-view-controller design pattern. it reuses the existing components of different frameworks which helps in creating a web application. The web application thus designed is more structured and pragmatic.', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1690772320023.png', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1690772320023.png', '2023-07-31 08:28:39', '2023-05-05 00:00:00', 0),
+(11, 13, 3, 'Building a CRUD Application with Laravel 10', 'building-a-crud-application-with-laravel-10', 'I will let you know about the Laravel 10 crud operation example. Here you will learn to build a Laravel 10 crud application. We will use the Laravel 10 crud application for beginners. It\'s a simple example of how to create a crud in Laravel 10. Alright, let’s dive into the steps.', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1691327635333.png', 'http://localhost:8080/app/Images/blog_Image/b_img-1691327635334.png', '2023-08-06 06:43:54', '2023-05-05 00:00:00', 0),
+(13, 6, 1, 'Hello World', 'react-js-hello-world', 'The smallest React example looks like this:', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688881454258.png', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688881454258.png', '2023-08-10 04:34:15', '2023-05-05 00:00:00', 0),
+(16, 6, 1, 'Introducing JSX', 'react-js-introducting-jsx', 'Consider this variable declaration:', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688881454258.png', 'https://blog.infinitytuts.com/app/Images/blog_Image/b_img-1688881454258.png', '2023-08-12 00:00:00', '2023-08-12 00:00:00', 0),
+(17, 7, 1, 'JavaScript', 'JS', 'React is a powerful JavaScript library that has revolutionized the way we build user interfaces. With its efficient\\and declarative approach, React simplifies the process of creating interactive and dynamic web applications. Whether you are working on a small project or a large-scale application, React provides the tools and flexibility to bring your ideas to life. \"abc\"*#@!%^*(){}[]:,<>?/;|+-\'', 'http://localhost:8080/app/Images/blog_Image/b_img-1692012702503.png', 'http://localhost:8080/app/Images/blog_Image/b_img-1692012702504.png', '2023-05-27 00:00:00', '2022-05-27 00:00:00', 0),
+(18, 7, 1, 'JavaScript', 'JS', 'nice', 'app/Images/blog_Image/b_img-1693228150881.png', 'app/Images/blog_Image/b_img-1693228150882.png', '2023-05-27 00:00:00', '2022-05-27 00:00:00', 0),
+(19, 7, 1, 'JavaScript', 'JS', 'nice', 'app/Images/blog_Image/b_img-1693228167944.png', 'app/Images/blog_Image/b_img-1693228167945.png', '2023-05-27 00:00:00', '2022-05-27 00:00:00', 0),
+(20, 7, 1, 'JavaScript', 'JS', 'nice', 'app/Images/blog_Image/b_img-1693228188263.png', 'app/Images/blog_Image/b_img-1693228188264.png', '2023-05-27 00:00:00', '2022-05-27 00:00:00', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_categories`
+--
+
+CREATE TABLE `tbl_categories` (
+  `cId` int(11) NOT NULL,
+  `vCategoryName` varchar(50) NOT NULL,
+  `vCategorySlug` varchar(50) NOT NULL,
+  `vCategoryImage` varchar(100) NOT NULL,
+  `iParentCatID` int(11) NOT NULL DEFAULT 0,
+  `tCreatedDate` datetime NOT NULL,
+  `tUpdatedDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_categories`
+--
+
+INSERT INTO `tbl_categories` (`cId`, `vCategoryName`, `vCategorySlug`, `vCategoryImage`, `iParentCatID`, `tCreatedDate`, `tUpdatedDate`) VALUES
+(1, 'React JS', 'reactjs', 'https://blog.infinitytuts.com/app/Images/cat_img/cat_img-1688879558963.png', 0, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(2, 'Node JS', 'node-js', 'https://blog.infinitytuts.com/app/Images/cat_img/cat_img-1688879594960.png', 0, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(3, 'Laravel', 'laravel', 'https://blog.infinitytuts.com/app/Images/cat_img/cat_img-1688879608079.png', 0, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(4, 'WordPress', 'wordpress', 'https://blog.infinitytuts.com/app/Images/cat_img/cat_img-1688879620274.png', 0, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(5, 'Installation', 'installation', 'https://blog.infinitytuts.com/app/Images/cat_img/cat_img-1688879699070.png', 1, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(6, 'WordPress Basics', 'wordpress-basics', 'http://localhost:8080/app/Images/cat_img/cat_img-1689221846621.png', 4, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(7, 'JS', 'variable', 'app/Images/cat_img/cat_img-1692011991501.png', 2, '2019-11-06 00:00:00', '2020-05-09 00:00:00'),
+(9, 'Introduction', 'laravel-introduction', 'http://localhost:8080/app/Images/cat_img/cat_img-1689485144757.png', 3, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(10, 'Custom Plugins', 'wordpress-plugins', 'http://localhost:8080/app/Images/cat_img/cat_img-1689488345721.png', 4, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(12, 'Installation', 'laravel-installation', 'http://localhost:8080/app/Images/cat_img/cat_img-1690717074776.png', 3, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(13, 'main-concepts', 'main-concepts-laravel', 'http://localhost:8080/app/Images/cat_img/cat_img-1691326786105.png', 3, '2021-05-03 00:00:00', '2023-05-18 00:00:00'),
+(14, 'JavaScript', 'JS', 'http://localhost:8080/app/Images/cat_img/cat_img-1692011966491.png', 1, '2021-05-03 00:00:00', '2023-05-18 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_contact`
+--
+
+CREATE TABLE `tbl_contact` (
+  `conId` int(11) NOT NULL,
+  `vFirstname` varchar(500) NOT NULL,
+  `vLastname` varchar(500) NOT NULL,
+  `vEmail` varchar(1000) NOT NULL,
+  `vContactNumber` varchar(20) NOT NULL,
+  `vAddress` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_contact`
+--
+
+INSERT INTO `tbl_contact` (`conId`, `vFirstname`, `vLastname`, `vEmail`, `vContactNumber`, `vAddress`) VALUES
+(1, 'VImal', 'kasfaf', 'fsfs@gmai.com', '9737502747', 'fsf'),
+(2, 'VImal', 'kasfaf', 'fsfs@gmai.com', '9737502747', 'fsf'),
+(3, 'Vimal', 'Kava', 'Vimal@gmail.com', '9737502747', 'Testing '),
+(4, 'Vimal', 'Kava', 'kavavimal@gmail.com', '9737502747', 'testing'),
+(5, 'Vimal ', 'Kava', 'kavavimal@gmail.com', '9737502747', 'Testing'),
+(6, 'Karan', 'Harsora', 'karan@gmail.com', '1234567890', 'Hello '),
+(7, 'Karan', 'Harsora', 'karanharsora2@gmail.com', '7041652801', 'Hello'),
+(8, 'tanmay', 'makwana', 'makwanatanmay483@gmail.com', '8905691100', 'somewhere on earth');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_modes`
+--
+
+CREATE TABLE `tbl_modes` (
+  `Id` int(11) NOT NULL,
+  `language` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_modes`
+--
+
+INSERT INTO `tbl_modes` (`Id`, `language`) VALUES
+(1, 'nodejs'),
+(2, 'java'),
+(3, 'php'),
+(4, 'ruby'),
+(5, 'python'),
+(6, 'go');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_system`
+--
+
+CREATE TABLE `tbl_system` (
+  `sId` int(11) NOT NULL,
+  `vProjectName` varchar(50) NOT NULL,
+  `vProjectLogo` varchar(50) NOT NULL,
+  `vProjectLoginPageBgImage` varchar(100) NOT NULL,
+  `vEmail` varchar(100) NOT NULL,
+  `vMobileNumber` varchar(50) NOT NULL,
+  `vAddress` varchar(100) NOT NULL,
+  `tCreatedDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_system`
+--
+
+INSERT INTO `tbl_system` (`sId`, `vProjectName`, `vProjectLogo`, `vProjectLoginPageBgImage`, `vEmail`, `vMobileNumber`, `vAddress`, `tCreatedDate`) VALUES
+(2, 'timepass', 'app/Images/system_img/logo-1692015246708.png', 'app/Images/system_img/logo-1692015246709.png', 'abc@gmail.com', '1123845631', 'somewhere on earth', '2023-05-15 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_users`
+--
+
+CREATE TABLE `tbl_users` (
+  `uId` int(11) NOT NULL,
+  `vUserName` varchar(50) NOT NULL,
+  `vFirstName` varchar(50) NOT NULL,
+  `vLastName` varchar(50) NOT NULL,
+  `vEmailId` varchar(50) NOT NULL,
+  `vPassword` varchar(50) NOT NULL,
+  `vMobileNumber` varchar(50) NOT NULL,
+  `tCreatedDate` datetime NOT NULL,
+  `tUpdatedDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`uId`, `vUserName`, `vFirstName`, `vLastName`, `vEmailId`, `vPassword`, `vMobileNumber`, `tCreatedDate`, `tUpdatedDate`) VALUES
+(1, 'pqr', 'abc', 'def', 'ghi', 'jkl', '684632321', '2023-05-03 00:00:00', '2025-06-06 00:00:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_additional_blogs_desc`
+--
+ALTER TABLE `tbl_additional_blogs_desc`
+  ADD PRIMARY KEY (`abId`);
+
+--
+-- Indexes for table `tbl_blogs`
+--
+ALTER TABLE `tbl_blogs`
+  ADD PRIMARY KEY (`bId`);
+
+--
+-- Indexes for table `tbl_categories`
+--
+ALTER TABLE `tbl_categories`
+  ADD PRIMARY KEY (`cId`);
+
+--
+-- Indexes for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  ADD PRIMARY KEY (`conId`);
+
+--
+-- Indexes for table `tbl_modes`
+--
+ALTER TABLE `tbl_modes`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `tbl_system`
+--
+ALTER TABLE `tbl_system`
+  ADD PRIMARY KEY (`sId`);
+
+--
+-- Indexes for table `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  ADD PRIMARY KEY (`uId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_additional_blogs_desc`
+--
+ALTER TABLE `tbl_additional_blogs_desc`
+  MODIFY `abId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+
+--
+-- AUTO_INCREMENT for table `tbl_blogs`
+--
+ALTER TABLE `tbl_blogs`
+  MODIFY `bId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tbl_categories`
+--
+ALTER TABLE `tbl_categories`
+  MODIFY `cId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  MODIFY `conId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_modes`
+--
+ALTER TABLE `tbl_modes`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_system`
+--
+ALTER TABLE `tbl_system`
+  MODIFY `sId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  MODIFY `uId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

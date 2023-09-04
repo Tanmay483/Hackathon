@@ -69,7 +69,8 @@ Team.create = (team, res) => {
                     const combinedResults = {
                         hackathonTitle: result3[0],
                         studentDetails: result4[0],
-                        inputData: team
+                        inputData: team,
+                        teamId: TeamId
                     };
                     res.json(combinedResults);
                 })

@@ -1,3 +1,4 @@
+const { composer } = require('googleapis/build/src/apis/composer');
 const sql = require('../config/db');
 const sendmail = require('../middleware/newPassword.tamplate')
 
@@ -391,38 +392,62 @@ Registration.update = (Id, registration, result) => {
 // find hackathon
 Registration.hackathon = (Id, res) => {
   let query1 = `SELECT * FROM student INNER JOIN applytohackathon ON student.Id = applytohackathon.sId WHERE student.Id = ${Id};`;
+  
   sql.query(query1, (err, result1) => {
     if (err) {
       console.error('Error executing query1:', err);
       return res.status(500).json({ error: 'Something went wrong' });
     }
+    
     if (result1.length === 0) {
-      return res.status(404).json({ error: `data not found with Id ${Id}` });
+      return res.status(404).json({ error: `Data not found with Id ${Id}` });
     } else {
-      const combinedResults = {
-        hackathonList: []
-      };
+      const hackathonList = [];
+      let hackathonProcessed = 0; // Initialize a counter for processed hackathons.
 
-      let hackathon = 0;
       for (let i = 0; i < result1.length; i++) {
         const hId = result1[i].hId;
+
         let query2 = `SELECT hId,vTitle,vDetails,vDeadline FROM hackathon WHERE hId = ${hId}`;
+
+        const iTeamId = result1[i].iTeamId;
+        const query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${iTeamId}'`;
+
         sql.query(query2, (err, result2) => {
           if (err) {
             console.error('Error executing query2:', err);
             return res.status(500).json({ error: 'Something went wrong' });
           }
-          combinedResults.hackathonList.push(result2[0]);
-          hackathon++;
 
-          if (hackathon === result1.length) {
-            res.json(combinedResults);
-          }
+          sql.query(query3, (err, result3) => {
+            if (err) {
+              console.error('Error executing query3:', err);
+              return res.status(500).json({ error: 'Something went wrong' });
+            }
+
+            const hackathonresult = {
+              hId: result2[0].hId,
+              vTitle: result2[0].vTitle,
+              vDetails: result2[0].vDetails,
+              vDeadline: result2[0].vDeadline,
+              Team: result3 // Use result3 directly here to capture all teams for the hackathon.
+            };
+            
+            hackathonList.push(hackathonresult);
+
+            hackathonProcessed++;
+            
+            // Check if all hackathons have been processed before sending the response.
+            if (hackathonProcessed === result1.length) {
+              res.json(hackathonList);
+            }
+          });
         });
       }
     }
   });
 };
+
 
 //serch
 Registration.search = (search, result) => {
@@ -437,10 +462,10 @@ Registration.search = (search, result) => {
       console.log("result: ", res);
       result(null, res);
     } else {
-      console.log("Invalid username or Password");
       result("Result not found", null);
     }
   });
 };
+
 
 module.exports = Registration
