@@ -392,29 +392,28 @@ Registration.update = (Id, registration, result) => {
 // find hackathon
 Registration.hackathon = (Id, res) => {
   let query1 = `SELECT * FROM student INNER JOIN applytohackathon ON student.Id = applytohackathon.sId WHERE student.Id = ${Id};`;
-  
+
   sql.query(query1, (err, result1) => {
     if (err) {
       console.error('Error executing query1:', err);
       return res.status(500).json({ error: 'Something went wrong' });
     }
-    
+
     if (result1.length === 0) {
       return res.status(404).json({ error: `Data not found with Id ${Id}` });
     } else {
       const hackathonList = [];
-      let hackathonProcessed = 0; // Initialize a counter for processed hackathons.
+      let hackathonProcessed = 0;
 
       for (let i = 0; i < result1.length; i++) {
         const hId = result1[i].hId;
-
-        let query2 = `SELECT hId,vTitle,vDetails,vDeadline FROM hackathon WHERE hId = ${hId}`;
+        let query2 = `SELECT hId, vTitle, vDetails, vDeadline FROM hackathon WHERE hId = ${hId}`;
 
         const iTeamId = result1[i].iTeamId;
         const query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${iTeamId}'`;
 
         sql.query(query2, (err, result2) => {
-          if (err) {
+          if (err) {  
             console.error('Error executing query2:', err);
             return res.status(500).json({ error: 'Something went wrong' });
           }
@@ -425,28 +424,50 @@ Registration.hackathon = (Id, res) => {
               return res.status(500).json({ error: 'Something went wrong' });
             }
 
-            const hackathonresult = {
-              hId: result2[0].hId,
-              vTitle: result2[0].vTitle,
-              vDetails: result2[0].vDetails,
-              vDeadline: result2[0].vDeadline,
-              Team: result3 // Use result3 directly here to capture all teams for the hackathon.
-            };
-            
-            hackathonList.push(hackathonresult);
+            // Retrieve student information based on sId from result3
+            const sIds = result3.map((item) => item.sId).join(',');
+            const leaderArray = result3.map((item) => item.leader.split(','));
 
-            hackathonProcessed++;
-            
-            // Check if all hackathons have been processed before sending the response.
-            if (hackathonProcessed === result1.length) {
-              res.json(hackathonList);
-            }
+            let query4 = `SELECT Id, vName , vEmail , vMobileNumber  FROM student WHERE Id IN (${sIds})`;
+
+            sql.query(query4, (err, result4) => {
+              if (err) {
+                console.error('Error executing query4:', err);
+                return res.status(500).json({ error: 'Something went wrong' });
+              }
+
+              const studentsWithLeader = result4.map((student, index) => ({
+                ...student,
+                Leader: leaderArray[index][0]
+              }));
+
+              // const teamDetails = {
+              //   Students: studentsWithLeader
+              // };
+
+              const hackathonResult = {
+                hId: result2[0].hId,
+                vTitle: result2[0].vTitle,
+                vDetails: result2[0].vDetails,
+                vDeadline: result2[0].vDeadline,
+                Students: studentsWithLeader
+              };
+
+              hackathonList.push(hackathonResult);
+
+              hackathonProcessed++;
+
+              if (hackathonProcessed === result1.length) {
+                res.json(hackathonList);
+              }
+            });
           });
         });
       }
     }
   });
 };
+
 
 
 //serch
