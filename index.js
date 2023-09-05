@@ -27,27 +27,8 @@ app.get("/", (req, res) => {
 });
 app.use(authMiddleware)
 
-// Generate JWT token
-app.post("/token", (req, resp) => {
-  const user = {};
 
-  jwt.sign({ user }, process.env.JWT_SECRET_KEY, {}, (err, token) => {
-    if (err) {
-      resp.status(500).json({ error: "Failed to generate token" });
-    } else {
-      resp.json({ token });
-      let query = `UPDATE jwttoken SET Token = '${token}' WHERE Id = 1`
-      sql.query(query, (err, token) => {
-        if (err) {
-          throw err;
-        }
-        else {
-          console.log("database updated")
-        }
-      })
-    }
-  });
-});
+
 
 const stripe = require('./app/middleware/stripe.payment.checkout')
 app.use(stripe)
@@ -55,11 +36,54 @@ app.use(stripe)
 
 const hello = require("./app/middleware/jwt.middleware");
 app.use(hello);
+//login
+app.post('/login', (req, resp) => {
+  const vUserName = req.body.username;
+  const Password = req.body.password;
+  let query1 = `SELECT * FROM student WHERE vUserName = '${vUserName}' AND Password = '${Password}'`;
+  
+  sql.query(query1, (err, resp1) => {
+    if (err) {
+      resp.status(500).json({
+        message: err.message
+      });
+    } else if (resp1.length === 0) {
+      resp.status(404).json({
+        message: `Invalid Username or Password`
+      });
+    } else {
+      const user = resp1;
+      jwt.sign({ user }, process.env.JWT_SECRET_KEY, {}, (err, token) => {
+        if (err) {
+          resp.status(500).json({ error: "Failed to generate token" });
+        } else {
+          const sId = resp1[0].Id;
+          const query2 = `INSERT INTO jwttoken (Token , sId) VALUES (?, ?)`;
+          
+          sql.query(query2, [token, sId], (err, resp2) => {
+            if (err) {
+              resp.status(500).json({
+                message: err.message
+              });
+            } else {
+              resp.status(200).json({
+                message: `Login Successfully`,
+                Token: token
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+});
 
 
 // logout
 app.post('/logout', (req, res) => {
-  let query = `UPDATE jwttoken SET Token = ' ' WHERE Id = 1`
+  const header = req.headers['authorization'].split(" ");
+  const token = header[1]
+  let query = `UPDATE jwttoken SET Token = ' ' WHERE Token = '${token}' AND sId != 0 `
   sql.query(query, (err, resp) => {
     if (err) {
       throw err
@@ -71,7 +95,6 @@ app.post('/logout', (req, res) => {
 })
 
 require("./app/routes/registration.routes")(app);
-require("./app/routes/login.routes")(app);
 require("./app/routes/details.routes")(app);
 require("./app/routes/contact.routes")(app);
 require("./app/routes/comment.routes")(app);
