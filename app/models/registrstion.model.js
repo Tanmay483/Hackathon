@@ -441,10 +441,6 @@ Registration.hackathon = (Id, res) => {
                 Leader: leaderArray[index][0]
               }));
 
-              // const teamDetails = {
-              //   Students: studentsWithLeader
-              // };
-
               const hackathonResult = {
                 hId: result2[0].hId,
                 vTitle: result2[0].vTitle,
@@ -467,8 +463,6 @@ Registration.hackathon = (Id, res) => {
     }
   });
 };
-
-
 
 //serch
 Registration.search = (search, result) => {
