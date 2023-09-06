@@ -4,9 +4,6 @@ module.exports = (app) => {
     const registration = require('../controller/registration.controller');
     var router = require('express').Router();
 
-    // Create a new blog
-    router.post('/', multer, registration.create);
-
     // Update a registration with id
     router.put('/:Id', registration.update);
 
