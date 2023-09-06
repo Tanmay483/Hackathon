@@ -292,13 +292,13 @@ Registration.hackathon = (Id, res) => {
 
       for (let i = 0; i < result1.length; i++) {
         const hId = result1[i].hId;
-        let query2 = `SELECT hId, vTitle, vDetails, vDeadline FROM hackathon WHERE hId = ${hId}`;
+        let query2 = `SELECT hId, vTitle , vDetails , vDeadline , vImage FROM hackathon WHERE hId = ${hId}`;
 
         const iTeamId = result1[i].iTeamId;
         const query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${iTeamId}'`;
 
         sql.query(query2, (err, result2) => {
-          if (err) {  
+          if (err) {
             console.error('Error executing query2:', err);
             return res.status(500).json({ error: 'Something went wrong' });
           }
@@ -331,6 +331,7 @@ Registration.hackathon = (Id, res) => {
                 vTitle: result2[0].vTitle,
                 vDetails: result2[0].vDetails,
                 vDeadline: result2[0].vDeadline,
+                vImage: result2[0].vImage,
                 Students: studentsWithLeader
               };
 
