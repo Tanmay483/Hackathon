@@ -105,7 +105,7 @@ Apply.find = (apply, result) => {
                                 teamSize: teamSize,
                                 numberOfStudentApplied: result3.length,
                                 numberOfStudetRemain: count,
-                                teamName: resp4[0].vTeamName
+                                teamName: resp4[0].vTeamName    
                             });
                         }
                         else {
