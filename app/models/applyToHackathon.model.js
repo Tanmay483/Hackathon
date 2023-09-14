@@ -1,3 +1,4 @@
+const { query } = require('express');
 const sql = require('../config/db');
 
 // constructor
@@ -72,40 +73,51 @@ Apply.find = (apply, result) => {
                 }, null);
                 return;
             }
-            // query3
-            let teamSize = result2[0].iTeamSize; // total size of team
-            let query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${apply.iTeamId}' AND hId = ${hId}`
-            sql.query(query3, (err, result3) => {
+            let query4 = `SELECT vTeamName FROM team WHERE iTeamId = '${apply.iTeamId}'`
+            sql.query(query4, (err, resp4) => {
                 if (err) {
                     console.error(err);
                     result({
                         success: false,
-                        message: "Failed to fetch information"
+                        message: "Failed to fetch team name"
                     }, null);
-                    return;
+                    return
                 }
-                else {
-                    let length = result3.length    // student count of applytohackathon for team
-                    let count = teamSize - length
-                    console.log(count, teamSize)
-                    if (length <= teamSize) {
-                        result(null, {
-                            message: "Team id verify successful",
-                            teamSize: teamSize,
-                            numberOfStudentApplied: result3.length,
-                            numberOfStudetRemain: count
-                        });
-                    }
-                    else {
+                // query3
+                let teamSize = result2[0].iTeamSize; // total size of team
+                let query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${apply.iTeamId}' AND hId = ${hId}`
+                sql.query(query3, (err, result3) => {
+                    if (err) {
+                        console.error(err);
                         result({
                             success: false,
-                            message: "team is full"
+                            message: "Failed to fetch information"
                         }, null);
                         return;
                     }
-                }
+                    else {
+                        let length = result3.length    // student count of applytohackathon for team
+                        let count = teamSize - length
+                        console.log(count, teamSize)
+                        if (length <= teamSize) {
+                            result(null, {
+                                message: "Team id verify successful",
+                                teamSize: teamSize,
+                                numberOfStudentApplied: result3.length,
+                                numberOfStudetRemain: count,
+                                teamName: resp4[0].vTeamName
+                            });
+                        }
+                        else {
+                            result({
+                                success: false,
+                                message: "team is full"
+                            }, null);
+                            return;
+                        }
+                    }
+                })
             })
-
         });
     });
 };
