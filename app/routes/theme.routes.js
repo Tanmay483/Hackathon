@@ -7,7 +7,7 @@ module.exports = app => {
     router.post("/addTheme", Theme.create);
 
     // Retrieve all Theme
-    router.get("/", Theme.findAll);
+    router.get("/all", Theme.findAll);
 
     //retrieve problemstatement by id
     router.get("/:theId", Theme.findId)

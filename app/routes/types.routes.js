@@ -3,7 +3,7 @@ module.exports = app => {
 
     var router = require("express").Router();
   
-    router.get("/", type.findAll);
+    router.get("/all", type.findAll);
 
 
     router.get("/Id/:tId", type.findId);

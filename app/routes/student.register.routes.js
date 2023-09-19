@@ -5,7 +5,9 @@ module.exports = (app) => {
     var router = require('express').Router();
 
     // Create a new blog
-    router.post('/student', multer, registration.create);
+    router.post('/registration/student', multer, registration.create);
 
-    app.use('/api/registration', router);
+    // 
+    router.get('/hackathon/:hId', registration.findOne)
+    app.use('/api', router);
 };

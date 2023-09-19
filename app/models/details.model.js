@@ -46,49 +46,6 @@ Details.create = (detail, result) => {
     });
 };
 
-
-// GET by ID
-Details.findById = (hId, result) => {
-    sql.query(`SELECT * FROM hackathon WHERE hId = ${hId}`, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-        if (res.length === 0) {
-            console.log('data not found');
-            result('error', null);
-            return;
-        }
-        const hackathon = res[0];
-
-        sql.query(
-            `SELECT comId, Id, vcomment FROM comment WHERE hId = ${hId}`,
-            (err, res) => {
-                if (err) {
-                    console.log('Error:', err);
-                    result(err, null);
-                    return;
-                }
-
-                const comment = res.length > 0 ? res : [];
-
-                const resultData = {
-                    hackathon: hackathon,
-                    comment: comment,
-                    tab: {
-                        vBrif: hackathon.vBrif,
-                        vDetails: hackathon.vDetails
-                    }
-                };
-
-                console.log('found hackathon:', resultData);
-                result(null, resultData);
-            }
-        );
-    });
-};
-
 //GET All
 
 Details.getAll = (result) => {

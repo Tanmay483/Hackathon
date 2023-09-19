@@ -65,3 +65,23 @@ exports.create = (req, res) => {
     }
   });
 };
+
+// get hackathon 
+exports.findOne = (req, res) => {
+  Registration.findById(req.params.hId, (err, data) => {
+    if (err) {
+      res.status(404).json({
+        success: false,
+        message: "error retriving data with id " + req.params.hId + " Id not found "
+      });
+    } else {
+      console.log("Registration changed successfully");
+      console.log(req.body);
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "User with id:" + req.params.hId
+      });
+    }
+  });
+};

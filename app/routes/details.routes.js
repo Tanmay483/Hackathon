@@ -6,13 +6,10 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Create a new Details
-  router.post("/", upload, Details.create);
+  router.post("/add", upload, Details.create);
 
   // Retrieve all Details
-  router.get("/", Details.findAll);
-
-  // Retrieve a single Details with id
-  router.get("/:hId", Details.findOne);
+  router.get("/all", Details.findAll);
 
   // Retrieve a single Details with id
   router.get("/brif/:hId", Details.brif);
