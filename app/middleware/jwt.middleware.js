@@ -8,9 +8,8 @@ const API = [
   '/api/type/all',
   '/api/type/domains',
   '/api/theme/all',
-  'api/hackathon/:id'
+  '/api/categories/all'
 ]
-console.log(API)
 
 
 async function verifyToken(req, resp, next) {

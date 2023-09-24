@@ -7,7 +7,7 @@ module.exports = (app) => {
   router.post("/", categories.create);
 
   // Retrieve all categories
-  router.get("/", categories.findAll);
+  router.get("/all", categories.findAll);
 
   //retrieve categories by id
   router.get("/:catId", categories.findId);
