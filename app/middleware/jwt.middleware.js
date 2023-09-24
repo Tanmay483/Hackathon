@@ -8,7 +8,9 @@ const API = [
   '/api/type/all',
   '/api/type/domains',
   '/api/theme/all',
-  '/api/categories/all'
+  '/api/categories/all',
+  '/api/tab/all',
+  '/api/course/all'
 ]
 
 

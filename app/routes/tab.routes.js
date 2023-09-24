@@ -7,10 +7,10 @@ module.exports = app => {
     router.post("/", Tab.create);
 
     // Retrieve all Tab
-    router.get("/", Tab.findAll);
+    router.get("/all", Tab.findAll);
 
     //retrieve problemstatement by id
-    router.get("/:tabId", Tab.findId)
+    router.get("/Id/:tabId", Tab.findId)
 
     //update problem statement
     router.put('/update/:tabId',Tab.Update)

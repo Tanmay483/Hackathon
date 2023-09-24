@@ -7,10 +7,10 @@ module.exports = app => {
     router.post("/", course.create);
 
     // Retrieve all course
-    router.get("/", course.findAll);
+    router.get("/all", course.findAll);
 
     //retrieve problemstatement by id
-    router.get("/:courseId", course.findId)
+    router.get("/Id/:courseId", course.findId)
 
     //update problem statement
     router.put('/update/:courseId',course.Update)
