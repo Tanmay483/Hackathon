@@ -8,6 +8,6 @@ module.exports = (app) => {
     router.post('/registration/student', multer, registration.create);
 
     // 
-    router.get('/hackathon/:hId', registration.findOne)
+    router.get('/hackathon/Id/:hId', registration.findOne)
     app.use('/api', router);
 };
