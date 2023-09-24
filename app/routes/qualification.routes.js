@@ -7,10 +7,10 @@ module.exports = app => {
     router.post("/", qualification.create);
 
     // Retrieve all qualification
-    router.get("/", qualification.findAll);
+    router.get("/all", qualification.findAll);
 
     //retrieve qualification by id
-    router.get("/:qId", qualification.findId)
+    router.get("/Id/:qId", qualification.findId)
 
     //update qualification
     router.put('/update/:qId',qualification.Update)

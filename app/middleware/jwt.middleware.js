@@ -10,7 +10,8 @@ const API = [
   '/api/theme/all',
   '/api/categories/all',
   '/api/tab/all',
-  '/api/course/all'
+  '/api/course/all',
+  '/api/qualification/all'
 ]
 
 
