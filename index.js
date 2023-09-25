@@ -31,7 +31,7 @@ app.use(authMiddleware)
 require('./app/routes/student.register.routes')(app)
 
 //login
-app.post('/login', (req, resp) => {
+app.post('/api/login', (req, resp) => {
   const vUserName = req.body.username;
   const Password = req.body.password;
   let query1 = `SELECT * FROM student WHERE vUserName = '${vUserName}' AND Password = '${Password}'`;
