@@ -280,23 +280,22 @@ Registration.hackathon = (Id, res) => {
 
   sql.query(query1, (err, result1) => {
     if (err) {
-      console.error('Error executing query1:', err);
+      console.log('Error executing query1:', err);
       return res.status(500).json({ error: 'Something went wrong' });
     }
-
     if (result1.length === 0) {
       return res.status(404).json({ error: `Data not found with Id ${Id}` });
     } else {
       const hackathonList = [];
       let hackathonProcessed = 0;
-
+      
       for (let i = 0; i < result1.length; i++) {
         const hId = result1[i].hId;
         let query2 = `SELECT hId, vTitle , vDetails , vDeadline , vImage FROM hackathon WHERE hId = ${hId}`;
 
         const iTeamId = result1[i].iTeamId;
+        console.log(iTeamId)
         const query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${iTeamId}'`;
-
         sql.query(query2, (err, result2) => {
           if (err) {
             console.error('Error executing query2:', err);
@@ -305,10 +304,9 @@ Registration.hackathon = (Id, res) => {
 
           sql.query(query3, (err, result3) => {
             if (err) {
-              console.error('Error executing query3:', err);
+              console.log('Error executing query3:', err);
               return res.status(500).json({ error: 'Something went wrong' });
             }
-
             // Retrieve student information based on sId from result3
             const sIds = result3.map((item) => item.sId).join(',');
             const leaderArray = result3.map((item) => item.leader.split(','));

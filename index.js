@@ -46,7 +46,7 @@ app.post('/api/login', (req, resp) => {
         message: `Invalid Username or Password`
       });
     } else {
-      const user = resp1;
+      const user = {};
       jwt.sign({ user }, process.env.JWT_SECRET_KEY, {}, (err, token) => {
         if (err) {
           resp.status(500).json({ error: "Failed to generate token" });
@@ -62,7 +62,9 @@ app.post('/api/login', (req, resp) => {
               console.log(err)
             } else {
               resp.status(200).json({
+                sucess: true,
                 message: `Login Successfully`,
+                details: resp1[0],
                 Token: token
               });
             }
@@ -72,7 +74,6 @@ app.post('/api/login', (req, resp) => {
     }
   });
 });
-
 
 
 const stripe = require('./app/middleware/stripe.payment.checkout')
