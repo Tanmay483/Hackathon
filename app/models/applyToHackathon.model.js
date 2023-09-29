@@ -29,15 +29,32 @@ Apply.create = (apply, result) => {
             return;
         }
         // iTeamId exists, proceed with insertion
-        let query2 = `INSERT INTO applytohackathon SET ?`;
-        sql.query(query2, apply, (applyErr, response2) => {
-            if (applyErr) {
-                console.error(applyErr);
-                result(applyErr, null);
+
+        // check if student already in team
+        let query3 = `SELECT * FROM applytohackathon WHERE BINARY iTeamId = '${apply.iTeamId}' AND hId = ${apply.hId}  AND sId = ${apply.sId}`
+        sql.query(query3, (err, result3) => {
+            console.log(result3.length)
+            if (err) {
+                console.error(err);
+                result(err, null);
+                return;
+            }
+            else if (result3.length > 0) {
+                result({ message: 'Student is already in team' },null);
                 return;
             }
             else {
-                result(null, { aId: response2.insertId, ...apply })
+                let query2 = `INSERT INTO applytohackathon SET ?`;
+                sql.query(query2, apply, (applyErr, response2) => {
+                    if (applyErr) {
+                        console.error(applyErr);
+                        result(applyErr, null);
+                        return;
+                    }
+                    else {
+                        result(null, { aId: response2.insertId, ...apply })
+                    }
+                })
             }
         })
     })
@@ -105,7 +122,7 @@ Apply.find = (apply, result) => {
                                 teamSize: teamSize,
                                 numberOfStudentApplied: result3.length,
                                 numberOfStudetRemain: count,
-                                teamName: resp4[0].vTeamName    
+                                teamName: resp4[0].vTeamName
                             });
                         }
                         else {

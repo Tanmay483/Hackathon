@@ -20,10 +20,10 @@ exports.create = (req, res) => {
         if (err) {
             res.status(400).json({
                 success: false,
-                message: "failed to  apply"
+                message: "failed to apply",
+                error: err.message
             });
         } else {
-            console.log("applied successfully");
             const responseData = { aId: data.insertaId, ...req.body };
             res.status(200).json({
                 success: true,
@@ -33,6 +33,8 @@ exports.create = (req, res) => {
         }
     });
 };
+
+
 
 exports.find = (req, res) => {
     if (!req.body) {
