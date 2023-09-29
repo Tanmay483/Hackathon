@@ -40,7 +40,7 @@ Apply.create = (apply, result) => {
                 return;
             }
             else if (result3.length > 0) {
-                result({ message: 'Student is already in team' },null);
+                result({ message: 'Student is already in team' }, null);
                 return;
             }
             else {

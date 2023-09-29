@@ -51,7 +51,7 @@ exports.find = (req, res) => {
 
     Apply.find(apply, (err, data) => {
         if (err) {
-            res.status(400).json({
+            res.status(201).json({
                 success: false,
                 message: `Error: ${err.message}`
             });
