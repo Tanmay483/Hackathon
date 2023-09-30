@@ -20,6 +20,7 @@ async function verifyToken(req, resp, next) {
     next();
     return;
   }
+  
   const bearerHeader = req.headers['authorization'];
 
   if (typeof bearerHeader !== 'undefined') {

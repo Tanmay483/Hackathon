@@ -30,8 +30,6 @@ exports.findId = (req, res) => {
         message: "error retriving data with id " + req.params.Id + " Id not found "
       });
     } else {
-      console.log("Registration:");
-      console.log(req.body);
       res.status(200).json({
         success: true,
         data: data,
@@ -179,8 +177,6 @@ exports.hackathon = (req, res) => {
         message: "error retriving data with id " + req.params.Id + " Id not found "
       });
     } else {
-      console.log("Registration:");
-      console.log(req.body);
       res.status(200).json({
         success: true,
         data: data,

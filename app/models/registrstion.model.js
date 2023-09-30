@@ -62,10 +62,29 @@ Registration.findId = (Id, res) => {
       return res.status(500).json({ error: 'Something went wrong' });
     }
     if (result1.length == 0) {
-      return res.status(404).json({ error: `data not found with Id ${Id}` });
+
+      const query7 = `SELECT * FROM student WHERE Id = ${Id}`
+      sql.query(query7, (err, result7) => {
+        if (err) {
+
+          return res.status(500).json({ error: 'Something went wrong' });
+
+        } else {
+
+          const response = {
+            student: result7[0],
+            hackathon: {},
+            domain:{},
+            theme: {},
+            qualification:{},
+          };
+          res.json(response)
+          return
+          
+        }
+      });
     }
     else {
-
       // query 2
       let hId = result1[0].hId
       let query2 = `SELECT * FROM hackathon WHERE hId = ${hId}`;
@@ -120,6 +139,7 @@ Registration.findId = (Id, res) => {
                   qualification: result6[0],
                 };
                 res.json(combinedResults);
+
               })
             })
           })
@@ -288,7 +308,7 @@ Registration.hackathon = (Id, res) => {
     } else {
       const hackathonList = [];
       let hackathonProcessed = 0;
-      
+
       for (let i = 0; i < result1.length; i++) {
         const hId = result1[i].hId;
         let query2 = `SELECT hId, vTitle , vDetails , vDeadline , vImage FROM hackathon WHERE hId = ${hId}`;
