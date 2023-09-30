@@ -121,7 +121,7 @@ require('./app/routes/ads.routes')(app);
 require('./app/routes/sponser.routes')(app);
 require('./app/routes/package.routes')(app);
 require('./app/routes/template.route')(app)
-
+require('./app/routes/admin.routes')(app)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8085;

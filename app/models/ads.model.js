@@ -58,7 +58,7 @@ Ads.remove = (adId, result) => {
     });
 };
 
-//update
+// update
 Ads.update = (adId, ads, result) => {
     let query = `UPDATE ads SET vTitle=?,tCreatedDate=?`
     const queryParams = [
@@ -88,6 +88,5 @@ Ads.update = (adId, ads, result) => {
     })
 
 }
-
 
 module.exports = Ads;

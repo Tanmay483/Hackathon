@@ -14,7 +14,6 @@ const API = [
   '/api/qualification/all'
 ]
 
-
 async function verifyToken(req, resp, next) {
   const path = req.path;
   if (API.includes(path)) {

@@ -23,12 +23,6 @@ const Registration = function (registration) {
   this.gender = registration.gender
   this.Termsandcondition = registration.Termsandcondition
   this.subscibe = registration.subscibe
-  // this.sId = registration.sId
-  // this.hId = registration.hId
-  // this.iTeamId = registration.iTeamId
-  // this.tId = registration.tId
-  // this.domId = registration.domId
-  // this.themeId = registration.themeId
   this.domainId = registration.domainId
   this.courseId = registration.courseId
   this.CourseProgramme = registration.CourseProgramme
@@ -116,30 +110,6 @@ Registration.create = (registration, result) => {
 
           console.log("created registration: ", { Id: resInsert.insertId, ...registration });
           result(null, { Id: resInsert.insertId, ...student  });
-
-          // Apply to hackathon
-          // if (registration.vTeamType == "team" || registration.vTeamType == "individual") {
-          //   const apply = {
-          //     sId: resInsert.insertId,
-          //     hId: registration.hId,
-          //     iTeamId: registration.iTeamId,
-          //     leader: 0,
-          //     vtype: registration.vTeamType,
-          //     tId: registration.tId,
-          //     domId: registration.domId,
-          //     themeId: registration.themeId
-          //   };
-
-          //   sql.query("INSERT INTO applytohackathon SET ?", apply, (errApply, resApply) => {
-          //     if (errApply) {
-          //       console.log("error: ", errApply);
-          //       result(errApply, null);
-          //       return;
-          //     } else {
-          //       console.log("applied to hackathon: ", resApply);
-          //     }
-          //   });
-          // }
 
           // Sende mail
           sendmail(registration.vEmail, registration.password);
