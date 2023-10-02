@@ -1,6 +1,5 @@
+const { existsSync } = require('fs');
 const sql = require('../config/db');
-const sendmail = require('../middleware/newPassword.tamplate')
-
 
 // constructor
 const Registration = function (registration) {
@@ -74,13 +73,13 @@ Registration.findId = (Id, res) => {
           const response = {
             student: result7[0],
             hackathon: {},
-            domain:{},
+            domain: {},
             theme: {},
-            qualification:{},
+            qualification: {},
           };
           res.json(response)
           return
-          
+
         }
       });
     }
@@ -149,7 +148,7 @@ Registration.findId = (Id, res) => {
   })
 };
 
-//update status 
+// update status 
 Registration.status = (Id, status, result) => {
   let query = `UPDATE student SET keyStatus =? WHERE Id = ?`
 
@@ -296,72 +295,82 @@ Registration.update = (Id, registration, result) => {
 
 // find hackathon
 Registration.hackathon = (Id, res) => {
-  let query1 = `SELECT * FROM student INNER JOIN applytohackathon ON student.Id = applytohackathon.sId WHERE student.Id = ${Id};`;
+  let query1 = `SELECT * FROM applytohackathon WHERE sId = ${Id}`; // retrieve sId, hId, and all other id
 
   sql.query(query1, (err, result1) => {
     if (err) {
-      console.log('Error executing query1:', err);
-      return res.status(500).json({ error: 'Something went wrong' });
-    }
-    if (result1.length === 0) {
-      return res.status(404).json({ error: `Data not found with Id ${Id}` });
+      res.send(err);
     } else {
-      const hackathonList = [];
-      let hackathonProcessed = 0;
+      let a = result1.length;
+      let hackathonResults = [];
 
-      for (let i = 0; i < result1.length; i++) {
+      for (let i = 0; i < a; i++) {
         const hId = result1[i].hId;
-        let query2 = `SELECT hId, vTitle , vDetails , vDeadline , vImage FROM hackathon WHERE hId = ${hId}`;
-
-        const iTeamId = result1[i].iTeamId;
-        console.log(iTeamId)
-        const query3 = `SELECT * FROM applytohackathon WHERE iTeamId = '${iTeamId}'`;
+        let query2 = `SELECT hId, vTitle, vDetails, vDeadline, vImage FROM hackathon WHERE hId = ${hId}`; // retrieve hackathon details
         sql.query(query2, (err, result2) => {
           if (err) {
-            console.error('Error executing query2:', err);
-            return res.status(500).json({ error: 'Something went wrong' });
-          }
-
-          sql.query(query3, (err, result3) => {
-            if (err) {
-              console.log('Error executing query3:', err);
-              return res.status(500).json({ error: 'Something went wrong' });
-            }
-            // Retrieve student information based on sId from result3
-            const sIds = result3.map((item) => item.sId).join(',');
-            const leaderArray = result3.map((item) => item.leader.split(','));
-
-            let query4 = `SELECT Id, vName , vEmail , vMobileNumber  FROM student WHERE Id IN (${sIds})`;
-
-            sql.query(query4, (err, result4) => {
+            res.send(err);
+          } else {
+            const tId = result1[i].iTeamId;
+            let query3 = `SELECT * FROM applytohackathon WHERE iTeamId = "${tId}" AND leader = 2`; // retrieve leader details
+            sql.query(query3, (err, result3) => {
               if (err) {
-                console.error('Error executing query4:', err);
-                return res.status(500).json({ error: 'Something went wrong' });
-              }
+                res.send(err);
+              } else {
+                const leaderId = result3[0].sId;
+                let temId = result3[0].iTeamId;
+                let query4 = `SELECT vTeamName FROM team WHERE iTeamId = '${temId}'`; // retrieve team name
+                sql.query(query4, (err, result4) => {
+                  if (err) {
+                    res.send(err);
+                  } else {
+                    let query5 = `SELECT * FROM applytohackathon WHERE iTeamId = '${tId}'`; // retrieve sid of same team member
+                    sql.query(query5, (err, result5) => {
+                      if (err) {
+                        res.send(err);
+                      } else {
+                        // Create an array to store the sId values
+                        const result6Data = []; // Array to store result6 values
+                        for (let j = 0; j < result5.length; j++) {
+                          let sId = result5[j].sId;
+                          let query6 = `SELECT Id, vName , vEmail,vMobileNumber FROM student WHERE Id = ${sId}`; // retrieve student information
+                          sql.query(query6, (err, result6) => {
+                            if (err) {
+                              throw err;
+                            } else {
+                              // Determine the leader value based on matching leaderId
+                              const leader = sId === leaderId ? 1 : 0;
+                              
+                              // Store result6 in the result6Data array with the leader field
+                              result6Data.push({ ...result6[0], leader });
 
-              const studentsWithLeader = result4.map((student, index) => ({
-                ...student,
-                Leader: leaderArray[index][0]
-              }));
+                              if (result6Data.length === result5.length) {
+                                const teamInfo = {
+                                  TeamName: result4[0].vTeamName,
+                                  StudentDetail: result6Data,
+                                };
 
-              const hackathonResult = {
-                hId: result2[0].hId,
-                vTitle: result2[0].vTitle,
-                vDetails: result2[0].vDetails,
-                vDeadline: result2[0].vDeadline,
-                vImage: result2[0].vImage,
-                Students: studentsWithLeader
-              };
+                                // Add TeamInfo to the hackathonResults
+                                result2[0].TeamInfo = [teamInfo];
 
-              hackathonList.push(hackathonResult);
+                                hackathonResults.push(result2[0]);
 
-              hackathonProcessed++;
-
-              if (hackathonProcessed === result1.length) {
-                res.json(hackathonList);
+                                if (hackathonResults.length === a) {
+                                  res.status(200).json({
+                                    hackathon: hackathonResults,
+                                  });
+                                }
+                              }
+                            }
+                          });
+                        }
+                      }
+                    });
+                  }
+                });
               }
             });
-          });
+          }
         });
       }
     }

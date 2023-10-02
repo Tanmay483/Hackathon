@@ -34,7 +34,7 @@ require('./app/routes/student.register.routes')(app)
 app.post('/api/login', (req, resp) => {
   const vUserName = req.body.username;
   const Password = req.body.password;
-  let query1 = `SELECT * FROM student WHERE vUserName = '${vUserName}' AND Password = '${Password}'`;
+  let query1 = `SELECT Id , vName , vUserName , vEmail , vMobileNumber,  UserType FROM student WHERE vUserName = '${vUserName}' AND Password = '${Password}'`;
 
   sql.query(query1, (err, resp1) => {
     if (err) {

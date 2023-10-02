@@ -11,7 +11,8 @@ const API = [
   '/api/categories/all',
   '/api/tab/all',
   '/api/course/all',
-  '/api/qualification/all'
+  '/api/qualification/all',
+  '/api/admin/login'
 ]
 
 async function verifyToken(req, resp, next) {

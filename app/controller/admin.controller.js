@@ -83,3 +83,29 @@ exports.update = (req, res) => {
         }
     });
 };
+
+// login
+exports.Login = (req, res) => {
+    if (!req.body) {
+        res.send({
+            message: "Content can not be empty!"
+        });
+    }
+    const admin = new Admin({
+        username: req.body.username,
+        password: req.body.password,
+    });
+    Admin.Login(admin, res,(err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Invalid username or password"
+            });
+        } else {
+            res.status(201).json({
+                success: true,
+                message: "Login successful"
+            });
+        }
+    });
+};
