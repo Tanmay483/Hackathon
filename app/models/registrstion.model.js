@@ -1,4 +1,3 @@
-const { existsSync } = require('fs');
 const sql = require('../config/db');
 
 // constructor
@@ -351,7 +350,7 @@ Registration.hackathon = (Id, res) => {
                                 };
 
                                 // Add TeamInfo to the hackathonResults
-                                result2[0].TeamInfo = [teamInfo];
+                                result2[0].TeamInfo = teamInfo;
 
                                 hackathonResults.push(result2[0]);
 

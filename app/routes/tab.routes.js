@@ -18,5 +18,8 @@ module.exports = app => {
     //delete tab
     router.delete('/delete/:tabId' , Tab.delete)
 
+    //get tab by hackathon id
+    router.get('/tab/:hId', Tab.findhId)
+
     app.use('/api/tab', router);
 };

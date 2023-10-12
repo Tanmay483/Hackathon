@@ -91,4 +91,21 @@ Tab.Update = (tabId, tab, result) => {
 
     });
 }
+
+// get by ID
+Tab.findHackathonTab = (hId, result) => {
+    sql.query(`SELECT * FROM tab WHERE hId = ${hId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res);
+            return;
+        }
+        result({ kind: "not_found" }, null);
+    });
+};
+
 module.exports = Tab;

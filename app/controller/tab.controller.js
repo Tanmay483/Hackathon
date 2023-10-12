@@ -37,7 +37,6 @@ exports.create = (req, res) => {
 };
 
 // GET all  
-
 exports.findAll = (req, res) => {
     Tab.getAll((err, data) => {
         if (err) {
@@ -58,7 +57,6 @@ exports.findAll = (req, res) => {
 };
 
 // get by id
-
 exports.findId = (req, res) => {
     Tab.findData(req.params.tabId, (err, data) => {
         if (err) {
@@ -79,7 +77,6 @@ exports.findId = (req, res) => {
 };
 
 // delete tab
-
 exports.delete = (req, res) => {
     Tab.remove(req.params.tabId, (err, data) => {
         if (err) {
@@ -123,3 +120,20 @@ exports.Update = (req, res) => {
         }
     })
 }
+
+exports.findhId = (req, res) => {
+    Tab.findHackathonTab(req.params.hId, (err, data) => {
+        if (err) {
+            res.status(404).json({
+                success: false,
+                message: "error can not find tab with id " + req.params.hId + " Id not found "
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                data: data,
+                message: "tab with id:" + req.params.hId
+            });
+        }
+    });
+};
