@@ -12,7 +12,8 @@ const API = [
   '/api/tab/all',
   '/api/course/all',
   '/api/qualification/all',
-  '/api/admin/login'
+  '/api/admin/login',
+  '/api/forgetpassword'
 ]
 
 async function verifyToken(req, resp, next) {
